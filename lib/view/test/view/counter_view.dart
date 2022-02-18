@@ -37,7 +37,7 @@ class _CounterState extends BaseState<Counter> {
                   children: [
                     Container(
                       //  height: dynamicHeight(0.2),
-                      color: const Color.fromARGB(255, 224, 65, 17),
+                      color: Colors.amber,
 
                       child: FlatButton(
                         child: const Text("tıkıla"),
@@ -62,7 +62,8 @@ class _CounterState extends BaseState<Counter> {
                         children: [
                           Observer(builder: (_) {
                             return Text(
-                                "anlık değer : " + viewModel.value.toString());
+                                "anlık değer : " + viewModel.value.toString(),style:
+                                    const TextStyle(color: Colors.white, fontSize: 25));
                           }),
                           TextButton(
                               onPressed: () {
@@ -71,7 +72,7 @@ class _CounterState extends BaseState<Counter> {
                               child: const Text(
                                 "arttır",
                                 style:
-                                    TextStyle(color: Colors.red, fontSize: 25),
+                                    TextStyle(color: Colors.black, fontSize: 25),
                               )),
                           TextButton(
                               onPressed: () {
@@ -80,7 +81,7 @@ class _CounterState extends BaseState<Counter> {
                               child: const Text(
                                 "azalt",
                                 style: TextStyle(
-                                    color: Colors.green, fontSize: 25),
+                                    color: Colors.white, fontSize: 25),
                               )),
                         ],
                       ),

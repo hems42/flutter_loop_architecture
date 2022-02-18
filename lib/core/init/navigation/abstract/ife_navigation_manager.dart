@@ -16,4 +16,5 @@ mixin INavigationManager implements INavigationService {
         return AppNavigationPageConstants.NOT_FOUND;
     }
   }
+
 }
