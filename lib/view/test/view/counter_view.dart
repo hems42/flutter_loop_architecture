@@ -3,9 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_notebook/core/base/state/base_state.dart';
 import 'package:flutter_notebook/core/base/view/base_widget.dart';
 import 'package:flutter_notebook/core/extension/string_extension.dart';
-import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/language_manager_easy_localization.dart';
 import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
-import 'package:flutter_notebook/core/init/lang/concrete/language_service.dart';
 import 'package:flutter_notebook/core/init/theme/concrete/theme_service.dart';
 import 'package:flutter_notebook/view/test/view_model/counter_view_model.dart';
 
