@@ -30,6 +30,9 @@ class NetworkService implements INetworService {
     }
   }
 
+
+
+
   @override
   Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
     // TODO: implement fetch
@@ -47,4 +50,20 @@ class NetworkService implements INetworService {
     // TODO: implement send
     throw UnimplementedError();
   }
+
+  @override
+  void logOutUser() {
+    // TODO: implement logOutUser
+  }
+
+  @override
+  void loginUser() {
+    // TODO: implement loginUser
+  }
+
+  @override
+  void signUpUser() {
+    // TODO: implement signUpUser
+  }
+
 }
