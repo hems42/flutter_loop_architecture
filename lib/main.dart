@@ -20,17 +20,15 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
- 
- 
-
   const MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final INavigationService navigationService = NavigationService.instance;
-    NavigationManagerOfCore navigationManagerOfCore = navigationService.getStuffUtilOfNavigationService() as NavigationManagerOfCore;
+    NavigationManagerOfCore navigationManagerOfCore = navigationService
+        .getStuffUtilOfNavigationService() as NavigationManagerOfCore;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -46,10 +44,9 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.red,
-        
       ),
       onGenerateRoute: navigationManagerOfCore.getRouteGenarator(),
-      navigatorKey:  navigationManagerOfCore.getNavigatorKey(),
+      navigatorKey: navigationManagerOfCore.getNavigatorKey(),
       home: const Counter(),
     );
   }

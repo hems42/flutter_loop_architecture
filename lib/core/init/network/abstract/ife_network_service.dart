@@ -10,25 +10,5 @@ abstract class INetworService {
 
   void logOutUser();
 
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
-
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
-
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(
-      String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
+  
 }
