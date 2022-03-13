@@ -1,26 +1,23 @@
 // ignore_for_file: unused_field
-
-import 'package:flutter_notebook/core/constants/enum/http_request_types_enum.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_response_model.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
-import 'package:flutter_notebook/core/constants/enum/network_manager_types_enum.dart';
-import 'package:flutter_notebook/core/init/network/abstract/ife_network_service.dart';
-import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
+import '../../../constants/enum/network_manager_types_enum.dart';
+import "../abstract/ife_network_service.dart";
+import '../abstract/ife_network_manager.dart';
+import 'dio/network_manager_dio.dart';
 
 class NetworkService implements INetworService {
-  static late final  NetworkService? _instance;
-  late final INetworService _service;
+  static late final NetworkService? _instance;
+  late final INetworkManager _manager;
+
   static NetworkService get instance {
-  
     _instance ??= NetworkService._init();
     return _instance!;
   }
 
   NetworkService._init() {
-    _service = _selectService(NetworkManagerTypes.DIO);
+    _manager = _selectManager(NetworkManagerTypes.DIO);
   }
 
-  INetworService _selectService(NetworkManagerTypes types) {
+  INetworkManager _selectManager(NetworkManagerTypes types) {
     switch (types) {
       case NetworkManagerTypes.DIO:
         return NetworkManagerOfDio.instance;
@@ -30,40 +27,19 @@ class NetworkService implements INetworService {
     }
   }
 
-
-
+  // authentication...
+  @override
+  void signUpUser() {}
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
-    // TODO: implement fetch
-    throw UnimplementedError();
-  }
+  void loginUser() {}
 
   @override
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
-    // TODO: implement fetchNoNetwork
-    throw UnimplementedError();
-  }
+  void logOutUser() {}
 
   @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
-    // TODO: implement send
-    throw UnimplementedError();
-  }
+  void register() {}
 
   @override
-  void logOutUser() {
-    // TODO: implement logOutUser
-  }
-
-  @override
-  void loginUser() {
-    // TODO: implement loginUser
-  }
-
-  @override
-  void signUpUser() {
-    // TODO: implement signUpUser
-  }
-
+  void refreshToken() {}
 }
