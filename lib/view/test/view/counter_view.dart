@@ -4,17 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_notebook/core/base/state/base_state.dart';
 import 'package:flutter_notebook/core/base/view/base_widget.dart';
-import 'package:flutter_notebook/core/constants/enum/app_navigation_animations_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/app_navigation_pages_enum.dart';
 import 'package:flutter_notebook/core/extension/string_extension.dart';
 import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
-import 'package:flutter_notebook/core/init/theme/concrete/theme_service.dart';
 import 'package:flutter_notebook/view/test/view_model/counter_view_model.dart';
 
-import '../../../core/init/navigation/abstract/ife_navigation_service.dart';
-import '../../../core/init/navigation/concrete/core_navigation/navigation_manager_core.dart';
-import '../../../core/init/navigation/concrete/navigation_service.dart';
-import '../../../core/init/theme/concrete/theme_service.dart';
 
 class Counter extends StatefulWidget {
   const Counter({Key? key}) : super(key: key);

@@ -34,17 +34,33 @@ class NetworkService implements INetworService {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,
+      {required HttpRequestTypes type,
+      required T parseModel,
+      data,
+      Map<String, Object>? queryParameters,
+      void Function(int p1, int p2)? onReceiveProgress}) {
+    return _manager.fetch(path, type: type, parseModel: parseModel);
+  }
+
+  @override
+  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(
+      String path,
+      {required HttpRequestTypes type,
+      required T parseModel,
+      data,
+      Map<String, Object>? queryParameters,
+      void Function(int p1, int p2)? onReceiveProgress}) {
     throw UnimplementedError();
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
+      {required HttpRequestTypes type,
+      required T parseModel,
+      data,
+      Map<String, Object>? queryParameters,
+      void Function(int p1, int p2)? onReceiveProgress}) {
     throw UnimplementedError();
   }
 }

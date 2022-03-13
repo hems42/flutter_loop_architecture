@@ -5,6 +5,7 @@ import 'package:flutter_notebook/core/constants/app/app_constant.dart';
 import 'package:flutter_notebook/core/init/navigation/abstract/ife_navigation_service.dart';
 import 'package:flutter_notebook/core/init/navigation/concrete/core_navigation/navigation_manager_core.dart';
 import 'package:flutter_notebook/core/init/navigation/concrete/navigation_service.dart';
+import 'package:flutter_notebook/view/json_place_holder/view/comment_view.dart';
 import 'package:flutter_notebook/view/test/view/counter_view.dart';
 
 Future<void> main() async {
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
     final INavigationService navigationService = NavigationService.instance;
     NavigationManagerOfCore navigationManagerOfCore = navigationService.getStuffUtilOfNavigationService() as NavigationManagerOfCore;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -50,7 +52,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: navigationManagerOfCore.getRouteGenarator(),
       navigatorKey:  navigationManagerOfCore.getNavigatorKey(),
-      home: const Counter(),
+      home: const CommentListView(),
     );
   }
 }

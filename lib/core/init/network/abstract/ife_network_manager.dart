@@ -19,6 +19,9 @@ mixin INetworkManager implements INetworService {
   final String _user = "/users";
   final String _authentication = "/authentication";
 
+  // local directory paths
+  final String _baseLocalDirectory = "";
+
   get connectionTimeOut => _connectionTimeOut;
 
   get receivingTimeOut => _receivingTimeOut;
@@ -28,6 +31,8 @@ mixin INetworkManager implements INetworService {
   get user => _baseUrl + _user;
 
   get authentication => _baseUrl + _authentication;
+
+  get baseLocalDirectory => _baseLocalDirectory;
 
   // needable interrup metods...
   VoidCallback? onRequestV;
