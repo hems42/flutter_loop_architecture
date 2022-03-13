@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import '../../../constants/app/app_constant.dart';
 import '../../../base/model/abstract/ife_base_model.dart';
-import '../../../base/model/abstract/ife_base_response_model.dart';
-import '../../../constants/enum/http_request_types_enum.dart';
 import 'ife_network_service.dart';
 
 mixin INetworkManager implements INetworService {
+  // util serviceses...
   // ignore: prefer_typing_uninitialized_variables
   var cacheService;
   // ignore: prefer_typing_uninitialized_variables
@@ -23,10 +23,21 @@ mixin INetworkManager implements INetworService {
 
   get receivingTimeOut => _receivingTimeOut;
 
+  get baseUrl => _baseUrl;
+
   get user => _baseUrl + _user;
 
   get authentication => _baseUrl + _authentication;
 
+  // needable interrup metods...
+  VoidCallback? onRequestV;
+  Function? onRequestF;
+  VoidCallback? onResponseV;
+  Function? onResponseF;
+  VoidCallback? onErrorV;
+  Function? onErrorF;
+
+  // util methods...
   R? responseParser<R, T>(IBaseModel model, dynamic data) {
     if (data is List) {
       return data.map((e) => model.fromJson(e)).toList().cast<T>() as R;
@@ -35,26 +46,4 @@ mixin INetworkManager implements INetworService {
     }
     return data as R?;
   }
-
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
-
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
-
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(
-      String path,
-      {required HttpRequestTypes type,
-      required T parseModel,
-      dynamic data,
-      Map<String, Object>? queryParameters,
-      void Function(int, int)? onReceiveProgress});
 }

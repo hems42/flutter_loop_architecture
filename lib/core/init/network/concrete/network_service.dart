@@ -1,4 +1,10 @@
 // ignore_for_file: unused_field
+import 'package:flutter_notebook/core/constants/enum/http_request_types_enum.dart';
+
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_response_model.dart';
+
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+
 import '../../../constants/enum/network_manager_types_enum.dart';
 import "../abstract/ife_network_service.dart";
 import '../abstract/ife_network_manager.dart';
@@ -27,19 +33,18 @@ class NetworkService implements INetworService {
     }
   }
 
-  // authentication...
   @override
-  void signUpUser() {}
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
+    throw UnimplementedError();
+  }
 
   @override
-  void loginUser() {}
+  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
+    throw UnimplementedError();
+  }
 
   @override
-  void logOutUser() {}
-
-  @override
-  void register() {}
-
-  @override
-  void refreshToken() {}
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path, {required HttpRequestTypes type, required T parseModel, data, Map<String, Object>? queryParameters, void Function(int p1, int p2)? onReceiveProgress}) {
+    throw UnimplementedError();
+  }
 }
