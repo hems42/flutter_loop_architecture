@@ -36,8 +36,11 @@ class NetworkManagerOfDio with INetworkManager {
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
+
     final response = await _dio.request(path,
-        data: data, options: Options(method: type.toMethod));
+        data: data,
+        options: Options(method: type.toMethod) );
+
     switch (response.statusCode) {
       case HttpStatus.ok:
       case HttpStatus.accepted:

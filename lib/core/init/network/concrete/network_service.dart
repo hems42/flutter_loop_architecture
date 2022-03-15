@@ -1,17 +1,14 @@
 // ignore_for_file: unused_field
-import 'package:flutter_notebook/core/constants/enum/http_request_types_enum.dart';
-
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_response_model.dart';
-
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
-
+import '../../../constants/enum/http_request_types_enum.dart';
+import '../../../base/model/abstract/ife_base_response_model.dart';
+import '../../../base/model/abstract/ife_base_model.dart';
 import '../../../constants/enum/network_manager_types_enum.dart';
 import "../abstract/ife_network_service.dart";
 import '../abstract/ife_network_manager.dart';
 import 'dio/network_manager_dio.dart';
 
 class NetworkService implements INetworService {
-  static  NetworkService? _instance;
+  static NetworkService? _instance;
   late final INetworkManager _manager;
 
   static NetworkService get instance {

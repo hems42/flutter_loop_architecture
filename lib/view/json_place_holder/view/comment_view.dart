@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
+import 'package:flutter_notebook/view/json_place_holder/model/comment_model.dart';
 import '../../../core/constants/enum/http_request_types_enum.dart';
 import '../../../core/init/network/concrete/dio/network_manager_dio.dart';
 import '../model/post_model.dart';
@@ -21,6 +22,7 @@ class _CommentListViewState extends BaseState<CommentListView> {
     return BaseView<CommentViewModel>(
       onModelReady: (model) {
         viewModel = model;
+        viewModel.init();
       },
       onPageBuilder: (context, value) {
         return SafeArea(
@@ -60,8 +62,15 @@ class _CommentListViewState extends BaseState<CommentListView> {
                             }
                             print("bitti");
                           }),
-                          btn_request("GET2",
-                              const Color.fromARGB(255, 124, 31, 25), () {})
+                          btn_request(
+                              "GET2", const Color.fromARGB(255, 124, 31, 25),
+                              () async {
+                            await (viewModel.commentModels
+                                    as Future<List<CommentModel>>)
+                                .then((value) => value.forEach((element) {
+                                      print(element.name);
+                                    }));
+                          })
                         ],
                       ),
                     ),

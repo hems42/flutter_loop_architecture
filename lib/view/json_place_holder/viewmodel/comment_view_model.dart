@@ -14,9 +14,11 @@ abstract class _CommentViewModelBase with Store, IBaseViewModel {
   @override
   void setContext(BuildContext context) => this.context = context;
   @override
-  void init() {service = JsonPlaceHolderService();}
+  void init() {
+    service = JsonPlaceHolderService();
+  }
 
-  
+  get commentModels => service.getAllComments();
 
   @observable
   int i = 0;
