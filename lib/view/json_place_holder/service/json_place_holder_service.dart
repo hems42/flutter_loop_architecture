@@ -1,11 +1,8 @@
+import '../../../product/base/ife_base_service.dart';
 import '../../../core/constants/enum/http_request_types_enum.dart';
-import '../../../core/init/network/abstract/ife_network_service.dart';
-import '../../../core/init/network/concrete/network_service.dart';
-import '../model/coment_model.dart';
+import '../model/comment_model.dart';
 
-class JsonPlaceHolderService {
-  final INetworService networkService = NetworkService.instance;
-
+class JsonPlaceHolderService extends IBaseService {
   Future<CommentModel?>? getAllComments() {
     final response = networkService
         .fetch<CommentModel, CommentModel>(

@@ -1,4 +1,6 @@
-class PhotoModel {
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+
+class PhotoModel extends IBaseModel {
   int? _albumId;
   int? _id;
   String? _title;
@@ -55,5 +57,15 @@ class PhotoModel {
     data['url'] = _url;
     data['thumbnailUrl'] = _thumbnailUrl;
     return data;
+  }
+
+  @override
+  fromJson(Map<String, dynamic> json) {
+    return PhotoModel(
+        albumId: json['albumId'],
+        id: json['id'],
+        title: json['title'],
+        url: json['url'],
+        thumbnailUrl: json['thumbnailUrl']);
   }
 }

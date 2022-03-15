@@ -1,4 +1,6 @@
-class TodoModel {
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+
+class TodoModel extends IBaseModel {
   int? _userId;
   int? _id;
   String? _title;
@@ -42,5 +44,15 @@ class TodoModel {
     data['title'] = _title;
     data['completed'] = _completed;
     return data;
+  }
+
+  @override
+  fromJson(Map<String, dynamic> json) {
+    return TodoModel(
+      userId : json['userId'],
+    id : json['id'],
+    title : json['title'],
+    completed : json['completed'],
+    );
   }
 }

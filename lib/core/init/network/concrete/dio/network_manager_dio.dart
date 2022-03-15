@@ -9,28 +9,25 @@ import '../../../../constants/enum/http_request_types_enum.dart';
 import '../../abstract/ife_network_manager.dart';
 
 class NetworkManagerOfDio with INetworkManager {
-  static late NetworkManagerOfDio _instance;
+  static NetworkManagerOfDio? _instance;
   late final Dio _dio;
 
-  static NetworkManagerOfDio get instance {
-    // ignore: unnecessary_null_comparison
-    if (_instance == null) NetworkManagerOfDio._init();
+  static NetworkManagerOfDio? get instance {
+    _instance ??= NetworkManagerOfDio._init();
     return _instance;
   }
 
   NetworkManagerOfDio._init() {
     _dio = Dio();
-    _dio.options.baseUrl = baseUrl;
-    _dio.options.connectTimeout = connectionTimeOut;
-    _dio.options.receiveTimeout = receivingTimeOut;
+    //_dio.options.baseUrl = baseUrl;
+    //_dio.options.connectTimeout = connectionTimeOut;
+    //_dio.options.receiveTimeout = receivingTimeOut;
 
-    _dio.interceptors.add(InterceptorsWrapper(
-        onRequest: (options, handler) {},
-        onResponse: (response, handler) {},
-        onError: (error, handler) {}));
+    // _dio.interceptors.add(InterceptorsWrapper(
+    //   onRequest: (options, handler) {},
+    // onResponse: (response, handler) {},
+    // onError: (error, handler) {}));
   }
-
-
 
   @override
   Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,

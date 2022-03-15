@@ -1,4 +1,6 @@
-class PostModel {
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+
+class PostModel extends IBaseModel{
   int? _userId;
   int? _id;
   String? _title;
@@ -42,5 +44,14 @@ class PostModel {
     data['title'] = _title;
     data['body'] = _body;
     return data;
+  }
+
+  @override
+  fromJson(Map<String, dynamic> json) {
+    return PostModel(
+      body: json['body'],
+      id: json['id'],
+      title: json['title'],
+      userId: json['userId']);
   }
 }

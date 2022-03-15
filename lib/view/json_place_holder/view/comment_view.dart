@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/base/state/base_state.dart';
-import 'package:flutter_notebook/core/base/view/base_widget.dart';
-import 'package:flutter_notebook/view/json_place_holder/viewmodel/comment_view_model.dart';
+import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
+import '../../../core/constants/enum/http_request_types_enum.dart';
+import '../../../core/init/network/concrete/dio/network_manager_dio.dart';
+import '../model/post_model.dart';
+import '../../../core/base/state/base_state.dart';
+import '../../../core/base/view/base_widget.dart';
+import '../viewmodel/comment_view_model.dart';
 
 class CommentListView extends StatefulWidget {
   const CommentListView({Key? key}) : super(key: key);
@@ -11,7 +15,7 @@ class CommentListView extends StatefulWidget {
 }
 
 class _CommentListViewState extends BaseState<CommentListView> {
-  late final CommentViewModel viewModel;
+  late CommentViewModel viewModel;
   @override
   Widget build(BuildContext context) {
     return BaseView<CommentViewModel>(
@@ -19,28 +23,75 @@ class _CommentListViewState extends BaseState<CommentListView> {
         viewModel = model;
       },
       onPageBuilder: (context, value) {
-        return Center(
-            child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        return SafeArea(
+          child: Center(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              btn_request("GET", Colors.green, () {
-                viewModel.service.getAllComments()!.then((value) { print(value!.email.toString());});
-              }),
-              btn_request("POST", Colors.red, () {
-                print("kırmızya tıkılandı");
-              }),
-              btn_request("FETCH", Colors.blue, () {
-                print("maviye tıkılandı");
-              }),
-              btn_request("PUT", Colors.amber, () {}),
+              Container(
+                color: Colors.green.shade100,
+                child: Expanded(
+                  flex: 5,
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          btn_request("GET", Colors.green, () {
+                            List<PostModel>? models = null;
+                            print("başladı");
+                            try {
+                              final gelen = NetworkService.instance!
+                                  .fetch<List<PostModel>, PostModel>(
+                                      "https://jsonplaceholder.typicode.com/posts",
+                                      type: HttpRequestTypes.GET,
+                                      parseModel: PostModel())
+                                  .then((value) {
+                                models = (value.data as List<PostModel>);
+
+                                models!.forEach((element) {
+                                  print(element.title);
+                                });
+                              }).whenComplete(() => print("sonunda bitti"));
+                            } catch (e) {
+                              print("gelen hata : " + e.toString());
+                            }
+                            print("bitti");
+                          }),
+                          btn_request("GET2",
+                              const Color.fromARGB(255, 124, 31, 25), () {})
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              //list_items()
+              //list_future_builder()
             ],
-          ),
-        ));
+          )),
+        );
       },
       viewModel: CommentViewModel(),
       onDispose: () {},
+    );
+  }
+
+  Expanded list_items() {
+    return Expanded(
+      flex: 5,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: List.generate(
+              10,
+              (index) => Material(
+                  child: ExpansionTile(title: Text(index.toString())))),
+        ),
+      ),
     );
   }
 }

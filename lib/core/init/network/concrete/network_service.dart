@@ -11,7 +11,7 @@ import '../abstract/ife_network_manager.dart';
 import 'dio/network_manager_dio.dart';
 
 class NetworkService implements INetworService {
-  static late final NetworkService? _instance;
+  static  NetworkService? _instance;
   late final INetworkManager _manager;
 
   static NetworkService get instance {
@@ -20,10 +20,10 @@ class NetworkService implements INetworService {
   }
 
   NetworkService._init() {
-    _manager = _selectManager(NetworkManagerTypes.DIO);
+    _manager = _selectManager(NetworkManagerTypes.DIO)!;
   }
 
-  INetworkManager _selectManager(NetworkManagerTypes types) {
+  INetworkManager? _selectManager(NetworkManagerTypes types) {
     switch (types) {
       case NetworkManagerTypes.DIO:
         return NetworkManagerOfDio.instance;
