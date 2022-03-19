@@ -17,6 +17,14 @@ class CommentListView extends StatefulWidget {
 
 class _CommentListViewState extends BaseState<CommentListView> {
   late CommentViewModel viewModel;
+  late Future<List<CommentModel>> model;
+
+  @override
+  void initState() {
+    model = getCommentModelList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView<CommentViewModel>(
@@ -25,62 +33,39 @@ class _CommentListViewState extends BaseState<CommentListView> {
         viewModel.init();
       },
       onPageBuilder: (context, value) {
-        return SafeArea(
-          child: Center(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                color: Colors.green.shade100,
-                child: Expanded(
-                  flex: 5,
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          btn_request("GET", Colors.green, () {
-                            List<PostModel>? models = null;
-                            print("başladı");
-                            try {
-                              final gelen = NetworkService.instance!
-                                  .fetch<List<PostModel>, PostModel>(
-                                      "https://jsonplaceholder.typicode.com/posts",
-                                      type: HttpRequestTypes.GET,
-                                      parseModel: PostModel())
-                                  .then((value) {
-                                models = (value.data as List<PostModel>);
-
-                                models!.forEach((element) {
-                                  print(element.title);
-                                });
-                              }).whenComplete(() => print("sonunda bitti"));
-                            } catch (e) {
-                              print("gelen hata : " + e.toString());
-                            }
-                            print("bitti");
-                          }),
-                          btn_request(
-                              "GET2", const Color.fromARGB(255, 124, 31, 25),
-                              () async {
-                            await (viewModel.commentModels
-                                    as Future<List<CommentModel>>)
-                                .then((value) => value.forEach((element) {
-                                      print(element.name);
-                                    }));
-                          })
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              //list_items()
-              //list_future_builder()
-            ],
-          )),
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Servis Geliştirmesi"),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(flex: 5, child: list_items()),
+                Expanded(
+                    flex: 5,
+                    child: Container(
+                      color: Colors.grey,
+                      child: SingleChildScrollView(
+                          child: Center(
+                        child: Column(
+                          children: [
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {}),
+                          ],
+                        ),
+                      )),
+                    ))
+              ],
+            ),
+          ),
         );
       },
       viewModel: CommentViewModel(),
@@ -88,39 +73,96 @@ class _CommentListViewState extends BaseState<CommentListView> {
     );
   }
 
-  Expanded list_items() {
-    return Expanded(
-      flex: 5,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: List.generate(
-              10,
-              (index) => Material(
-                  child: ExpansionTile(title: Text(index.toString())))),
-        ),
+  Widget list_items() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: Colors.amber.shade200,
+      child: FutureBuilder<List<CommentModel>>(
+        initialData: [CommentModel(body: "body", email: "email", name: "name")],
+        future: model,
+        builder: (context, snapshot) {
+          final comments = snapshot.data;
+          if (snapshot.hasError) {
+            print("hataya düşüt : " + snapshot.error.toString());
+            return const Center(child: Text("bura yarrağı yedi"));
+          } else if (snapshot.hasData) {
+            return buildCommentList(comments ??
+                List<CommentModel>.of([
+                  CommentModel(body: "body", email: "email", name: "name")
+                ]));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
-}
 
-Container btn_request(
-    String requestType, Color buttonColor, Function buttonFunction) {
-  return Container(
-    margin: const EdgeInsets.symmetric(vertical: 3.0),
-    child: TextButton(
-        style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all(Colors.white30),
-            fixedSize: MaterialStateProperty.all(const Size(250, 30)),
-            elevation: MaterialStateProperty.all(10),
-            backgroundColor: MaterialStateProperty.all(buttonColor)),
-        onPressed: () {
-          buttonFunction.call();
-        },
-        child: Text(
-          requestType,
-          style: const TextStyle(color: Colors.white),
-        )),
-  );
+  Future<List<CommentModel>> getCommentModelList() async {
+    late List<CommentModel> model;
+    await NetworkService.instance
+        .fetch<List<CommentModel>, CommentModel>(
+            "https://jsonplaceholder.typicode.com/comments",
+            type: HttpRequestTypes.GET,
+            parseModel: CommentModel())
+        .then((value) => model = value.data as List<CommentModel>);
+
+    return model;
+  }
+
+  Widget buildCommentList(List<CommentModel> commentsAll) {
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: commentsAll.length,
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(10),
+      itemBuilder: (c, i) {
+        final comment = commentsAll.elementAt(i);
+
+        return ExpansionTile(
+          childrenPadding: EdgeInsets.all(5),
+          // collapsedBackgroundColor: Colors.blue,
+          // collapsedIconColor: Colors.white,
+          // textColor: Color.fromRGBO(255, 255, 255, 1),
+          children: [
+            Text(comment.name.toString()),
+            SizedBox(
+              height: 10,
+              width: 10,
+            ),
+            TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "apply",
+                  style: TextStyle(color: Colors.white),
+                ))
+          ],
+          backgroundColor: Colors.blueGrey,
+          iconColor: Colors.white,
+          leading: const Icon(Icons.airline_seat_flat_angled_sharp),
+          title: Text(comment.email.toString()),
+        );
+      },
+    );
+  }
+
+  Container btn_request(
+      String requestType, Color buttonColor, Function buttonFunction) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 3.0),
+      child: TextButton(
+          style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.white30),
+              fixedSize: MaterialStateProperty.all(const Size(250, 30)),
+              elevation: MaterialStateProperty.all(10),
+              backgroundColor: MaterialStateProperty.all(buttonColor)),
+          onPressed: () {
+            buttonFunction.call();
+          },
+          child: Text(
+            requestType,
+            style: const TextStyle(color: Colors.white),
+          )),
+    );
+  }
 }
