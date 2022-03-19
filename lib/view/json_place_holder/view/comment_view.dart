@@ -119,28 +119,34 @@ class _CommentListViewState extends BaseState<CommentListView> {
       itemBuilder: (c, i) {
         final comment = commentsAll.elementAt(i);
 
-        return ExpansionTile(
-          childrenPadding: EdgeInsets.all(5),
-          // collapsedBackgroundColor: Colors.blue,
-          // collapsedIconColor: Colors.white,
-          // textColor: Color.fromRGBO(255, 255, 255, 1),
-          children: [
-            Text(comment.name.toString()),
-            SizedBox(
-              height: 10,
-              width: 10,
-            ),
-            TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "apply",
-                  style: TextStyle(color: Colors.white),
-                ))
-          ],
-          backgroundColor: Colors.blueGrey,
-          iconColor: Colors.white,
-          leading: const Icon(Icons.airline_seat_flat_angled_sharp),
-          title: Text(comment.email.toString()),
+        return Container(
+          margin: const EdgeInsets.all(3),
+          decoration: const BoxDecoration(
+              color: Colors.cyan,
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: ExpansionTile(
+            childrenPadding: const EdgeInsets.all(5),
+            // collapsedBackgroundColor: Colors.blue,
+            //collapsedIconColor: Colors.white,
+            textColor: const Color.fromRGBO(255, 255, 255, 1),
+            children: [
+              Text(comment.name.toString()),
+              const SizedBox(
+                height: 10,
+                width: 10,
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "apply",
+                    style: TextStyle(color: Colors.white),
+                  ))
+            ],
+            backgroundColor: Colors.blueGrey,
+            iconColor: Colors.white,
+            leading: const Icon(Icons.email_sharp),
+            title: Text("$i  : " + comment.email.toString()),
+          ),
         );
       },
     );
