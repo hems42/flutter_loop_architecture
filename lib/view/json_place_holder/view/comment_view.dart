@@ -75,7 +75,7 @@ class _CommentListViewState extends BaseState<CommentListView> {
 
   Widget list_items() {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       color: Colors.amber.shade200,
       child: FutureBuilder<List<CommentModel>>(
         initialData: [CommentModel(body: "body", email: "email", name: "name")],

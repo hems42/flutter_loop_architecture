@@ -1,8 +1,8 @@
-import 'package:flutter_notebook/core/constants/enum/app_theme_types_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/cache_manager_types_enum.dart';
-import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_manager.dart';
-import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_service.dart';
-import 'package:flutter_notebook/core/init/cache/concrete/shared_preferences/cache_manager_shared_preferences.dart';
+import '../../../constants/enum/app_theme_types_enum.dart';
+import '../../../constants/enum/cache_manager_types_enum.dart';
+import '../abstract/ife_cache_manager.dart';
+import '../abstract/ife_cache_service.dart';
+import 'shared_preferences/cache_manager_shared_preferences.dart';
 
 class CacheService implements ICacheService {
   static final CacheService _instance = CacheService._init();

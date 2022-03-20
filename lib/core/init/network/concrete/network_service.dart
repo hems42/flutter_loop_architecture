@@ -60,4 +60,20 @@ class NetworkService implements INetworService {
       void Function(int p1, int p2)? onReceiveProgress}) {
     throw UnimplementedError();
   }
+
+  // post metod
+
+  // get metod
+
+  // put metod
+
+  // patch metod
+
+  // download metod
+
+  // refreshtoken
+
+  // access-token
+
+  
 }
