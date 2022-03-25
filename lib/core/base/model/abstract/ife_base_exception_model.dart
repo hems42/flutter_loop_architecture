@@ -1,6 +1,6 @@
-import 'package:flutter_notebook/core/constants/enum/exception_error_types_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/exception_event_types_enum.dart';
-import 'package:flutter_notebook/core/extension/exception_extension.dart';
+import '../../../extension/exception_extension.dart';
+import '../../../constants/enum/exception/exception_error_types_enum.dart';
+import '../../../constants/enum/exception/exception_event_types_enum.dart';
 
 abstract class IBaseExceptionModel {
   late String _timestamp;
