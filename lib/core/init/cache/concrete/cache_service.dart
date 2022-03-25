@@ -1,5 +1,5 @@
-import '../../../constants/enum/app_theme_types_enum.dart';
-import '../../../constants/enum/cache_manager_types_enum.dart';
+import '../../../constants/enum/cache/cache_manager_types_enum.dart';
+import '../../../constants/enum/theme/app_theme_types_enum.dart';
 import '../abstract/ife_cache_manager.dart';
 import '../abstract/ife_cache_service.dart';
 import 'shared_preferences/cache_manager_shared_preferences.dart';

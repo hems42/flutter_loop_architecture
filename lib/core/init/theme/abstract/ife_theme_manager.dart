@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/constants/enum/app_theme_types_enum.dart';
-import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_service.dart';
-import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
-import 'package:flutter_notebook/core/init/theme/abstract/ife_theme_service.dart';
+import '../../../constants/enum/theme/app_theme_types_enum.dart';
+import '../../cache/abstract/ife_cache_service.dart';
+import '../../cache/concrete/cache_service.dart';
+import 'ife_theme_service.dart';
 
 mixin IThemeManager implements IThemeService {
   final ICacheService getCacheService = CacheService.instance;
@@ -11,11 +11,7 @@ mixin IThemeManager implements IThemeService {
     return selectThemeFromAppThemeTypes(getCacheService.getCurrentThme());
   }
 
-  
-  void  updateSelectedThemeOnCache(AppThemeTypes type)
-  {
-      
-  }
+  void updateSelectedThemeOnCache(AppThemeTypes type) {}
 
   ThemeData selectThemeFromAppThemeTypes(AppThemeTypes type) {
     switch (type) {

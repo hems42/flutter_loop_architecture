@@ -2,12 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_notebook/core/base/state/base_state.dart';
-import 'package:flutter_notebook/core/base/view/base_widget.dart';
+import '../../../core/base/state/abstract/ife_base_state.dart';
+import '../../../core/base/view/concrete/base_widget.dart';
 import 'package:flutter_notebook/core/extension/string_extension.dart';
-import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
-import 'package:flutter_notebook/view/test/view_model/counter_view_model.dart';
-
+import '../../../core/init/lang/concrete/easy_localization/locale_keys.g.dart';
+import '../view_model/counter_view_model.dart';
 
 class Counter extends StatefulWidget {
   const Counter({Key? key}) : super(key: key);
@@ -40,7 +39,6 @@ class _CounterState extends BaseState<Counter> {
                       btn_mtd(
                         "dene buton",
                         Colors.blue,
-                        
                       ),
                       btn_mtd(
                         "mimari classları deneme",

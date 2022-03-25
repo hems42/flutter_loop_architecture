@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_notebook/core/constants/enum/app_language_types_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/language_manager_types_enum.dart';
+import 'package:flutter_notebook/core/constants/enum/lang/app_language_types_enum.dart';
+import 'package:flutter_notebook/core/constants/enum/lang/language_manager_types_enum.dart';
 import 'package:flutter_notebook/core/init/lang/abstract/ife_language_manager.dart';
 import 'package:flutter_notebook/core/init/lang/abstract/ife_language_service.dart';
 import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/language_manager_easy_localization.dart';

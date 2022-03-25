@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter_notebook/core/init/analytic/abstract/ife_analytic_manager.dart';
+import '../../abstract/ife_analytic_manager.dart';
 
 class AnalyticManagerOfCustom implements IAnalyticManager {
   static AnalyticManagerOfCustom? _instance;

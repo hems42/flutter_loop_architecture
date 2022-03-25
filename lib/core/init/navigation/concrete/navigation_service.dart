@@ -1,9 +1,8 @@
-import 'package:flutter_notebook/core/constants/enum/app_navigation_animations_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/navigation_manager_types_enum.dart';
-import 'package:flutter_notebook/core/init/navigation/abstract/ife_navigation_service.dart';
-import 'package:flutter_notebook/core/init/navigation/concrete/core_navigation/navigation_manager_core.dart';
-
-import '../../../constants/enum/app_navigation_pages_enum.dart';
+import '../../../constants/enum/navigation/app_navigation_animations_enum.dart';
+import '../../../constants/enum/navigation/app_navigation_pages_enum.dart';
+import '../../../constants/enum/navigation/navigation_manager_types_enum.dart';
+import '../abstract/ife_navigation_service.dart';
+import 'core_navigation/navigation_manager_core.dart';
 import '../abstract/ife_navigation_manager.dart';
 
 class NavigationService implements INavigationService {

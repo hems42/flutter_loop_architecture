@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_view_model.dart';
+import '../../../core/base/model/abstract/ife_base_view_model.dart';
 import 'package:mobx/mobx.dart';
-
 import '../service/json_place_holder_service.dart';
 part 'comment_view_model.g.dart';
 

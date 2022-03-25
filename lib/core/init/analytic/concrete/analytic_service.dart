@@ -1,7 +1,7 @@
-import 'package:flutter_notebook/core/constants/enum/analytic_manager_types_enum.dart';
-import 'package:flutter_notebook/core/init/analytic/abstract/ife_analytic_manager.dart';
-import 'package:flutter_notebook/core/init/analytic/abstract/ife_analytic_service.dart';
-import 'package:flutter_notebook/core/init/analytic/concrete/custom_analytic/analytic_manager_custom.dart';
+import '../../../constants/enum/analytic/analytic_manager_types_enum.dart';
+import '../abstract/ife_analytic_manager.dart';
+import '../abstract/ife_analytic_service.dart';
+import 'custom_analytic/analytic_manager_custom.dart';
 
 class AnalyticService implements IAnalyticService {
   static AnalyticService? _instance;
@@ -26,8 +26,8 @@ class AnalyticService implements IAnalyticService {
   }
 
   @override
-  void dene2() {print("dene  den çıktı");
+  void dene2() {
+    print("dene  den çıktı");
     _manager!.dene();
-    
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_notebook/core/constants/enum/http_request_types_enum.dart';
+import '../constants/enum/network/http_request_types_enum.dart';
 
 extension ExtensionOfNetworkTypes on HttpRequestTypes {
   String get toMethod {

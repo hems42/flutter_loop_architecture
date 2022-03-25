@@ -1,7 +1,6 @@
 import 'package:flutter_notebook/core/base/model/concrete/response_model.dart';
-
+import '../../../core/constants/enum/network/http_request_types_enum.dart';
 import '../../../product/base/ife_base_service.dart';
-import '../../../core/constants/enum/http_request_types_enum.dart';
 import '../model/comment_model.dart';
 
 class JsonPlaceHolderService extends IBaseService {

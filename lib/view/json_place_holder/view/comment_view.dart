@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
-import 'package:flutter_notebook/view/json_place_holder/model/comment_model.dart';
-import '../../../core/constants/enum/http_request_types_enum.dart';
-import '../../../core/init/network/concrete/dio/network_manager_dio.dart';
-import '../model/post_model.dart';
-import '../../../core/base/state/base_state.dart';
-import '../../../core/base/view/base_widget.dart';
+import '../../../core/init/network/concrete/network_service.dart';
+import '../model/comment_model.dart';
+import '../../../core/base/state/abstract/ife_base_state.dart';
+import '../../../core/base/view/concrete/base_widget.dart';
 import '../viewmodel/comment_view_model.dart';
 
 class CommentListView extends StatefulWidget {

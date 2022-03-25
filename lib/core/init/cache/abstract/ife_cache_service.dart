@@ -1,4 +1,4 @@
-import 'package:flutter_notebook/core/constants/enum/app_theme_types_enum.dart';
+import '../../../constants/enum/theme/app_theme_types_enum.dart';
 
 abstract class ICacheService {
   AppThemeTypes getCurrentThme();

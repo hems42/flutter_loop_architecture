@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_theme_model.dart';
-import 'package:flutter_notebook/core/constants/enum/app_theme_types_enum.dart';
-import 'package:flutter_notebook/core/constants/enum/theme_manager_types_enum.dart';
-import 'package:flutter_notebook/core/init/theme/abstract/ife_theme_service.dart';
-import 'package:flutter_notebook/core/init/theme/concrete/theme_notifier/theme_manager_notifier.dart';
-
+import '../../../base/model/abstract/ife_base_theme_model.dart';
+import '../../../constants/enum/theme/app_theme_types_enum.dart';
+import '../../../constants/enum/theme/theme_manager_types_enum.dart';
+import '../abstract/ife_theme_service.dart';
+import 'theme_notifier/theme_manager_notifier.dart';
 import '../abstract/ife_theme_manager.dart';
 
 class ThemeService implements IThemeService {

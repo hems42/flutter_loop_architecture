@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/constants/enum/app_navigation_animations_enum.dart';
 import 'package:flutter_notebook/view/test/view/counter_view.dart';
-
-import '../../../../constants/enum/app_navigation_pages_enum.dart';
+import '../../../../constants/enum/navigation/app_navigation_animations_enum.dart';
+import '../../../../constants/enum/navigation/app_navigation_pages_enum.dart';
 import '../../../../constants/navigation/navigation_constants.dart';
 import '../../abstract/ife_navigation_manager.dart';
 

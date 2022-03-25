@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_theme_model.dart';
-import 'package:flutter_notebook/core/constants/enum/app_theme_types_enum.dart';
-import 'package:flutter_notebook/core/init/theme/abstract/ife_theme_manager.dart';
+import '../../../../base/model/abstract/ife_base_theme_model.dart';
+import '../../../../constants/enum/theme/app_theme_types_enum.dart';
+import '../../abstract/ife_theme_manager.dart';
 
 class ThemeManagerOfNotifier extends ChangeNotifier with IThemeManager {
   static late final ThemeManagerOfNotifier? _instance;
