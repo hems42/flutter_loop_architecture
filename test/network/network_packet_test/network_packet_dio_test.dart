@@ -1,23 +1,25 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_notebook/view/json_place_holder/model/todo_model.dart';
+import 'package:flutter_notebook/view/json_place_holder/model/comment_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late Dio dio;
-  TodoModel? todos;
+  CommentModel? comment;
   setUp((() {
     dio = Dio();
   }));
 
-  test("get data", () {
-    final response = dio.get("https://jsonplaceholder.typicode.com/todos/1");
-
-    response.then((value) {
-      todos = TodoModel.fromJson(value.data);
-    }).catchError((e) {
-      print("gelen hata : " + e.toString());
-    }).whenComplete(() => print("completed"));
-
-    expect(todos, isNotNull);
+  test("get data", () async {
+    final response =
+        await dio.get("https://jsonplaceholder.typicode.com/comments/1");
+    comment = CommentModel.fromJson(response.data);
+    expect(comment, isNotNull);
   });
+
+  test("get users", (() async {
+    final response =
+        await dio.get("http://localhost:8080/api/users/getAllUsers");
+    expect(response.data, isNotNull);
+    expect(response.data, isList);
+  }));
 }
