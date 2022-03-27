@@ -22,4 +22,11 @@ void main() {
     expect(response.data, isNotNull);
     expect(response.data, isList);
   }));
+
+  test('get exception test', () async {
+    final response = await dio
+    .post('http://localhost:8080/api/authentication/signup',
+           data: {"userNickName": "vali", "eMail": "vali@vali", "password": "vali"});
+
+  });
 }

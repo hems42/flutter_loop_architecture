@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
 
 class UserModel extends IBaseModel {
@@ -59,6 +61,8 @@ class UserModel extends IBaseModel {
   set phone(String? phone) => _phone = phone;
   String? get website => _website;
   set website(String? website) => _website = website;
+  
+
   Company? get company => _company;
   set company(Company? company) => _company = company;
 
