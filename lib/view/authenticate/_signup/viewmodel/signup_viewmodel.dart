@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_view_model.dart';
-import 'package:flutter_notebook/view/authenticate/_signup/service/abstract/ife_signup_cache_service.dart';
-import 'package:flutter_notebook/view/authenticate/_signup/service/abstract/ife_singup_service.dart';
+import '../../../../core/base/model/abstract/ife_base_view_model.dart';
+import '../service/abstract/ife_signup_cache_service.dart';
+import '../service/abstract/ife_singup_service.dart';
 import 'package:mobx/mobx.dart';
 part 'signup_viewmodel.g.dart';
 
