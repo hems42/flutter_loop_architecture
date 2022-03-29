@@ -16,21 +16,15 @@ mixin INetworkManager implements INetworService {
 
   // base url - paths
   final String _baseUrl = ApplicationConstants.API_BASE_URL;
-  final String _user = "/users";
-  final String _authentication = "/authentication";
 
   // local directory paths
   final String _baseLocalDirectory = "";
 
+  get baseUrl => _baseUrl;
+
   get connectionTimeOut => _connectionTimeOut;
 
   get receivingTimeOut => _receivingTimeOut;
-
-  get baseUrl => _baseUrl;
-
-  get user => _baseUrl + _user;
-
-  get authentication => _baseUrl + _authentication;
 
   get baseLocalDirectory => _baseLocalDirectory;
 
@@ -47,7 +41,7 @@ mixin INetworkManager implements INetworService {
     if (data is List) {
       return data.map((e) => model.fromJson(e)).toList().cast<T>() as R;
     } else if (data is Map) {
-      return model.fromJson(data as Map<String, Object>) as R;
+      return model.fromJson(data as Map<String, dynamic>) as R;
     }
     return data as R?;
   }

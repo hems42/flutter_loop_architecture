@@ -6,10 +6,10 @@ part 'signup_request_model.g.dart';
 @JsonSerializable()
 class SignupRequestModel extends IBaseModel<SignupRequestModel> {
   final String? userNickName;
-  final String? email;
+  final String? eMail;
   final String? password;
 
-  SignupRequestModel({this.userNickName, this.email, this.password});
+  SignupRequestModel({this.userNickName, this.eMail, this.password});
 
   @override
   SignupRequestModel fromJson(Map<String, dynamic> json) {

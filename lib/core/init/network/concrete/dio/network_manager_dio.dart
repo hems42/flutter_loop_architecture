@@ -19,7 +19,7 @@ class NetworkManagerOfDio with INetworkManager {
 
   NetworkManagerOfDio._init() {
     _dio = Dio();
-    //_dio.options.baseUrl = baseUrl;
+    _dio.options.baseUrl = baseUrl;
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
@@ -79,11 +79,12 @@ class NetworkManagerOfDio with INetworkManager {
   Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
       {required HttpRequestTypes type,
       required T parseModel,
-      data,
+      dynamic data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
     final response = await _dio.request(path,
         data: data, options: Options(method: type.toMethod));
+
     switch (response.statusCode) {
       case HttpStatus.ok:
       case HttpStatus.accepted:

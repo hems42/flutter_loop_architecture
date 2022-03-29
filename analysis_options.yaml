@@ -16,4 +16,4 @@ linter:
 
   rules:
    unnecessary_getters_setters;
- 
+   unused_field;

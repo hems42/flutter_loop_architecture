@@ -10,5 +10,5 @@ class ApplicationConstants {
   static const EMAIL_REGIEX = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$';
   static const APP_WEB_SITE =
       'https://github.com/VB10/flutter-architecture-template';
-  static const API_BASE_URL = "https://notebook-b-api.herokuapp.com";
+  static const API_BASE_URL = "http://localhost:8080/api";
 }

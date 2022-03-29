@@ -58,7 +58,7 @@ class NetworkService implements INetworService {
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) {
-    throw UnimplementedError();
+    return _manager.send(path, type: type, parseModel: parseModel, data : data);
   }
 
   // post metod
