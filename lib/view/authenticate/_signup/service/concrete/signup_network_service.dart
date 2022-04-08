@@ -1,5 +1,4 @@
-import 'package:flutter_notebook/core/base/model/concrete/error_response_model.dart';
-
+import '../../../../../core/base/model/concrete/error_response_model.dart';
 import '../../../../../core/constants/enum/network/http_request_types_enum.dart';
 import '../../model/signup_response_model.dart';
 import '../../model/signup_request_model.dart';
@@ -12,7 +11,7 @@ class SignupNetworkService extends ISignupNetworkService {
     try {
       final response =
           await networkService.send<SignupResponseModel, SignupResponseModel>(
-              'http://localhost:8080/api/authentication/deneme?deneme',
+              signupUrl,
               type: HttpRequestTypes.POST,
               parseModel: SignupResponseModel(),
               data: signupRequestModel);
@@ -24,7 +23,6 @@ class SignupNetworkService extends ISignupNetworkService {
       }
     } on ErrorResponseModel catch (e) {
       print("serviste patşayan hata : " + e.toString());
-
     }
   }
 }
