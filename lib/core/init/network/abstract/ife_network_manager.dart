@@ -4,6 +4,21 @@ import '../../../base/model/abstract/ife_base_model.dart';
 import 'ife_network_service.dart';
 
 mixin INetworkManager implements INetworService {
+  // ignore: todo
+  // TODO List :
+  // - token resfresh mechanism
+  // - internet connection checking management
+  // - request encode
+  // - response decode
+  // - upload file
+  // - download file
+  // - cancel scenerio
+  //
+  //
+  //
+  //
+  //
+
   // util serviceses...
   // ignore: prefer_typing_uninitialized_variables
   var cacheService;

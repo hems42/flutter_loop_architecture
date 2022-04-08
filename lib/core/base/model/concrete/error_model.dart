@@ -1,5 +1,15 @@
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_error_model.dart';
+import '../abstract/ife_base_error_model.dart';
 
 class ErrorModel extends IBaseErrorModel {
-  ErrorModel({required String errorMessage, required String statusCode}) : super(errorMessage: errorMessage, statusCode: statusCode);
+  final String? errorDescription;
+  final String errorMessage;
+  final String? errorCode;
+  final String? timestamp;
+
+  ErrorModel({
+    this.errorDescription,
+    this.errorCode,
+    this.timestamp,
+    required this.errorMessage, required String statusCode})
+      : super(errorMessage: errorMessage, statusCode: statusCode);
 }

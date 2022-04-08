@@ -3,7 +3,7 @@
 import 'ife_base_error_model.dart';
 
 abstract class IBaseResponseModel<T> {
-  final bool _success;
+  bool _success;
   T? _data;
   IBaseErrorModel? _error;
 
@@ -12,7 +12,11 @@ abstract class IBaseResponseModel<T> {
     error != null ? _error = error : _error = null;
   }
 
-  get success => _success;
+   bool get success => _success;
+
+   set success(bool success) {
+     _success = success;
+   }
 
   get data => _data;
 

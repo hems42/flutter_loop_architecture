@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/view/authenticate/_signup/service/concrete/signup_network_service.dart';
 import '../../../core/constants/enum/network/http_request_types_enum.dart';
 import '../../../core/init/network/concrete/network_service.dart';
+import '../../authenticate/_signup/model/signup_request_model.dart';
 import '../model/comment_model.dart';
 import '../../../core/base/state/abstract/ife_base_state.dart';
 import '../../../core/base/view/concrete/base_widget.dart';
@@ -47,7 +49,17 @@ class _CommentListViewState extends BaseState<CommentListView> {
                           child: Center(
                         child: Column(
                           children: [
-                            btn_request("GET", Colors.red, () {}),
+                            btn_request("GET", Colors.red, () {
+                              SignupNetworkService()
+                                  .signup(SignupRequestModel(
+                                      eMail: "ali@ali",
+                                      password: "ali",
+                                      userNickName: "ali"))
+                                  .then((value) {
+                                print(
+                                    "gelen  res : " + value!.email.toString());
+                              });
+                            }),
                             btn_request("GET", Colors.red, () {}),
                             btn_request("GET", Colors.red, () {}),
                             btn_request("GET", Colors.red, () {}),

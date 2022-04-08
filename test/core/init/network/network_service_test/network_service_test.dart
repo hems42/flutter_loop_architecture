@@ -12,8 +12,11 @@ void main() {
 
   group("network service base requirrements test", () {
     test("response parser work", () {
-  
-     // networService.fetch("", type: HttpRequestTypes.GET, parseModel: )
+      // networService.fetch("", type: HttpRequestTypes.GET, parseModel: )
     });
+  });
+
+  test("description", () {
+  
   });
 }
