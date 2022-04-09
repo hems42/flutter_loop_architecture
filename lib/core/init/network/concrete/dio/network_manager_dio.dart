@@ -28,10 +28,14 @@ class NetworkManagerOfDio with INetworkManager {
 
     _dio.interceptors.add(InterceptorsWrapper(onError: (error, handler) {
       var foundFlag = error.response!.headers.value("errorflag");
-      ErrorResponseModel? model;
+
       if (foundFlag == "true") {
-        model = responseParser<ErrorResponseModel, ErrorResponseModel>(
+        var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
             ErrorResponseModel(), error.response!.data);
+        model!.statusCode = error.response!.statusCode.toString();
+        error.type = DioErrorType.other;
+
+        error.error = model;
       }
 
       //  return handler.next(error);
@@ -47,10 +51,6 @@ class NetworkManagerOfDio with INetworkManager {
       );
       */
 
-      model!.statusCode = error.response!.statusCode.toString();
-      error.type = DioErrorType.other;
-
-      error.error = model;
       handler.next(error);
 
       //throw NotFoundException(ExceptionEventTypes.NOT_FOUND_USER);
@@ -66,7 +66,7 @@ class NetworkManagerOfDio with INetworkManager {
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
-  return _getResponseFromRequest(path, type: type, parseModel: parseModel);
+    return _getResponseFromRequest(path, type: type, parseModel: parseModel);
   }
 
   @override
@@ -87,7 +87,8 @@ class NetworkManagerOfDio with INetworkManager {
       dynamic data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
-    return _getResponseFromRequest(path, type: type, parseModel: parseModel);
+    return _getResponseFromRequest(path,
+        data: data, type: type, parseModel: parseModel);
   }
 
   Future<IBaseResponseModel<R>>
@@ -113,9 +114,8 @@ class NetworkManagerOfDio with INetworkManager {
                   errorMessage: response.statusMessage.toString()));
       }
     } on DioError catch (e) {
-      //  e.response.headers.
-      var error = e.error as ErrorResponseModel;
-
+      var foundFlag = e.response!.headers.value("errorflag");
+      var error = foundFlag != null ? e.error as ErrorResponseModel : e.error;
       throw error;
     }
   }
