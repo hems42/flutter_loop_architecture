@@ -13,8 +13,8 @@ mixin INetworkManager implements INetworService {
   // - upload file
   // - download file
   // - cancel scenerio
-  //
-  //
+  // - onConncetionlost sceniro
+  // - onReConnceted sceniro
   //
   //
   //
@@ -50,6 +50,10 @@ mixin INetworkManager implements INetworService {
   Function? onResponseF;
   VoidCallback? onErrorV;
   Function? onErrorF;
+  VoidCallback? onConnectionLostV;
+  Function? onConnectionLostF;
+  VoidCallback? onReConnectedV;
+  Function? onReConnectedF;
 
   // util methods...
   R? responseParser<R, T>(IBaseModel model, dynamic data) {
@@ -59,5 +63,9 @@ mixin INetworkManager implements INetworService {
       return model.fromJson(data as Map<String, dynamic>) as R;
     }
     return data as R?;
+  }
+
+  bool hasInternetnetConnection() {
+    return true;
   }
 }
