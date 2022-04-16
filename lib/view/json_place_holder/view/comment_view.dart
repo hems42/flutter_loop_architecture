@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/view/authenticate/_signup/service/concrete/signup_network_service.dart';
 import '../../../core/constants/enum/network/http_request_types_enum.dart';
 import '../../../core/init/network/concrete/network_service.dart';
-import '../../authenticate/_signup/model/signup_request_model.dart';
+import '../../authentication/_signup/model/signup_request_model.dart';
+import '../../authentication/_signup/service/concrete/signup_network_service.dart';
 import '../model/comment_model.dart';
 import '../../../core/base/state/abstract/ife_base_state.dart';
 import '../../../core/base/view/concrete/base_widget.dart';
