@@ -9,7 +9,6 @@ void main() {
   final NetworkMockModel networkMockModel = NetworkMockModel();
 
   group("network manager infrastructure test", () {
-  
     test(' -: internet connection status', () {
       final result = networkManagerMock.hasInternetnetConnection();
       expect(result, true);
@@ -26,8 +25,6 @@ void main() {
       expect(parsedModel.lastName, NetworkMockModel.defaultModel().lastName);
       expect(parsedModel.age, NetworkMockModel.defaultModel().age);
 
-
-
       final parseListModel = NetworkMockModel.defaultListResponseDataModel();
       final parsedListModel = networkManagerMock
           .responseParser<List<NetworkMockModel>, NetworkMockModel>(
@@ -36,7 +33,7 @@ void main() {
       expect(parsedListModel, isNotNull);
       expect(parsedListModel, isList);
     });
- 
- 
   });
+
+  group('network manager metods test', () {});
 }
