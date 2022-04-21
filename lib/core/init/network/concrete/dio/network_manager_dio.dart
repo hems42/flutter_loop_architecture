@@ -26,7 +26,9 @@ class NetworkManagerOfDio with INetworkManager {
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
-    _dio.interceptors.add(InterceptorsWrapper(onError: (error, handler) {
+    _dio.interceptors.add(InterceptorsWrapper(
+      
+      onError: (error, handler) {
       var foundFlag = error.response!.headers.value("errorflag");
 
       if (foundFlag == "true") {
@@ -66,7 +68,7 @@ class NetworkManagerOfDio with INetworkManager {
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
-    return _getResponseFromRequest(path, type: type, parseModel: parseModel);
+    return _getResponseFromRequest(path, type: type, parseModel: parseModel, data: data);
   }
 
   @override
