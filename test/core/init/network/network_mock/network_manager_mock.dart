@@ -1,4 +1,3 @@
-import 'package:flutter_notebook/core/constants/app/app_constant.dart';
 import 'package:flutter_notebook/core/constants/enum/network/http_request_types_enum.dart';
 import 'package:flutter_notebook/core/base/model/abstract/ife_base_response_model.dart';
 import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
