@@ -22,7 +22,7 @@ class NetworkManagerOfDio with INetworkManager {
 
   NetworkManagerOfDio._init() {
     _dio = Dio();
-    _dio.options.baseUrl = baseUrl;
+  //  _dio.options.baseUrl = baseUrl;
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
