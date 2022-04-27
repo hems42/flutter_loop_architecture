@@ -1,6 +1,6 @@
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_network_model.dart';
 
-class CommentModel extends IBaseModel {
+class CommentModel extends IBaseNetworkModel {
   int? _postId;
   int? _id;
   String? _name;

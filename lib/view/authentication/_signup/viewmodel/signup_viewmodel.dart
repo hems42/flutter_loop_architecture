@@ -1,7 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/view/authentication/_signup/model/signup_request_model.dart';
+import '../model/signup_request_model.dart';
 import '../service/abstract/ife_signup_network_service.dart';
 import '../../../../core/base/model/abstract/ife_base_view_model.dart';
 import '../service/abstract/ife_singup_cache_service.dart';

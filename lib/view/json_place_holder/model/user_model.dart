@@ -1,8 +1,8 @@
 
 
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_network_model.dart';
 
-class UserModel extends IBaseModel {
+class UserModel extends IBaseNetworkModel {
   int? _id;
   String? _name;
   String? _username;

@@ -1,1 +1,1 @@
-abstract class IBaseParseModel{}
+abstract class IBaseParseModel<T>{}

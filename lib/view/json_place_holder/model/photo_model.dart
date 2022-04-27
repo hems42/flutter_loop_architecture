@@ -1,6 +1,6 @@
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_network_model.dart';
 
-class PhotoModel extends IBaseModel {
+class PhotoModel extends IBaseNetworkModel {
   int? _albumId;
   int? _id;
   String? _title;

@@ -4,7 +4,7 @@ import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
 import '../../../../constants/enum/network/http_request_types_enum.dart';
 import '../../../../extension/network_extension.dart';
-import '../../../../base/model/abstract/ife_base_model.dart';
+import '../../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../../base/model/abstract/ife_base_response_model.dart';
 import '../../../../base/model/concrete/error_model.dart';
 import '../../abstract/ife_network_manager.dart';
@@ -62,7 +62,7 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(String path,
       {required HttpRequestTypes type,
       required T parseModel,
       data,
@@ -72,7 +72,7 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(
+  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseNetworkModel>(
       String path,
       {required HttpRequestTypes type,
       required T parseModel,
@@ -83,7 +83,7 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(String path,
       {required HttpRequestTypes type,
       required T parseModel,
       dynamic data,
@@ -94,7 +94,7 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   Future<IBaseResponseModel<R>>
-      _getResponseFromRequest<R, T extends IBaseModel>(String path,
+      _getResponseFromRequest<R, T extends IBaseNetworkModel>(String path,
           {required HttpRequestTypes type,
           required T parseModel,
           dynamic data,

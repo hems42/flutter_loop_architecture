@@ -10,6 +10,10 @@ class ApplicationConstants {
   static const EMAIL_REGIEX = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$';
   static const APP_WEB_SITE = '';
 
+  // CACHE SERVICE
+  static const String CACHE_FOLDER_NAME = 'application _of_cache_box';
+  static const String CACHE_AUTHENTICATION_NAME = 'authentication';
+
   // NETWORK SERVICE URL LIST
   static const API_BASE_URL = "http://localhost:8080/api";
   //-- authentication url:

@@ -1,10 +1,10 @@
-import '../../../../core/base/model/abstract/ife_base_model.dart';
+import '../../../../core/base/model/abstract/ife_base_network_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'signup_request_model.g.dart';
 
 @JsonSerializable()
-class SignupRequestModel extends IBaseModel<SignupRequestModel> {
+class SignupRequestModel extends IBaseNetworkModel<SignupRequestModel> {
   final String? userNickName;
   final String? eMail;
   final String? password;

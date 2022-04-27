@@ -1,6 +1,6 @@
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_network_model.dart';
 
-class TodoModel extends IBaseModel {
+class TodoModel extends IBaseNetworkModel {
   int? _userId;
   int? _id;
   String? _title;

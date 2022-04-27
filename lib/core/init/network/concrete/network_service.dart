@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field
 import '../../../base/model/abstract/ife_base_response_model.dart';
-import '../../../base/model/abstract/ife_base_model.dart';
+import '../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../constants/enum/network/http_request_types_enum.dart';
 import '../../../constants/enum/network/network_manager_types_enum.dart';
 import "../abstract/ife_network_service.dart";
@@ -31,7 +31,7 @@ class NetworkService implements INetworService {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseModel>(String path,
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(String path,
       {required HttpRequestTypes type,
       required T parseModel,
       data,
@@ -41,7 +41,7 @@ class NetworkService implements INetworService {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseModel>(
+  Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseNetworkModel>(
       String path,
       {required HttpRequestTypes type,
       required T parseModel,
@@ -52,7 +52,7 @@ class NetworkService implements INetworService {
   }
 
   @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseModel>(String path,
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(String path,
       {required HttpRequestTypes type,
       required T parseModel,
       data,

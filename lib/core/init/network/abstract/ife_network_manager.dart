@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../constants/app/app_constant.dart';
-import '../../../base/model/abstract/ife_base_model.dart';
+import '../../../base/model/abstract/ife_base_network_model.dart';
 import 'ife_network_service.dart';
 
 mixin INetworkManager implements INetworService {
@@ -56,7 +56,7 @@ mixin INetworkManager implements INetworService {
   Function? onReConnectedF;
 
   // util methods...
-  R? responseParser<R, T>(IBaseModel model, dynamic data) {
+  R? responseParser<R, T>(IBaseNetworkModel model, dynamic data) {
     if (data is List) {
       return data.map((e) => model.fromJson(e)).toList().cast<T>() as R;
     } else if (data is Map) {

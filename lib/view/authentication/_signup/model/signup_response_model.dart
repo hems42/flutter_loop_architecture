@@ -1,10 +1,10 @@
-import 'package:flutter_notebook/core/base/model/abstract/ife_base_model.dart';
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_network_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'signup_response_model.g.dart';
 
 @JsonSerializable()
-class SignupResponseModel extends IBaseModel<SignupResponseModel> {
+class SignupResponseModel extends IBaseNetworkModel<SignupResponseModel> {
   final String? accessToken;
   final String? refreshToken;
   final String? userId;
