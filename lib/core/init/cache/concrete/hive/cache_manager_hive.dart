@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
-
+// ignore_for_file: unnecessary_null_comparison
 import '../../../../constants/enum/cache/caching_keys_enum.dart';
 import '../../../../constants/enum/theme/app_theme_types_enum.dart';
-import '../../../../extension/cache_extension.dart';
+
 import '../../abstract/ife_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CacheManagerOfHive with ICacheManager {
   static CacheManagerOfHive? _instance;
+  bool isInitialized = false;
   var authenticationBox;
   static CacheManagerOfHive? get instance {
     _instance ??= CacheManagerOfHive._init();
@@ -16,69 +16,86 @@ class CacheManagerOfHive with ICacheManager {
 
   CacheManagerOfHive._init() {
     initHive();
-    populateBoxes();
   }
 
   @override
   Future<bool> ensureInit() {
-    
+    if (!isInitialized) {
+      initHive();
+    }
     return Future.value(true);
   }
 
   @override
   AppThemeTypes getCurrentThme() {
-    // TODO: implement getCurrentThme
     throw UnimplementedError();
   }
 
   @override
-  Future<String> getAccesToken() async {
+  Future<String> getAccesToken({String? email}) async {
+    var accessTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    var accesToken =
-        await authenticationBox.get(CachingKeys.ACCESS_TOKEN.toRaw);
+    String accessToken = await authenticationBox.get(accessTokenSearchItem);
+    authenticationBox.close();
+    return accessToken;
+  }
+
+  @override
+  Future<String> getRefreshToken({String? email}) async {
+    var refreshTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.REFRESH_TOKEN);
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    String refreshToken = await authenticationBox.get(refreshTokenSearchItem);
     await authenticationBox.close();
-    return accesToken;
+    return refreshToken;
   }
 
   @override
-  Future<String> getRefreshToken() {
-    // TODO: implement getRefreshToken
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> saveAccesToken(String accesToken) async {
+  Future<bool> saveAccesToken(String accesToken, {String? email}) async {
+    var accessTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    await authenticationBox.put(CachingKeys.ACCESS_TOKEN.toRaw, accesToken);
+    await authenticationBox.put(accessTokenSearchItem, accesToken);
     await authenticationBox.close();
     return true;
   }
 
   @override
-  Future<String> saveRefreshToken(String refreshToken) {
-    // TODO: implement saveRefreshToken
-    throw UnimplementedError();
+  Future<bool> saveRefreshToken(String refreshToken, {String? email}) async {
+    var refreshTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.REFRESH_TOKEN);
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    await authenticationBox.put(refreshTokenSearchItem, refreshToken);
+    await authenticationBox.close();
+    return true;
   }
 
   @override
-  Future<String> updateAccesToken(String AccesToken) {
-    // TODO: implement updateAccesToken
-    throw UnimplementedError();
+  Future<bool> updateAccesToken(String accesToken, {String? email}) async {
+    var accessTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.ACCESS_TOKEN);
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    await authenticationBox.put(accessTokenSearchItem, accesToken);
+    await authenticationBox.close();
+    return true;
   }
 
   @override
-  Future<String> updateRefreshToken(String refreshToken) {
-    // TODO: implement updateRefreshToken
-    throw UnimplementedError();
+  Future<bool> updateRefreshToken(String refreshToken, {String? email}) async {
+    var refreshTokenSearchItem =
+        getTokenSearchItem(email, CachingKeys.REFRESH_TOKEN);
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    await authenticationBox.put(refreshTokenSearchItem, refreshToken);
+    await authenticationBox.close();
+    return true;
   }
 
   // util metods
 
   void initHive() {
     Hive.init(cacheFoldername);
+    isInitialized = true;
   }
 
-  Future<void> populateBoxes() async {
-    authenticationBox = await Hive.openBox(cacheAuthenticationName);
-  }
-}
+ }

@@ -1,5 +1,4 @@
-import 'package:flutter_notebook/core/init/cache/concrete/hive/cache_manager_hive.dart';
-
+import 'hive/cache_manager_hive.dart';
 import '../../../constants/enum/cache/cache_manager_types_enum.dart';
 import '../../../constants/enum/theme/app_theme_types_enum.dart';
 import '../abstract/ife_cache_manager.dart';
@@ -34,37 +33,36 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<String> getAccesToken() {
-    return _manager.getAccesToken();
+  Future<String> getAccesToken({String? email}) {
+    return _manager.getAccesToken(email: email);
   }
 
   @override
-  Future<String> getRefreshToken() {
-    // TODO: implement getRefreshToken
+  Future<String> getRefreshToken({String? email}) {
     throw UnimplementedError();
   }
 
   @override
-  Future<bool> saveAccesToken(String AccesToken) async {
-   await _manager.saveAccesToken(AccesToken);
-    return true;
+  Future<bool> saveAccesToken(String accesToken, {String? email}) {
+    return _manager.saveAccesToken(accesToken,email: email);
   }
 
   @override
-  Future<String> saveRefreshToken(String refreshToken) {
-    // TODO: implement saveRefreshToken
+  Future<bool> saveRefreshToken(String refreshToken, {String? email}) {
+   return _manager.saveRefreshToken(refreshToken,email: email);
+  }
+
+  @override
+  Future<bool> updateAccesToken(String AccesToken, {String? email}) {
     throw UnimplementedError();
   }
 
   @override
-  Future<String> updateAccesToken(String AccesToken) {
-    // TODO: implement updateAccesToken
+  Future<bool> updateRefreshToken(String refreshToken, {String? email}) {
+    
     throw UnimplementedError();
   }
 
-  @override
-  Future<String> updateRefreshToken(String refreshToken) {
-    // TODO: implement updateRefreshToken
-    throw UnimplementedError();
-  }
+  
+
 }

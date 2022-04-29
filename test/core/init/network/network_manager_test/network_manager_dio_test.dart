@@ -17,7 +17,7 @@ void main() {
   late final INetworkManager networkManager = NetworkManagerOfDio.instance!;
   late final NetworkManagerMock networkManagerMock = NetworkManagerMock();
 
-  group('internet connection available status', () {
+  group('internet connection available status test group', () {
     bool internetConnectionAvailable = true;
 
     test(' -: fetch get metod test', () async {
@@ -76,7 +76,7 @@ void main() {
     });
   });
 
-  group('internet connection not available status', () {
+  group('internet connection not available status test group', () {
     bool internetConnectionAvailable = true;
   });
 
