@@ -39,30 +39,26 @@ class CacheService implements ICacheService {
 
   @override
   Future<String> getRefreshToken({String? email}) {
-    throw UnimplementedError();
+    return _manager.getRefreshToken(email: email);
   }
 
   @override
   Future<bool> saveAccesToken(String accesToken, {String? email}) {
-    return _manager.saveAccesToken(accesToken,email: email);
+    return _manager.saveAccesToken(accesToken, email: email);
   }
 
   @override
   Future<bool> saveRefreshToken(String refreshToken, {String? email}) {
-   return _manager.saveRefreshToken(refreshToken,email: email);
+    return _manager.saveRefreshToken(refreshToken, email: email);
   }
 
   @override
   Future<bool> updateAccesToken(String AccesToken, {String? email}) {
-    throw UnimplementedError();
+    return _manager.updateAccesToken(AccesToken, email: email);
   }
 
   @override
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) {
-    
-    throw UnimplementedError();
+    return _manager.updateRefreshToken(refreshToken, email: email);
   }
-
-  
-
 }
