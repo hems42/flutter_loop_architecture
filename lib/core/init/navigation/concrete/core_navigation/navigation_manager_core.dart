@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/view/test/view/counter_view.dart';
+import 'package:flutter_notebook/view/authentication/_signup/view/concrete/signup_view.dart';
 import '../../../../constants/enum/navigation/app_navigation_animations_enum.dart';
 import '../../../../constants/enum/navigation/app_navigation_pages_enum.dart';
 import '../../../../constants/navigation/navigation_constants.dart';
@@ -19,11 +19,11 @@ class NavigationManagerOfCore with INavigationManager {
     switch (args.name) {
       case AppNavigationPageConstants.DEFAULT:
         return _normalNavigate(
-            const Counter(), AppNavigationPageConstants.DEFAULT);
+             SignupView(), AppNavigationPageConstants.DEFAULT);
 
       default:
         return MaterialPageRoute(
-          builder: (context) => const Counter(),
+          builder: (context) =>  SignupView(),
         );
     }
   }

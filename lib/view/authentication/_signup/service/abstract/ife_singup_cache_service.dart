@@ -1,6 +1,10 @@
-import '../../../../../core/init/cache/abstract/ife_cache_service.dart';
-import '../../../../../core/init/cache/concrete/cache_service.dart';
+import '../../../util/authentication_cache_service_util.dart';
 
-abstract class ISignupCacheService {
-  final ICacheService cacheService = CacheService.instance;
+abstract class ISignupCacheService with AuthenticationCacheServiceUtil {
+  Future<bool> saveAccesToken(String AccesToken,{String? email});
+  Future<bool> updateAccesToken(String AccesToken,{String? email});
+  Future<String> getAccesToken({String? email});
+  Future<bool> saveRefreshToken(String refreshToken,{String? email});
+  Future<bool> updateRefreshToken(String refreshToken,{String? email});
+  Future<String> getRefreshToken({String? email});
 }
