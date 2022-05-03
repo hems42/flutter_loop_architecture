@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/signup_response_model.dart';
 import '../service/concrete/signup_network_service.dart';
 import '../model/signup_request_model.dart';
 import '../service/abstract/ife_signup_network_service.dart';
@@ -54,8 +55,8 @@ abstract class _SingupViewModelBase with Store, IBaseViewModel {
   }
 
   @action
-  Future<void> signup() async {
-    isLoadingChange();
+  Future<SignupResponseModel> signup() async {
+    isLoading == true ? isLoadingChange() : null;
     if (formState.currentState!.validate()) {
       final response = await _signupNetworkService.signup(SignupRequestModel(
           eMail: emailController!.text,
@@ -63,10 +64,6 @@ abstract class _SingupViewModelBase with Store, IBaseViewModel {
           password: passwordController!.text));
 
       if (response != null) {
-        if (scaffoldState.currentState != null) {
-          scaffoldState.currentState!
-              .showSnackBar(SnackBar(content: Text(response.refreshToken!)));
-        }
         await _signupCacheService.saveAccesToken(
             response.accessToken.toString(),
             email: response.email);
@@ -74,8 +71,22 @@ abstract class _SingupViewModelBase with Store, IBaseViewModel {
         await _signupCacheService.saveRefreshToken(
             response.refreshToken.toString(),
             email: response.email);
+
+        isLoadingChange();
+        clearInput();
+
+        return response;
+      } else {
+        throw Exception("signup failed");
       }
+    } else {
+      throw Exception();
     }
-    isLoadingChange();
+  }
+
+  clearInput() {
+    usernameController!.clear();
+    emailController!.clear();
+    passwordController!.clear();
   }
 }

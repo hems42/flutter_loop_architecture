@@ -1,4 +1,4 @@
-import '../../../constants/enum/analytic/analytic_manager_types_enum.dart';
+import '../../../constant/enum/analytic/analytic_manager_types_enum.dart';
 import '../abstract/ife_analytic_manager.dart';
 import '../abstract/ife_analytic_service.dart';
 import 'custom_analytic/analytic_manager_custom.dart';

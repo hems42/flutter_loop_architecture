@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/enum/network/http_request_types_enum.dart';
+import '../../../core/constant/enum/network/http_request_types_enum.dart';
 import '../../../core/init/network/concrete/network_service.dart';
 import '../../authentication/_signup/model/signup_request_model.dart';
 import '../../authentication/_signup/service/concrete/signup_network_service.dart';

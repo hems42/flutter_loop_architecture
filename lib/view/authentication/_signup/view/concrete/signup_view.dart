@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_notebook/core/base/view/concrete/base_widget.dart';
-import 'package:flutter_notebook/core/extension/string_extension.dart';
-import 'package:flutter_notebook/view/authentication/_signup/viewmodel/signup_viewmodel.dart';
+import '../../../../../core/base/view/concrete/base_widget.dart';
+import '../../../../../core/extension/string_extension.dart';
+import '../../viewmodel/signup_viewmodel.dart';
 
 class SignupView extends StatelessWidget {
   @override
@@ -16,24 +16,29 @@ class SignupView extends StatelessWidget {
       onPageBuilder: (BuildContext context, SingupViewModel value) =>
           DefaultTabController(
         length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Kayıt Sayfası"),
-          ),
-          key: value.scaffoldState,
-          body: SafeArea(
-            child: Center(
-                child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: buildForm(value, context),
-            )),
-          ),
-        ),
+        child: Observer(builder: (_) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Kayıt Sayfası"),
+            ),
+            key: value.scaffoldState,
+            body: SafeArea(
+              child: Center(
+                  child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: buildForm(value, context),
+              )),
+            ),
+          );
+        }),
       ),
     );
   }
 
   Form buildForm(SingupViewModel value, BuildContext context) {
+    String result = value.isLoading == false
+        ? "henüz kayıt edilmedi"
+        : "kayıt başarıyla gerçekleşti";
     return Form(
       key: value.formState,
       autovalidateMode: AutovalidateMode.always,
@@ -44,9 +49,13 @@ class SignupView extends StatelessWidget {
           buildTextFormFieldEmail(context, value),
           buildTextFormFieldPassword(context, value),
           Spacer(),
+          Text("Kayt olma durumu :  $result"),
+          Spacer(),
           FlatButton(
-              onPressed: () {
-                value.signup();
+              onPressed: () async {
+                var response = await value.signup();
+                print("kayıt sayfasından gelen : " +
+                    response.accessToken.toString());
               },
               child: Text("signup", style: TextStyle(color: Colors.white)),
               color: Colors.red),
@@ -98,7 +107,7 @@ class SignupView extends StatelessWidget {
   TextFormField buildTextFormFieldUsername(
       BuildContext context, SingupViewModel viewModel) {
     return TextFormField(
-      controller: viewModel.emailController,
+      controller: viewModel.usernameController,
       validator: (value) => value!.isValidEmails ? 'asdasd' : null,
       decoration: InputDecoration(
         labelText: "username",

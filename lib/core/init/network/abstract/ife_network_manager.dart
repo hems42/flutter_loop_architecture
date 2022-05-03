@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constants/app/app_constant.dart';
+import '../../../constants/app/application_static.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
 import 'ife_network_service.dart';
 

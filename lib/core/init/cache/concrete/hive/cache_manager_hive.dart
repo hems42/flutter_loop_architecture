@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
-import '../../../../constants/enum/cache/caching_keys_enum.dart';
-import '../../../../constants/enum/theme/app_theme_types_enum.dart';
 
+
+import '../../../../constant/enum/theme/app_theme_types_enum.dart';
 import '../../abstract/ife_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -93,9 +93,9 @@ class CacheManagerOfHive with ICacheManager {
 
   // util metods
 
-  void initHive() {
-    Hive.init(cacheFoldername);
+  Future<void> initHive() async {
+    String cacheFoldePath = await getCacheFolderPath();
+    Hive.init(cacheFoldePath);
     isInitialized = true;
   }
-
- }
+}

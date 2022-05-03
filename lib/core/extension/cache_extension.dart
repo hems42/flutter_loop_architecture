@@ -1,4 +1,5 @@
-import 'package:flutter_notebook/core/constants/enum/cache/caching_keys_enum.dart';
+
+import '../constant/enum/cache/caching_keys_enum.dart';
 
 extension ExtensionOfCachingKeys on CachingKeys {
   String get toRaw {

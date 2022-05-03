@@ -2,12 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_notebook/view/authentication/_signup/view/concrete/signup_view.dart';
-import 'core/constants/app/app_constant.dart';
+import 'core/constant/static/application_static.dart';
 import 'core/init/navigation/abstract/ife_navigation_service.dart';
 import 'core/init/navigation/concrete/core_navigation/navigation_manager_core.dart';
 import 'core/init/navigation/concrete/navigation_service.dart';
-import 'view/json_place_holder/view/comment_view.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

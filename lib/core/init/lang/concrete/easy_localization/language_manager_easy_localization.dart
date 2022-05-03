@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import "package:flutter/material.dart";
-import '../../../../constants/enum/lang/app_language_types_enum.dart';
+import '../../../../constant/enum/lang/app_language_types_enum.dart';
 import '../../abstract/ife_language_manager.dart';
-import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
 import '../../../../base/model/abstract/ife_base_language_keys_model.dart';
 
 class LanguageManagerOfEasyLocalization with ILanguageManager {

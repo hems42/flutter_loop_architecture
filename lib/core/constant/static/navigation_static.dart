@@ -1,6 +1,4 @@
-// ignore_for_file: constant_identifier_names
-
-abstract class AppNavigationPageConstants {
+class NavigationConstant{
   static const TEST_VIEW = '/test';
   static const DEFAULT = '/';
   static const SETTINGS_WEB_VIEW = '/settingsWebView';

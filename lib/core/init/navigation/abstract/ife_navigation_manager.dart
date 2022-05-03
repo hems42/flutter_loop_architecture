@@ -1,19 +1,19 @@
-import '../../../constants/navigation/navigation_constants.dart';
+import '../../../constant/enum/navigation/app_navigation_pages_enum.dart';
+import '../../../constant/static/navigation_static.dart';
 import 'ife_navigation_service.dart';
-import '../../../constants/enum/navigation/app_navigation_pages_enum.dart';
 
 mixin INavigationManager implements INavigationService {
   String getSelectedPageStringFromAppNavigationPagesEnum(
       AppNavigationPagesEnum pages) {
     switch (pages) {
       case AppNavigationPagesEnum.TEST_VIEW:
-        return AppNavigationPageConstants.TEST_VIEW;
+        return NavigationConstant.TEST_VIEW;
 
       case AppNavigationPagesEnum.DEFAULT:
-        return AppNavigationPageConstants.DEFAULT;
+        return NavigationConstant.DEFAULT;
 
       default:
-        return AppNavigationPageConstants.NOT_FOUND;
+        return NavigationConstant.NOT_FOUND;
     }
   }
 }

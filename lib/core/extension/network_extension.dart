@@ -1,4 +1,4 @@
-import '../constants/enum/network/http_request_types_enum.dart';
+import '../constant/enum/network/http_request_types_enum.dart';
 
 extension ExtensionOfNetworkTypes on HttpRequestTypes {
   String get toMethod {

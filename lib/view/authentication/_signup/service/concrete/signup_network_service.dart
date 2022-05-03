@@ -1,5 +1,5 @@
 import '../../../../../core/base/model/concrete/error_response_model.dart';
-import '../../../../../core/constants/enum/network/http_request_types_enum.dart';
+import '../../../../../core/constant/enum/network/http_request_types_enum.dart';
 import '../../model/signup_response_model.dart';
 import '../../model/signup_request_model.dart';
 import '../abstract/ife_signup_network_service.dart';

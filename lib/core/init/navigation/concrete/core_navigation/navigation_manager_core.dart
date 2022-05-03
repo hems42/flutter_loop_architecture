@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_notebook/view/authentication/_signup/view/concrete/signup_view.dart';
-import '../../../../constants/enum/navigation/app_navigation_animations_enum.dart';
-import '../../../../constants/enum/navigation/app_navigation_pages_enum.dart';
-import '../../../../constants/navigation/navigation_constants.dart';
+import '../../../../constant/enum/navigation/app_navigation_animations_enum.dart';
+import '../../../../constant/enum/navigation/app_navigation_pages_enum.dart';
+import '../../../../constant/static/navigation_static.dart';
 import '../../abstract/ife_navigation_manager.dart';
 
 class NavigationManagerOfCore with INavigationManager {
@@ -17,9 +17,9 @@ class NavigationManagerOfCore with INavigationManager {
 
   Route<dynamic> _generateRoute(RouteSettings args) {
     switch (args.name) {
-      case AppNavigationPageConstants.DEFAULT:
+      case NavigationConstant.DEFAULT:
         return _normalNavigate(
-             SignupView(), AppNavigationPageConstants.DEFAULT);
+             SignupView(), NavigationConstant.DEFAULT);
 
       default:
         return MaterialPageRoute(
@@ -37,7 +37,7 @@ class NavigationManagerOfCore with INavigationManager {
   }
 
   @override
-  Future<void> navigateToPage(AppNavigationPagesEnum page,
+  Future<void> navigateToPage(NavigationConstant page,
       {Object? data, AppNavigationAnimationsEnum? selectedAnimation}) async {
     await _navigatorKey.currentState!.pushNamed(
         getSelectedPageStringFromAppNavigationPagesEnum(page),

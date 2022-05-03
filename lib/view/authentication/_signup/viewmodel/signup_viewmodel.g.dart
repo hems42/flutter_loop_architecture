@@ -42,7 +42,7 @@ mixin _$SingupViewModel on _SingupViewModelBase, Store {
   final _$signupAsyncAction = AsyncAction('_SingupViewModelBase.signup');
 
   @override
-  Future<void> signup() {
+  Future<SignupResponseModel> signup() {
     return _$signupAsyncAction.run(() => super.signup());
   }
 
