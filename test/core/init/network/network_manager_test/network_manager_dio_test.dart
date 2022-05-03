@@ -3,7 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_notebook/core/base/model/abstract/ife_base_error_model.dart';
 import 'package:flutter_notebook/core/base/model/concrete/error_response_model.dart';
-import 'package:flutter_notebook/core/constants/enum/network/http_request_types_enum.dart';
+import 'package:flutter_notebook/core/constant/enum/network/http_request_types_enum.dart';
 import 'package:flutter_notebook/core/init/network/abstract/ife_network_manager.dart';
 import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
 import 'package:flutter_notebook/view/authentication/_signup/model/signup_response_model.dart';

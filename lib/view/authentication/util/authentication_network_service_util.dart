@@ -1,4 +1,4 @@
-import '../../../core/constants/app/application_static.dart';
+import '../../../core/constant/static/application_statics.dart';
 import '../../../core/init/network/abstract/ife_network_service.dart';
 import '../../../core/init/network/concrete/network_service.dart';
 

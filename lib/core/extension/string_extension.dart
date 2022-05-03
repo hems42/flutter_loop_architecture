@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import '../constant/static/application_static.dart';
+import '../constant/static/application_statics.dart';
 
 extension ExtensionOfStringLocalization on String {
   String get locale => this.tr();

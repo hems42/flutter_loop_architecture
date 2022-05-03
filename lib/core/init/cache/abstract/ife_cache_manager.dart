@@ -4,7 +4,7 @@ import 'package:flutter_notebook/core/extension/cache_extension.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../constant/enum/cache/caching_keys_enum.dart';
-import '../../../constant/static/application_static.dart';
+import '../../../constant/static/application_statics.dart';
 import 'ife_cache_service.dart';
 
 mixin ICacheManager implements ICacheService {

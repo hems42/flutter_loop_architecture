@@ -1,6 +1,6 @@
 import '../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../base/model/abstract/ife_base_response_model.dart';
-import '../../../constants/enum/network/http_request_types_enum.dart';
+import '../../../constant/enum/network/http_request_types_enum.dart';
 
 abstract class INetworService {
   Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(String path,

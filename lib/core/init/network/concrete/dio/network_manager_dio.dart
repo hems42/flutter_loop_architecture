@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'dart:io';
 import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
-import '../../../../constants/enum/network/http_request_types_enum.dart';
+import '../../../../constant/enum/network/http_request_types_enum.dart';
 import '../../../../extension/network_extension.dart';
 import '../../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../../base/model/abstract/ife_base_response_model.dart';

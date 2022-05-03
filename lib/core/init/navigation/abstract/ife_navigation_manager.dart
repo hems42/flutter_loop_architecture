@@ -1,5 +1,5 @@
 import '../../../constant/enum/navigation/app_navigation_pages_enum.dart';
-import '../../../constant/static/navigation_static.dart';
+import '../../../constant/static/navigation_statics.dart';
 import 'ife_navigation_service.dart';
 
 mixin INavigationManager implements INavigationService {

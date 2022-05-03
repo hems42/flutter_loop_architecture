@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../base/model/abstract/ife_base_theme_model.dart';
-import '../../../constants/enum/theme/app_theme_types_enum.dart';
-import '../../../constants/enum/theme/theme_manager_types_enum.dart';
+import '../../../constant/enum/theme/app_theme_types_enum.dart';
+import '../../../constant/enum/theme/theme_manager_types_enum.dart';
 import '../abstract/ife_theme_service.dart';
 import 'theme_notifier/theme_manager_notifier.dart';
 import '../abstract/ife_theme_manager.dart';

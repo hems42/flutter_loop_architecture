@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/view/authentication/_signup/view/concrete/signup_view.dart';
+import '../../../../../view/authentication/_signup/view/concrete/signup_view.dart';
 import '../../../../constant/enum/navigation/app_navigation_animations_enum.dart';
 import '../../../../constant/enum/navigation/app_navigation_pages_enum.dart';
-import '../../../../constant/static/navigation_static.dart';
+import '../../../../constant/static/navigation_statics.dart';
 import '../../abstract/ife_navigation_manager.dart';
 
 class NavigationManagerOfCore with INavigationManager {

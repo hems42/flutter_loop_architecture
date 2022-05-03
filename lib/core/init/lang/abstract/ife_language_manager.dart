@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constants/enum/lang/app_language_types_enum.dart';
+import '../../../constant/enum/lang/app_language_types_enum.dart';
 import 'ife_language_service.dart';
 import '../../cache/abstract/ife_cache_service.dart';
 import '../../cache/concrete/cache_service.dart';

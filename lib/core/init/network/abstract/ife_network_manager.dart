@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../constants/app/application_static.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
+import '../../../constant/static/application_statics.dart';
 import 'ife_network_service.dart';
 
 mixin INetworkManager implements INetworService {

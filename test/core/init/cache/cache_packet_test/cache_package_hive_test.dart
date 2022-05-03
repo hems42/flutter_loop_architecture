@@ -1,4 +1,4 @@
-import 'package:flutter_notebook/core/constants/app/application_static.dart';
+import 'package:flutter_notebook/core/constant/static/application_statics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 
