@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import '../abstract/ife_language_manager.dart';
 import '../abstract/ife_language_service.dart';
 import 'easy_localization/language_manager_easy_localization.dart';
-import '../../../constant/enum/lang/app_language_types_enum.dart';
+import '../../../constant/enum/lang/language_types_enum.dart';
 import '../../../constant/enum/lang/language_manager_types_enum.dart';
 
 class LanguageService implements ILanguageService {
@@ -46,7 +46,7 @@ class LanguageService implements ILanguageService {
   }
 
   @override
-  void changeLangue(AppLanguageTypes type) {
+  void changeLangue(LanguageTypes type) {
     // TODO: implement changeLangue
   }
 

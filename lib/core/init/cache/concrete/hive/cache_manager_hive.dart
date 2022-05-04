@@ -2,7 +2,7 @@
 
 
 import '../../../../constant/enum/cache/caching_keys_enum.dart';
-import '../../../../constant/enum/theme/app_theme_types_enum.dart';
+import '../../../../constant/enum/theme/theme_types_enum.dart';
 import '../../abstract/ife_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -28,7 +28,7 @@ class CacheManagerOfHive with ICacheManager {
   }
 
   @override
-  AppThemeTypes getCurrentThme() {
+  ThemeTypes getCurrentThme() {
     throw UnimplementedError();
   }
 

@@ -1,4 +1,4 @@
-import 'package:flutter_notebook/core/constant/enum/theme/app_theme_types_enum.dart';
+import 'package:flutter_notebook/core/constant/enum/theme/theme_types_enum.dart';
 import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_manager.dart';
 
 import '../../../mock/ife_core_mock.dart';
@@ -17,7 +17,7 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   }
 
   @override
-  AppThemeTypes getCurrentThme() {
+  ThemeTypes getCurrentThme() {
     // TODO: implement getCurrentThme
     throw UnimplementedError();
   }

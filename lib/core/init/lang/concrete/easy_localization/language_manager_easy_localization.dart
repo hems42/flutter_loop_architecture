@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import "package:flutter/material.dart";
-import '../../../../constant/enum/lang/app_language_types_enum.dart';
+import '../../../../constant/enum/lang/language_types_enum.dart';
 import '../../abstract/ife_language_manager.dart';
 import '../../../../base/model/abstract/ife_base_language_keys_model.dart';
 
@@ -38,12 +38,12 @@ class LanguageManagerOfEasyLocalization with ILanguageManager {
     return this;
   }
 
-  Locale _convertAppLanguageTypeToLocale(AppLanguageTypes types) {
+  Locale _convertAppLanguageTypeToLocale(LanguageTypes types) {
     switch (types) {
-      case AppLanguageTypes.ENGLISH:
+      case LanguageTypes.ENGLISH:
         return enLocale;
 
-      case AppLanguageTypes.TURKISH:
+      case LanguageTypes.TURKISH:
         return trLocale;
       default:
         return enLocale;
@@ -51,7 +51,7 @@ class LanguageManagerOfEasyLocalization with ILanguageManager {
   }
 
   @override
-  void changeLangue(AppLanguageTypes type) {
+  void changeLangue(LanguageTypes type) {
     context.setLocale(_convertAppLanguageTypeToLocale(type));
     updateSelectedLanguage(type);
   }

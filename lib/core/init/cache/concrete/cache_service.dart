@@ -1,5 +1,5 @@
 import '../../../constant/enum/cache/cache_manager_types_enum.dart';
-import '../../../constant/enum/theme/app_theme_types_enum.dart';
+import '../../../constant/enum/theme/theme_types_enum.dart';
 import 'hive/cache_manager_hive.dart';
 import '../abstract/ife_cache_manager.dart';
 import '../abstract/ife_cache_service.dart';
@@ -28,7 +28,7 @@ class CacheService implements ICacheService {
   }
 
   @override
-  AppThemeTypes getCurrentThme() {
+  ThemeTypes getCurrentThme() {
     return _manager.getCurrentThme();
   }
 

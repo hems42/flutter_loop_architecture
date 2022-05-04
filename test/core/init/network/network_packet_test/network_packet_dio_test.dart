@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable
 import 'package:dio/dio.dart';
 import 'package:flutter_notebook/core/base/model/concrete/error_response_model.dart';
-import 'package:flutter_notebook/core/constant/static/application_statics.dart';
+import 'package:flutter_notebook/core/constant/static/app/application_statics.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

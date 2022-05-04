@@ -1,5 +1,5 @@
-import '../../../constant/enum/navigation/app_navigation_animations_enum.dart';
-import '../../../constant/enum/navigation/app_navigation_pages_enum.dart';
+import '../../../constant/enum/navigation/navigation_animations_enum.dart';
+import '../../../constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../constant/enum/navigation/navigation_manager_types_enum.dart';
 import '../abstract/ife_navigation_service.dart';
 import 'core_navigation/navigation_manager_core.dart';
@@ -28,15 +28,15 @@ class NavigationService implements INavigationService {
   }
 
   @override
-  Future<void> navigateToPage(AppNavigationPagesEnum page,
-      {Object? data, AppNavigationAnimationsEnum? selectedAnimation}) async {
+  Future<void> navigateToPage(NavigationPagesEnum page,
+      {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
     _manager.navigateToPage(page,
         data: data, selectedAnimation: selectedAnimation);
   }
 
   @override
-  Future<void> navigateToPageClear(AppNavigationPagesEnum page,
-      {Object? data, AppNavigationAnimationsEnum? selectedAnimation}) async {
+  Future<void> navigateToPageClear(NavigationPagesEnum page,
+      {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
     _manager.navigateToPage(page,
         data: data, selectedAnimation: selectedAnimation);
   }

@@ -1,3 +1,3 @@
 // ignore_for_file: constant_identifier_names
 
-enum AppNavigationAnimationsEnum{NORMAL,SLIDE}
+enum LanguageTypes{ENGLISH,TURKISH}

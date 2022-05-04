@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import '../../../base/model/abstract/ife_base_language_keys_model.dart';
-import '../../../constant/enum/lang/app_language_types_enum.dart';
+import '../../../constant/enum/lang/language_types_enum.dart';
 
 abstract class ILanguageService {
   IBaseLanguageKeysModel getLanguageKeys();
 
-  void changeLangue(AppLanguageTypes type);
+  void changeLangue(LanguageTypes type);
 
   dynamic getUtilStuffOfLanguageService();
 

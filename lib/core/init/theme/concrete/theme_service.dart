@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../base/model/abstract/ife_base_theme_model.dart';
-import '../../../constant/enum/theme/app_theme_types_enum.dart';
+import '../../../constant/enum/theme/theme_types_enum.dart';
 import '../../../constant/enum/theme/theme_manager_types_enum.dart';
 import '../abstract/ife_theme_service.dart';
 import 'theme_notifier/theme_manager_notifier.dart';
@@ -25,7 +25,7 @@ class ThemeService implements IThemeService {
   }
 
   @override
-  void changeTheme(AppThemeTypes type) {
+  void changeTheme(ThemeTypes type) {
     _manager!.changeTheme(type);
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/constant/enum/navigation/app_navigation_animations_enum.dart';
+import '../../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../view/authentication/_signup/view/concrete/signup_view.dart';
-import '../../../../constant/enum/navigation/app_navigation_pages_enum.dart';
-import '../../../../constant/static/navigation_statics.dart';
+import '../../../../constant/enum/navigation/navigation_pages_enum.dart';
+import '../../../../constant/static/navigation/navigation_statics.dart';
 import '../../abstract/ife_navigation_manager.dart';
 
 class NavigationManagerOfCore with INavigationManager {
@@ -12,24 +12,33 @@ class NavigationManagerOfCore with INavigationManager {
   NavigationManagerOfCore._init();
 
   GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
-  // ignore: prefer_function_declarations_over_variables
+
   final removeAllOldRoutes = (Route<dynamic> route) => false;
 
   Route<dynamic> _generateRoute(RouteSettings args) {
     switch (args.name) {
-      case NavigationConstant.DEFAULT:
-        return _normalNavigate(
-             SignupView(), NavigationConstant.DEFAULT);
+      case NavigationConstant.ON_BOARD:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstant.SPLASH:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstant.SIGN_UP:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstant.LOGIN:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstant.FORGET_PASSWORD:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstant.NOT_FOUND:
+        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
 
       default:
         return MaterialPageRoute(
-          builder: (context) =>  SignupView(),
+          builder: (context) => SignupView(),
         );
     }
   }
 
   MaterialPageRoute _normalNavigate(Widget widget, String pageName,
-      {AppNavigationAnimationsEnum? selectedAnimation}) {
+      {NavigationAnimationsEnum? selectedAnimation}) {
     return MaterialPageRoute(
         builder: (context) => widget,
         //analytciste görülecek olan sayfa ismi için pageName veriyoruz
@@ -37,18 +46,10 @@ class NavigationManagerOfCore with INavigationManager {
   }
 
   @override
-  Future<void> navigateToPage(NavigationConstant page,
-      {Object? data, AppNavigationAnimationsEnum? selectedAnimation}) async {
-    await _navigatorKey.currentState!.pushNamed(
-        getSelectedPageStringFromAppNavigationPagesEnum(page),
-        arguments: data);
-  }
-
-  @override
-  Future<void> navigateToPageClear(AppNavigationPagesEnum page,
-      {Object? data, AppNavigationAnimationsEnum? selectedAnimation}) async {
+  Future<void> navigateToPageClear(NavigationPagesEnum page,
+      {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
     await _navigatorKey.currentState!.pushNamedAndRemoveUntil(
-        getSelectedPageStringFromAppNavigationPagesEnum(page),
+        getSelectedPageStringFromNavigationPagesEnum(page),
         removeAllOldRoutes,
         arguments: data);
   }
@@ -60,5 +61,13 @@ class NavigationManagerOfCore with INavigationManager {
   @override
   getStuffUtilOfNavigationService() {
     return this;
+  }
+
+  @override
+  Future<void> navigateToPage(NavigationPagesEnum page,
+      {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
+    await _navigatorKey.currentState!.pushNamed(
+        getSelectedPageStringFromNavigationPagesEnum(page),
+        arguments: data);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../constant/enum/lang/app_language_types_enum.dart';
+import '../../../constant/enum/lang/language_types_enum.dart';
 import 'ife_language_service.dart';
 import '../../cache/abstract/ife_cache_service.dart';
 import '../../cache/concrete/cache_service.dart';
@@ -12,6 +12,6 @@ mixin ILanguageManager implements ILanguageService {
     this.context = context;
   }
 
-  void updateSelectedLanguage(AppLanguageTypes type) {}
+  void updateSelectedLanguage(LanguageTypes type) {}
   void dene2();
 }

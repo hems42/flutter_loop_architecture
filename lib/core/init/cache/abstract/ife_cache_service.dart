@@ -1,9 +1,9 @@
 
 
-import '../../../constant/enum/theme/app_theme_types_enum.dart';
+import '../../../constant/enum/theme/theme_types_enum.dart';
 
 abstract class ICacheService {
-  AppThemeTypes getCurrentThme();
+  ThemeTypes getCurrentThme();
   Future<bool> ensureInit();
   Future<bool> saveAccesToken(String AccesToken,{String? email});
   Future<bool> updateAccesToken(String AccesToken,{String? email});

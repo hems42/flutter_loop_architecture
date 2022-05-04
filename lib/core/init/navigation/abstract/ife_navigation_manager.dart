@@ -1,18 +1,27 @@
-import '../../../constant/enum/navigation/app_navigation_pages_enum.dart';
-import '../../../constant/static/navigation_statics.dart';
+import '../../../constant/enum/navigation/navigation_pages_enum.dart';
+import '../../../constant/static/navigation/navigation_statics.dart';
 import 'ife_navigation_service.dart';
 
 mixin INavigationManager implements INavigationService {
-  String getSelectedPageStringFromAppNavigationPagesEnum(
-      AppNavigationPagesEnum pages) {
+  String getSelectedPageStringFromNavigationPagesEnum(
+      NavigationPagesEnum pages) {
     switch (pages) {
-      case AppNavigationPagesEnum.TEST_VIEW:
-        return NavigationConstant.TEST_VIEW;
+      case NavigationPagesEnum.ON_BOARD:
+        return NavigationConstant.ON_BOARD;
 
-      case AppNavigationPagesEnum.DEFAULT:
-        return NavigationConstant.DEFAULT;
+      case NavigationPagesEnum.SPLASH:
+        return NavigationConstant.SPLASH;
 
-      default:
+      case NavigationPagesEnum.SIGN_UP:
+        return NavigationConstant.SIGN_UP;
+
+      case NavigationPagesEnum.LOGIN:
+        return NavigationConstant.LOGIN;
+
+      case NavigationPagesEnum.FORGET_PASSWORD:
+        return NavigationConstant.FORGET_PASSWORD;
+
+      case NavigationPagesEnum.NOT_FOUND:
         return NavigationConstant.NOT_FOUND;
     }
   }
