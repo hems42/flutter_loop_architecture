@@ -56,7 +56,7 @@ class NavigationManagerOfCore with INavigationManager {
 
   Route Function(RouteSettings args) getRouteGenarator() => _generateRoute;
 
-  GlobalKey<NavigatorState> getNavigatorKey() => _navigatorKey;
+  get navigatorKey => _navigatorKey;
 
   @override
   getStuffUtilOfNavigationService() {

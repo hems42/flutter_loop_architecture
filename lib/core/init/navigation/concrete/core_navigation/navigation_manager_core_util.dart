@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/constant/static/navigation/navigation_statics.dart';
+import 'package:flutter_notebook/view/authentication/_signup/view/concrete/signup_view.dart';
 
 class NavigationManagerOfCoreUtil {
-    static final NavigationManagerOfCoreUtil _instance = NavigationManagerOfCoreUtil._init();
+  static final NavigationManagerOfCoreUtil _instance =
+      NavigationManagerOfCoreUtil._init();
   static NavigationManagerOfCoreUtil get instance => _instance;
 
   NavigationManagerOfCoreUtil._init();
 
   Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
-      case "":
-        return normalNavigate(Container(), "");
+      case NavigationConstant.SIGN_UP:
+        return normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
 
- 
+      case NavigationConstant.LOGIN:
+        return normalNavigate(getLogin(), NavigationConstant.LOGIN);
 
       default:
         return MaterialPageRoute(
@@ -28,4 +32,18 @@ class NavigationManagerOfCoreUtil {
   }
 
   NotFoundNavigationWidget() {}
+
+  Widget getLogin() {
+    return Scaffold(
+      appBar: AppBar(title: Text("LoginPage"),),
+      body: Center(
+        child: Container(
+          color: Colors.amber,
+          child: Text("LOGİN PAGE", style: TextStyle(
+            color: Colors.white
+          ),),
+        ),
+      ),
+    );
+  }
 }

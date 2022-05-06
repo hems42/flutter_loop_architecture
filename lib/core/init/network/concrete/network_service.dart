@@ -31,7 +31,8 @@ class NetworkService implements INetworService {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(String path,
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(
+      String path,
       {required HttpRequestTypes type,
       required T parseModel,
       data,
@@ -48,17 +49,18 @@ class NetworkService implements INetworService {
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) {
-    throw UnimplementedError();
+    return _manager.fetchNoNetwork(path, type: type, parseModel: parseModel);
   }
 
   @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(String path,
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(
+      String path,
       {required HttpRequestTypes type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) {
-    return _manager.send(path, type: type, parseModel: parseModel, data : data);
+    return _manager.send(path, type: type, parseModel: parseModel, data: data);
   }
 
   // post metod

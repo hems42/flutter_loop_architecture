@@ -1,6 +1,6 @@
 import '../../../util/authentication_cache_service_util.dart';
 
-abstract class ISignupCacheService with AuthenticationCacheServiceUtil {
+abstract class ISignupCacheService extends AuthenticationCacheServiceUtil {
   Future<bool> saveAccesToken(String AccesToken,{String? email});
   Future<bool> updateAccesToken(String AccesToken,{String? email});
   Future<String> getAccesToken({String? email});

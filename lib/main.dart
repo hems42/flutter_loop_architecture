@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/init/navigation/concrete/core_navigation/navigation_manager_core_util.dart';
 import 'view/authentication/_signup/view/concrete/signup_view.dart';
 import 'core/constant/static/app/application_statics.dart';
 import 'core/init/navigation/abstract/ife_navigation_service.dart';
@@ -44,8 +45,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      onGenerateRoute: navigationManagerOfCore.getRouteGenarator(),
-      navigatorKey: navigationManagerOfCore.getNavigatorKey(),
+      onGenerateRoute: NavigationManagerOfCoreUtil.instance.generateRoute,
+      navigatorKey: navigationManagerOfCore.navigatorKey,
       home: SignupView(),
     );
   }

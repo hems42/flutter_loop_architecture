@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notebook/core/constant/enum/navigation/navigation_pages_enum.dart';
+import 'package:flutter_notebook/core/init/navigation/concrete/navigation_service.dart';
 import '../../../../../core/base/view/concrete/base_widget.dart';
 import '../../../../../core/extension/string_extension.dart';
 import '../../viewmodel/signup_viewmodel.dart';
@@ -61,6 +63,12 @@ class SignupView extends StatelessWidget {
               color: Colors.red),
           // buildTextForgot(),
           Spacer(flex: 6),
+          FlatButton(
+              onPressed: () {
+                NavigationService.instance
+                    .navigateToPage(NavigationPagesEnum.LOGIN);
+              },
+              child: Text("goto login")),
           //  buildRaisedButtonLogin(context, value),
           // buildWrapForgot(),
           Spacer(),

@@ -1,10 +1,7 @@
-import 'package:vexana/vexana.dart';
-
+import '../../../product/base/ife_base_product_service.dart';
 import '../../../core/constant/static/app/application_statics.dart';
-import '../../../core/init/network/abstract/ife_network_service.dart';
-import '../../../core/init/network/concrete/network_service.dart';
 
-mixin AuthenticationNetworkServiceUtil  {
+abstract class AuthenticationNetworkServiceUtil extends IBaseProductService {
   final String signupUrl = ApplicationConstants.SIGN_UP_URL;
   final String registerUrl = ApplicationConstants.REGISTER_URL;
   final String loginUrl = ApplicationConstants.LOGIN_URL;
@@ -12,5 +9,4 @@ mixin AuthenticationNetworkServiceUtil  {
   final String logoutUrl = ApplicationConstants.LOGOUT_URL;
   final String forgetPasswordUrl = ApplicationConstants.FORGET_PASSWORD_URL;
   final String resendEmailUrl = ApplicationConstants.RESEND_EMAIL_URL;
-  final INetworService networkService = NetworkService.instance;
 }
