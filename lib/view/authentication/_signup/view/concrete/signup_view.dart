@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notebook/core/constant/enum/navigation/navigation_animations_enum.dart';
 import 'package:flutter_notebook/core/constant/enum/navigation/navigation_pages_enum.dart';
 import 'package:flutter_notebook/core/init/navigation/concrete/navigation_service.dart';
 import '../../../../../core/base/view/concrete/base_widget.dart';
@@ -67,14 +68,17 @@ class SignupView extends StatelessWidget {
           Spacer(flex: 6),
           FlatButton(
               onPressed: () {
-                NavigationService.instance
-                    .navigateToPage(NavigationPagesEnum.LOGIN);
+                NavigationService.instance.navigateToPage(
+                    NavigationPagesEnum.LOGIN,
+                    data: null,
+                    selectedAnimation: NavigationAnimationsEnum.FADE);
               },
-              child: Text("goto login")),
+              child: Text("goto not found")),
           SizedBox(height: 20),
           FlatButton(
               onPressed: () {
-                print("işletim sistemi: "+Platform.operatingSystem.toString());
+                print(
+                    "işletim sistemi: " + Platform.operatingSystem.toString());
               },
               child: Text("dene")),
           //  buildRaisedButtonLogin(context, value),

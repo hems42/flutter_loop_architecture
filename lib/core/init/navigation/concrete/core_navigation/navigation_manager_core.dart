@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../constant/enum/system/platform_types_enum.dart';
 import '../../../../../view/util/view/not_found_page.dart';
@@ -18,19 +19,19 @@ class NavigationManagerOfCore with INavigationManager {
     if (currentPlatform == null) {
       currentPlatform = PlatformTypesEnum.UNDEFINED;
     }
-
-    print("seçilen platform : " + currentPlatform.toString());
   }
 
   GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
-  Route<dynamic> generateRoute(RouteSettings args) {
-    switch (args.name) {
+  Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case NavigationConstants.SIGN_UP:
-        return _normalNavigate(SignupView(), NavigationConstants.SIGN_UP);
+        return _navigate(SignupView(), NavigationConstants.SIGN_UP,
+            data: settings.arguments, selectedAnimation: selectedAnimation);
 
       case NavigationConstants.LOGIN:
-        return _normalNavigate(NotFoundPageView(), NavigationConstants.LOGIN);
+        return _navigate(NotFoundPageView(), NavigationConstants.LOGIN,
+            data: settings.arguments, selectedAnimation: selectedAnimation);
 
       default:
         return MaterialPageRoute(
@@ -59,31 +60,66 @@ class NavigationManagerOfCore with INavigationManager {
   @override
   Future<void> navigateToPage(NavigationPagesEnum page,
       {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
+    
+    updateSelectedAnimation(selectedAnimation);
+
     await _navigatorKey.currentState!.pushNamed(
         getSelectedPageStringFromNavigationPagesEnum(page),
         arguments: data);
   }
 
-  PageRoute _normalNavigate(Widget widget, String pageName,
-      {NavigationAnimationsEnum? selectedAnimation}) {
-    return downSlideAnimation(widget);
-    // builder: (context) => widget, settings: RouteSettings(name: pageName));
-  }
+  PageRoute _navigate(Widget widget, String pageName,
+      {Object? data, NavigationAnimationsEnum? selectedAnimation}) {
+    if (selectedAnimation == null) {
+      switch (currentPlatform) {
+        case PlatformTypesEnum.ANDROID:
+          return MaterialPageRoute(
+              settings: RouteSettings(arguments: data, name: pageName),
+              builder: (context) => widget);
 
-  Widget getLogin() {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("LoginPage"),
-      ),
-      body: Center(
-        child: Container(
-          color: Colors.amber,
-          child: Text(
-            "LOGİN PAGE",
-            style: TextStyle(color: Colors.white),
-          ),
+        case PlatformTypesEnum.IOS:
+          return CupertinoPageRoute(
+              settings: RouteSettings(arguments: data, name: pageName),
+              builder: (context) => widget);
+
+        default:
+          return createPageRoute(
+            widget,
+            settings: RouteSettings(name: pageName, arguments: data),
+            transitionBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    getSelectedAnimation(NavigationAnimationsEnum.FADE, context, animation,
+                            secondaryAnimation, child)
+                        .call(context, animation, secondaryAnimation, child),
+          );
+      }
+      
+    } else {
+      return createPageRoute(
+        widget,
+        settings: RouteSettings(name: pageName, arguments: data),
+        transitionBuilder: (context, animation, secondaryAnimation, child) =>
+            getSelectedAnimation(selectedAnimation, context, animation,
+                    secondaryAnimation, child)
+                .call(context, animation, secondaryAnimation, child),
+      );
+    }
+  }
+}
+
+Widget getLogin() {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text("LoginPage"),
+    ),
+    body: Center(
+      child: Container(
+        color: Colors.amber,
+        child: Text(
+          "LOGİN PAGE",
+          style: TextStyle(color: Colors.white),
         ),
       ),
-    );
-  }
+    ),
+  );
 }

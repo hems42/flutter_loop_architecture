@@ -2,7 +2,9 @@
 
 enum NavigationAnimationsEnum {
   NORMAL,
-  SLIDE_RIGT,
+  SCALE,
+  FADE,
+  SLIDE_RIGHT,
   SLIDE_LEFT,
   SLIDE_UP,
   SLIDE_DOWN,

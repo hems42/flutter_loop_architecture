@@ -1,11 +1,20 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
-
+import '../../../constant/enum/system/platform_types_enum.dart';
+import '../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../constant/static/navigation/navigation_statics.dart';
 import 'ife_navigation_service.dart';
 
 mixin INavigationManager implements INavigationService {
+ NavigationAnimationsEnum? _selectedAnimation;
+  get selectedAnimation => _selectedAnimation;
+
+  void updateSelectedAnimation(NavigationAnimationsEnum? selectedAnimation) 
+  {
+    _selectedAnimation = null;
+    _selectedAnimation = selectedAnimation;
+  }
+
   String getSelectedPageStringFromNavigationPagesEnum(
       NavigationPagesEnum pages) {
     switch (pages) {
