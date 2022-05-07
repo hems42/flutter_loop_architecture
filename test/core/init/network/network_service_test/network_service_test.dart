@@ -17,30 +17,29 @@ void main() {
       final response =
           await networkService.fetch<NetworkMockModel, NetworkMockModel>(
               ApplicationMockConstants.MOCK_TEST_GET_URL,
-              type: HttpRequestTypes.GET,
+              type: HttpRequestTypesEnum.GET,
               parseModel: NetworkMockModel());
 
       final foundModel = response.data as NetworkMockModel;
       expect(foundModel, isNotNull);
     });
 
-   test(" -: fetch get list metod test", () async {
+    test(" -: fetch get list metod test", () async {
       final response =
           await networkService.fetch<List<NetworkMockModel>, NetworkMockModel>(
               ApplicationMockConstants.MOCK_TEST_GET_LIST_URL,
-              type: HttpRequestTypes.GET,
+              type: HttpRequestTypesEnum.GET,
               parseModel: NetworkMockModel());
 
-    final foundModelList = response.data as List<NetworkMockModel>;
+      final foundModelList = response.data as List<NetworkMockModel>;
       expect(foundModelList, isNotNull);
       expect(foundModelList, isList);
     });
-     
 
-        test(' -: fetch post metod test', () async {
+    test(' -: fetch post metod test', () async {
       final response = await networkService.fetch<NetworkMockModel,
               NetworkMockModel>(ApplicationMockConstants.MOCK_TEST_POST_URL,
-          type: HttpRequestTypes.POST,
+          type: HttpRequestTypesEnum.POST,
           parseModel: NetworkMockModel(),
           data: {"firstName": "firstName", "lastName": "lastName", "age": 30});
 
@@ -54,7 +53,7 @@ void main() {
         final response = await networkService
             .fetch<NetworkMockModel, NetworkMockModel>(
                 ApplicationMockConstants.MOCK_TEST_EXCEPTION_URL,
-                type: HttpRequestTypes.GET,
+                type: HttpRequestTypesEnum.GET,
                 parseModel: NetworkMockModel(),
                 data: {
               "firstName": "firstName",
@@ -67,7 +66,4 @@ void main() {
       }
     });
   });
-
-
-
 }

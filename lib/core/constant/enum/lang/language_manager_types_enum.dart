@@ -1,2 +1,2 @@
 // ignore: constant_identifier_names
-enum LanguageManagerTypes { EASY_LOCALIZATION }
+enum LanguageManagerTypesEnum { EASY_LOCALIZATION }

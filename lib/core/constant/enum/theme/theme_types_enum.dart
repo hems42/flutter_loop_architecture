@@ -1,3 +1,3 @@
 // ignore_for_file: constant_identifier_names
 
-enum ThemeTypes { CUSTOM_THEME_DARK, CUSTOM_THEME_LIGHT }
+enum ThemeTypesEnum { CUSTOM_THEME_DARK, CUSTOM_THEME_LIGHT }

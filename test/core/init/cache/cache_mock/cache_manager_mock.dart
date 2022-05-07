@@ -17,7 +17,7 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   }
 
   @override
-  ThemeTypes getCurrentThme() {
+  ThemeTypesEnum getCurrentThme() {
     // TODO: implement getCurrentThme
     throw UnimplementedError();
   }

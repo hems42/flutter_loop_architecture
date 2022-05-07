@@ -7,5 +7,5 @@ abstract class IThemeService {
 
   IBaseThemeModel get themeModel;
 
-  void changeTheme(ThemeTypes type);
+  void changeTheme(ThemeTypesEnum type);
 }

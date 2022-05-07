@@ -38,12 +38,12 @@ class LanguageManagerOfEasyLocalization with ILanguageManager {
     return this;
   }
 
-  Locale _convertAppLanguageTypeToLocale(LanguageTypes types) {
+  Locale _convertAppLanguageTypeToLocale(LanguageTypesEnum types) {
     switch (types) {
-      case LanguageTypes.ENGLISH:
+      case LanguageTypesEnum.ENGLISH:
         return enLocale;
 
-      case LanguageTypes.TURKISH:
+      case LanguageTypesEnum.TURKISH:
         return trLocale;
       default:
         return enLocale;
@@ -51,7 +51,7 @@ class LanguageManagerOfEasyLocalization with ILanguageManager {
   }
 
   @override
-  void changeLangue(LanguageTypes type) {
+  void changeLangue(LanguageTypesEnum type) {
     context.setLocale(_convertAppLanguageTypeToLocale(type));
     updateSelectedLanguage(type);
   }

@@ -12,6 +12,6 @@ mixin ILanguageManager implements ILanguageService {
     this.context = context;
   }
 
-  void updateSelectedLanguage(LanguageTypes type) {}
+  void updateSelectedLanguage(LanguageTypesEnum type) {}
   void dene2();
 }

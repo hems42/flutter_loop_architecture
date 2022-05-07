@@ -22,13 +22,11 @@ class NetworkManagerOfDio with INetworkManager {
 
   NetworkManagerOfDio._init() {
     _dio = Dio();
-  //  _dio.options.baseUrl = baseUrl;
+    //  _dio.options.baseUrl = baseUrl;
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
-    _dio.interceptors.add(InterceptorsWrapper(
-      
-      onError: (error, handler) {
+    _dio.interceptors.add(InterceptorsWrapper(onError: (error, handler) {
       var foundFlag = error.response!.headers.value("errorflag");
 
       if (foundFlag == "true") {
@@ -62,19 +60,21 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   @override
-  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(String path,
-      {required HttpRequestTypes type,
+  Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(
+      String path,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
-    return _getResponseFromRequest(path, type: type, parseModel: parseModel, data: data);
+    return _getResponseFromRequest(path,
+        type: type, parseModel: parseModel, data: data);
   }
 
   @override
   Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseNetworkModel>(
       String path,
-      {required HttpRequestTypes type,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,
@@ -83,8 +83,9 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   @override
-  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(String path,
-      {required HttpRequestTypes type,
+  Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(
+      String path,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       dynamic data,
       Map<String, Object>? queryParameters,
@@ -95,7 +96,7 @@ class NetworkManagerOfDio with INetworkManager {
 
   Future<IBaseResponseModel<R>>
       _getResponseFromRequest<R, T extends IBaseNetworkModel>(String path,
-          {required HttpRequestTypes type,
+          {required HttpRequestTypesEnum type,
           required T parseModel,
           dynamic data,
           Map<String, Object>? queryParameters,

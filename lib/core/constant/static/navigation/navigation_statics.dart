@@ -1,4 +1,4 @@
-class NavigationConstant{
+class NavigationConstants {
   static const ON_BOARD = '/onBoard';
   static const SPLASH = '/splash';
   static const SIGN_UP = '/signup';

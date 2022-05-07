@@ -1,60 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
+import 'package:flutter_notebook/view/util/view/not_found_page.dart';
 import '../../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../view/authentication/_signup/view/concrete/signup_view.dart';
 import '../../../../constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../../constant/static/navigation/navigation_statics.dart';
 import '../../abstract/ife_navigation_manager.dart';
 
+part 'navigation_manager_core_animations.dart';
+
 class NavigationManagerOfCore with INavigationManager {
   static final NavigationManagerOfCore _instance =
       NavigationManagerOfCore._init();
   static NavigationManagerOfCore get instance => _instance;
-  NavigationManagerOfCore._init();
+  NavigationManagerOfCore._init() {
+    currentPlatform = defineCurrentPlatfrom();
+    if (currentPlatform == null) 
+    {currentPlatform = PlatformTypesEnum.UNDEFINED;} 
+  }
 
   GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
-  final removeAllOldRoutes = (Route<dynamic> route) => false;
-
-  Route<dynamic> _generateRoute(RouteSettings args) {
+  Route<dynamic> generateRoute(RouteSettings args) {
     switch (args.name) {
-      case NavigationConstant.ON_BOARD:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
-      case NavigationConstant.SPLASH:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
-      case NavigationConstant.SIGN_UP:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
-      case NavigationConstant.LOGIN:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
-      case NavigationConstant.FORGET_PASSWORD:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
-      case NavigationConstant.NOT_FOUND:
-        return _normalNavigate(SignupView(), NavigationConstant.SIGN_UP);
+      case NavigationConstants.SIGN_UP:
+        return _normalNavigate(SignupView(), NavigationConstants.SIGN_UP);
+
+      case NavigationConstants.LOGIN:
+        return _normalNavigate(NotFoundPageView(), NavigationConstants.LOGIN);
 
       default:
         return MaterialPageRoute(
-          builder: (context) => SignupView(),
+          builder: (context) => NotFoundPageView(),
         );
     }
   }
 
-  MaterialPageRoute _normalNavigate(Widget widget, String pageName,
-      {NavigationAnimationsEnum? selectedAnimation}) {
-    return MaterialPageRoute(
-        builder: (context) => widget,
-        //analytciste görülecek olan sayfa ismi için pageName veriyoruz
-        settings: RouteSettings(name: pageName));
-  }
+  final removeAllOldRoutes = (Route<dynamic> route) => false;
+
 
   @override
   Future<void> navigateToPageClear(NavigationPagesEnum page,
       {Object? data, NavigationAnimationsEnum? selectedAnimation}) async {
     await _navigatorKey.currentState!.pushNamedAndRemoveUntil(
-        getSelectedPageStringFromNavigationPagesEnum(page),
-        removeAllOldRoutes,
+        getSelectedPageStringFromNavigationPagesEnum(page), removeAllOldRoutes,
         arguments: data);
   }
-
-  Route Function(RouteSettings args) getRouteGenarator() => _generateRoute;
 
   get navigatorKey => _navigatorKey;
 
@@ -69,5 +60,29 @@ class NavigationManagerOfCore with INavigationManager {
     await _navigatorKey.currentState!.pushNamed(
         getSelectedPageStringFromNavigationPagesEnum(page),
         arguments: data);
+  }
+
+
+  PageRoute _normalNavigate(Widget widget, String pageName,
+      {NavigationAnimationsEnum? selectedAnimation}) {
+    return downSlideAnimation(widget);
+       // builder: (context) => widget, settings: RouteSettings(name: pageName));
+  }
+
+  Widget getLogin() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("LoginPage"),
+      ),
+      body: Center(
+        child: Container(
+          color: Colors.amber,
+          child: Text(
+            "LOGİN PAGE",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }

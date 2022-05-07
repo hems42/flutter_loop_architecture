@@ -24,7 +24,7 @@ void main() {
       final response =
           await networkManager.fetch<NetworkMockModel, NetworkMockModel>(
               ApplicationMockConstants.MOCK_TEST_GET_URL,
-              type: HttpRequestTypes.GET,
+              type: HttpRequestTypesEnum.GET,
               parseModel: NetworkMockModel());
 
       final foundModel = response.data as NetworkMockModel;
@@ -35,7 +35,7 @@ void main() {
       final response =
           await networkManager.fetch<List<NetworkMockModel>, NetworkMockModel>(
               ApplicationMockConstants.MOCK_TEST_GET_LIST_URL,
-              type: HttpRequestTypes.GET,
+              type: HttpRequestTypesEnum.GET,
               parseModel: NetworkMockModel());
 
       final foundModelList = response.data as List<NetworkMockModel>;
@@ -45,7 +45,7 @@ void main() {
     test(' -: fetch post metod test', () async {
       final response = await networkManager.fetch<NetworkMockModel,
               NetworkMockModel>(ApplicationMockConstants.MOCK_TEST_POST_URL,
-          type: HttpRequestTypes.POST,
+          type: HttpRequestTypesEnum.POST,
           parseModel: NetworkMockModel(),
           data: {"firstName": "firstName", "lastName": "lastName", "age": 30});
 
@@ -59,7 +59,7 @@ void main() {
         final response = await networkManager
             .fetch<NetworkMockModel, NetworkMockModel>(
                 ApplicationMockConstants.MOCK_TEST_EXCEPTION_URL,
-                type: HttpRequestTypes.GET,
+                type: HttpRequestTypesEnum.GET,
                 parseModel: NetworkMockModel(),
                 data: {
               "firstName": "firstName",
@@ -69,10 +69,7 @@ void main() {
       } on IBaseErrorModel catch (e) {
         expect(e, isNotNull);
         expect(e, isException);
-      } on DioError catch(b)
-      {
-
-      }
+      } on DioError catch (b) {}
     });
   });
 
@@ -85,7 +82,7 @@ void main() {
       final response = await networkManager
           .fetch<SignupResponseModel, SignupResponseModel>(
               ApplicationMockConstants.SIGN_UP_URL,
-              type: HttpRequestTypes.POST,
+              type: HttpRequestTypesEnum.POST,
               parseModel: SignupResponseModel(),
               data: {
             "userNickName": "mali",

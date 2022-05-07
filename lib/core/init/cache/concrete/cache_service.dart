@@ -9,12 +9,12 @@ class CacheService implements ICacheService {
   late final ICacheManager _manager;
   static CacheService get instance => _instance;
   CacheService._init() {
-    _manager = _selectManager(CacheManagerTypes.HIVE)!;
+    _manager = _selectManager(CacheManagerTypesEnum.HIVE)!;
     ensureInit();
   }
-  ICacheManager? _selectManager(CacheManagerTypes types) {
+  ICacheManager? _selectManager(CacheManagerTypesEnum types) {
     switch (types) {
-      case CacheManagerTypes.HIVE:
+      case CacheManagerTypesEnum.HIVE:
         return CacheManagerOfHive.instance;
 
       default:
@@ -28,7 +28,7 @@ class CacheService implements ICacheService {
   }
 
   @override
-  ThemeTypes getCurrentThme() {
+  ThemeTypesEnum getCurrentThme() {
     return _manager.getCurrentThme();
   }
 

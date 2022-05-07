@@ -17,4 +17,10 @@ void main() {
       print("gelen değer : " + box.get(element.toString()));
     });
   });
+
+  test("ıhı", () {
+   
+   //var a = TargetPlatform.
+
+  });
 }

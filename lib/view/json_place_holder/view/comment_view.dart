@@ -113,7 +113,7 @@ class _CommentListViewState extends BaseState<CommentListView> {
     await NetworkService.instance
         .fetch<List<CommentModel>, CommentModel>(
             "https://jsonplaceholder.typicode.com/comments",
-            type: HttpRequestTypes.GET,
+            type: HttpRequestTypesEnum.GET,
             parseModel: CommentModel())
         .then((value) => model = value.data as List<CommentModel>);
 

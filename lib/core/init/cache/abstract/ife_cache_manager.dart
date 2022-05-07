@@ -19,16 +19,15 @@ mixin ICacheManager implements ICacheService {
 
     if (isExist) {
       return currentPath;
-    } else { 
+    } else {
       Directory createdPath =
           await Directory(document.path + "/" + cacheFoldername).create();
       return createdPath.path;
     }
-
   }
 
   // util metods ...
-  String getTokenSearchItem(String? email, CachingKeys key) {
+  String getTokenSearchItem(String? email, CachingKeysEnum key) {
     var tokenSearchItem = email != null ? key.toRaw + "--" + email : key.toRaw;
     return tokenSearchItem;
   }

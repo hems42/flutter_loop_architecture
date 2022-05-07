@@ -1,1 +1,1 @@
-class LogConstant{}
+class LogConstants {}

@@ -12,12 +12,12 @@ class AnalyticService implements IAnalyticService {
   }
 
   AnalyticService._init() {
-    _manager = _selectManager(AnalyticManagerTypes.CUSTOM);
+    _manager = _selectManager(AnalyticManagerTypesEnum.CUSTOM);
   }
 
-  IAnalyticManager? _selectManager(AnalyticManagerTypes types) {
+  IAnalyticManager? _selectManager(AnalyticManagerTypesEnum types) {
     switch (types) {
-      case AnalyticManagerTypes.CUSTOM:
+      case AnalyticManagerTypesEnum.CUSTOM:
         return AnalyticManagerOfCustom.instance;
 
       default:

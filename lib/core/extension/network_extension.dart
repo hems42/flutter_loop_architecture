@@ -1,21 +1,21 @@
 import '../constant/enum/network/http_request_types_enum.dart';
 
-extension ExtensionOfNetworkTypes on HttpRequestTypes {
+extension ExtensionOfNetworkTypes on HttpRequestTypesEnum {
   String get toMethod {
     switch (this) {
-      case HttpRequestTypes.GET:
+      case HttpRequestTypesEnum.GET:
         return 'GET';
-      case HttpRequestTypes.POST:
+      case HttpRequestTypesEnum.POST:
         return 'POST';
-      case HttpRequestTypes.PATCH:
+      case HttpRequestTypesEnum.PATCH:
         return 'PATCH';
-      case HttpRequestTypes.PUT:
+      case HttpRequestTypesEnum.PUT:
         return 'PUT';
-      case HttpRequestTypes.DELETE:
+      case HttpRequestTypesEnum.DELETE:
         return 'DELETE';
-      case HttpRequestTypes.HEAD:
+      case HttpRequestTypesEnum.HEAD:
         return 'HEAD';
-      case HttpRequestTypes.OPTIONS:
+      case HttpRequestTypesEnum.OPTIONS:
         return 'OPTIONS';
       default:
         return '';

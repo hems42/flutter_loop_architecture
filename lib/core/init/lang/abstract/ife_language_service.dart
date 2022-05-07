@@ -5,7 +5,7 @@ import '../../../constant/enum/lang/language_types_enum.dart';
 abstract class ILanguageService {
   IBaseLanguageKeysModel getLanguageKeys();
 
-  void changeLangue(LanguageTypes type);
+  void changeLangue(LanguageTypesEnum type);
 
   dynamic getUtilStuffOfLanguageService();
 

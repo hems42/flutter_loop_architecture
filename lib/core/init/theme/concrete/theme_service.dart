@@ -12,12 +12,12 @@ class ThemeService implements IThemeService {
   static ThemeService get instance => _instance;
 
   ThemeService._init() {
-    _manager = _selectManager(ThemeManagerTypes.NOTIFIER);
+    _manager = _selectManager(ThemeManagerTypesEnum.NOTIFIER);
   }
 
-  IThemeManager _selectManager(ThemeManagerTypes types) {
+  IThemeManager _selectManager(ThemeManagerTypesEnum types) {
     switch (types) {
-      case ThemeManagerTypes.NOTIFIER:
+      case ThemeManagerTypesEnum.NOTIFIER:
         return ThemeManagerOfNotifier.instance;
       default:
         return ThemeManagerOfNotifier.instance;
@@ -25,7 +25,7 @@ class ThemeService implements IThemeService {
   }
 
   @override
-  void changeTheme(ThemeTypes type) {
+  void changeTheme(ThemeTypesEnum type) {
     _manager!.changeTheme(type);
   }
 

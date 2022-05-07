@@ -17,12 +17,12 @@ class NetworkService implements INetworService {
   }
 
   NetworkService._init() {
-    _manager = _selectManager(NetworkManagerTypes.DIO)!;
+    _manager = _selectManager(NetworkManagerTypesEnum.DIO)!;
   }
 
-  INetworkManager? _selectManager(NetworkManagerTypes types) {
+  INetworkManager? _selectManager(NetworkManagerTypesEnum types) {
     switch (types) {
-      case NetworkManagerTypes.DIO:
+      case NetworkManagerTypesEnum.DIO:
         return NetworkManagerOfDio.instance;
 
       default:
@@ -33,7 +33,7 @@ class NetworkService implements INetworService {
   @override
   Future<IBaseResponseModel<R>> fetch<R, T extends IBaseNetworkModel>(
       String path,
-      {required HttpRequestTypes type,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,
@@ -44,7 +44,7 @@ class NetworkService implements INetworService {
   @override
   Future<IBaseResponseModel<R>> fetchNoNetwork<R, T extends IBaseNetworkModel>(
       String path,
-      {required HttpRequestTypes type,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,
@@ -55,7 +55,7 @@ class NetworkService implements INetworService {
   @override
   Future<IBaseResponseModel<R>> send<R, T extends IBaseNetworkModel>(
       String path,
-      {required HttpRequestTypes type,
+      {required HttpRequestTypesEnum type,
       required T parseModel,
       data,
       Map<String, Object>? queryParameters,

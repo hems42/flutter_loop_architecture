@@ -11,11 +11,11 @@ mixin IThemeManager implements IThemeService {
     return selectThemeFromAppThemeTypes(getCacheService.getCurrentThme());
   }
 
-  void updateSelectedThemeOnCache(ThemeTypes type) {}
+  void updateSelectedThemeOnCache(ThemeTypesEnum type) {}
 
-  ThemeData selectThemeFromAppThemeTypes(ThemeTypes type) {
+  ThemeData selectThemeFromAppThemeTypes(ThemeTypesEnum type) {
     switch (type) {
-      case ThemeTypes.CUSTOM_THEME_DARK:
+      case ThemeTypesEnum.CUSTOM_THEME_DARK:
         return ThemeData.light();
 
       default:

@@ -1,2 +1,2 @@
 // ignore: constant_identifier_names
-enum CachingKeys { ACCESS_TOKEN,REFRESH_TOKEN,SELECTED_THEME }
+enum CachingKeysEnum { ACCESS_TOKEN, REFRESH_TOKEN, SELECTED_THEME }

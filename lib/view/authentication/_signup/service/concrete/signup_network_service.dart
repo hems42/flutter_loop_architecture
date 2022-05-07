@@ -9,10 +9,9 @@ class SignupNetworkService extends ISignupNetworkService {
   Future<SignupResponseModel?> signup(
       SignupRequestModel signupRequestModel) async {
     try {
-      final response =
-          await networkService.send<SignupResponseModel, SignupResponseModel>(
-              signupUrl,
-              type: HttpRequestTypes.POST,
+      final response = await networkService
+          .send<SignupResponseModel, SignupResponseModel>(signupUrl,
+              type: HttpRequestTypesEnum.POST,
               parseModel: SignupResponseModel(),
               data: signupRequestModel);
 

@@ -18,7 +18,7 @@ class ThemeManagerOfNotifier extends ChangeNotifier with IThemeManager {
   }
 
   @override
-  void changeTheme(ThemeTypes type) {
+  void changeTheme(ThemeTypesEnum type) {
     updateSelectedThemeOnCache(type);
     notifyListeners();
   }

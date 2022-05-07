@@ -16,12 +16,12 @@ class LanguageService implements ILanguageService {
 
   LanguageService._init(BuildContext context) {
     _context = context;
-    _manager = _selectManager(LanguageManagerTypes.EASY_LOCALIZATION);
+    _manager = _selectManager(LanguageManagerTypesEnum.EASY_LOCALIZATION);
   }
 
-  ILanguageManager? _selectManager(LanguageManagerTypes types) {
+  ILanguageManager? _selectManager(LanguageManagerTypesEnum types) {
     switch (types) {
-      case LanguageManagerTypes.EASY_LOCALIZATION:
+      case LanguageManagerTypesEnum.EASY_LOCALIZATION:
         return LanguageManagerOfEasyLocalization.instance(_context);
 
       default:
@@ -46,7 +46,7 @@ class LanguageService implements ILanguageService {
   }
 
   @override
-  void changeLangue(LanguageTypes type) {
+  void changeLangue(LanguageTypesEnum type) {
     // TODO: implement changeLangue
   }
 

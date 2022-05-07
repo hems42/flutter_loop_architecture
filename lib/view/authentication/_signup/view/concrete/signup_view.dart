@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_notebook/core/constant/enum/navigation/navigation_pages_enum.dart';
@@ -69,6 +71,12 @@ class SignupView extends StatelessWidget {
                     .navigateToPage(NavigationPagesEnum.LOGIN);
               },
               child: Text("goto login")),
+          SizedBox(height: 20),
+          FlatButton(
+              onPressed: () {
+                print("işletim sistemi: "+Platform.operatingSystem.toString());
+              },
+              child: Text("dene")),
           //  buildRaisedButtonLogin(context, value),
           // buildWrapForgot(),
           Spacer(),

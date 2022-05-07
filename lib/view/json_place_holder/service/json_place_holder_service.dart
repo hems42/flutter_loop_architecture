@@ -8,7 +8,7 @@ class JsonPlaceHolderService extends IBaseProductService {
     final response =
         await networkService.fetch<List<CommentModel>, CommentModel>(
             "https://jsonplaceholder.typicode.com/comments",
-            type: HttpRequestTypes.GET,
+            type: HttpRequestTypesEnum.GET,
             parseModel: CommentModel());
 
     return (response as ResponseModel).data;
