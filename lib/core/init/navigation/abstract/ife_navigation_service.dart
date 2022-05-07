@@ -7,5 +7,6 @@ abstract class INavigationService {
   Future<void> navigateToPageClear(NavigationPagesEnum page,
       {Object? data, NavigationAnimationsEnum? selectedAnimation});
 
+// 
   dynamic getStuffUtilOfNavigationService();
 }

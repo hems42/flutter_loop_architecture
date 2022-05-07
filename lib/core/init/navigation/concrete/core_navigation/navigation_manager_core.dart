@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
-import 'package:flutter_notebook/view/util/view/not_found_page.dart';
+import '../../../../constant/enum/system/platform_types_enum.dart';
+import '../../../../../view/util/view/not_found_page.dart';
 import '../../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../view/authentication/_signup/view/concrete/signup_view.dart';
 import '../../../../constant/enum/navigation/navigation_pages_enum.dart';
@@ -15,8 +15,11 @@ class NavigationManagerOfCore with INavigationManager {
   static NavigationManagerOfCore get instance => _instance;
   NavigationManagerOfCore._init() {
     currentPlatform = defineCurrentPlatfrom();
-    if (currentPlatform == null) 
-    {currentPlatform = PlatformTypesEnum.UNDEFINED;} 
+    if (currentPlatform == null) {
+      currentPlatform = PlatformTypesEnum.UNDEFINED;
+    }
+
+    print("seçilen platform : " + currentPlatform.toString());
   }
 
   GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
@@ -37,7 +40,6 @@ class NavigationManagerOfCore with INavigationManager {
   }
 
   final removeAllOldRoutes = (Route<dynamic> route) => false;
-
 
   @override
   Future<void> navigateToPageClear(NavigationPagesEnum page,
@@ -62,11 +64,10 @@ class NavigationManagerOfCore with INavigationManager {
         arguments: data);
   }
 
-
   PageRoute _normalNavigate(Widget widget, String pageName,
       {NavigationAnimationsEnum? selectedAnimation}) {
     return downSlideAnimation(widget);
-       // builder: (context) => widget, settings: RouteSettings(name: pageName));
+    // builder: (context) => widget, settings: RouteSettings(name: pageName));
   }
 
   Widget getLogin() {
