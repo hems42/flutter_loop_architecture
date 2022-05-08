@@ -1,5 +1,5 @@
-import '../../../product/base/ife_base_product_service.dart';
+import '../../../product/util/mixin/product_mixin_cache_service.dart';
 
-abstract class AuthenticationCacheServiceUtil extends IBaseProductService{
+ class AuthenticationCacheServiceUtil with ProductMixinCacheService{
   
 }

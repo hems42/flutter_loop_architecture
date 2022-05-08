@@ -10,21 +10,16 @@ class NavigationService implements INavigationService {
   late final INavigationManager _manager;
   static NavigationService get instance => _instance;
   NavigationService._init() {
-    _manager = _selectService(NavigationManagerTypesEnum.CORE_NAVIGATION);
+    _manager = _selectManager(NavigationManagerTypesEnum.CORE_NAVIGATION);
   }
 
-  INavigationManager _selectService(NavigationManagerTypesEnum types) {
+  INavigationManager _selectManager(NavigationManagerTypesEnum types) {
     switch (types) {
       case NavigationManagerTypesEnum.CORE_NAVIGATION:
         return NavigationManagerOfCore.instance;
       default:
         return NavigationManagerOfCore.instance;
     }
-  }
-
-  @override
-  getStuffUtilOfNavigationService() {
-    return _manager.getStuffUtilOfNavigationService();
   }
 
   @override

@@ -3,9 +3,7 @@ import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 import 'view/authentication/_signup/view/concrete/signup_view.dart';
 import 'core/constant/static/app/application_statics.dart';
-import 'core/init/navigation/abstract/ife_navigation_service.dart';
 import 'core/init/navigation/concrete/core_navigation/navigation_manager_core.dart';
-import 'core/init/navigation/concrete/navigation_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -23,9 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final INavigationService navigationService = NavigationService.instance;
-    NavigationManagerOfCore navigationManagerOfCore = navigationService
-        .getStuffUtilOfNavigationService() as NavigationManagerOfCore;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
@@ -45,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
       ),
       onGenerateRoute: NavigationManagerOfCore.instance.generateRoute,
-      navigatorKey: navigationManagerOfCore.navigatorKey,
+      navigatorKey: NavigationManagerOfCore.instance.navigatorKey,
       
       home: SignupView(),
     );

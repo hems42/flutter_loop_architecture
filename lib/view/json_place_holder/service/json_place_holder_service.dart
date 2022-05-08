@@ -1,9 +1,9 @@
-import 'package:flutter_notebook/core/base/model/concrete/response_model.dart';
+import '../../../core/base/model/concrete/response_model.dart';
+import '../../../product/util/mixin/product_mixin_network_service.dart';
 import '../../../core/constant/enum/network/http_request_types_enum.dart';
-import '../../../product/base/ife_base_product_service.dart';
 import '../model/comment_model.dart';
 
-class JsonPlaceHolderService extends IBaseProductService {
+class JsonPlaceHolderService with ProductMixinNetwokService {
   Future<List<CommentModel>> getAllComments() async {
     final response =
         await networkService.fetch<List<CommentModel>, CommentModel>(

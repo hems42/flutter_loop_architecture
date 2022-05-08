@@ -2,7 +2,7 @@ import '../abstract/ife_singup_cache_service.dart';
 
 class SingupCacheService extends ISignupCacheService {
   @override
-  Future<String> getAccesToken({String? email}) {
+  Future<String> getAccesToken({String? email}) { 
     return cacheService.getAccesToken(email: email);
   }
 

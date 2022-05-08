@@ -1,7 +1,7 @@
-import '../../../product/base/ife_base_product_service.dart';
+import '../../../product/util/mixin/product_mixin_network_service.dart';
 import '../../../core/constant/static/app/application_statics.dart';
 
-abstract class AuthenticationNetworkServiceUtil extends IBaseProductService {
+  class AuthenticationNetworkServiceUtil with ProductMixinNetwokService {
   final String signupUrl = ApplicationConstants.SIGN_UP_URL;
   final String registerUrl = ApplicationConstants.REGISTER_URL;
   final String loginUrl = ApplicationConstants.LOGIN_URL;
