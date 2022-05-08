@@ -9,7 +9,7 @@ import '../../../../base/model/abstract/ife_base_response_model.dart';
 import '../../../../base/model/concrete/error_model.dart';
 import '../../abstract/ife_network_manager.dart';
 
-part 'network_manager_dio_util.dart';
+part 'network_manager_dio_accesss_token_renew.dart';
 
 class NetworkManagerOfDio with INetworkManager {
   static NetworkManagerOfDio? _instance;
@@ -26,9 +26,10 @@ class NetworkManagerOfDio with INetworkManager {
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
+      
     _dio.interceptors.add(InterceptorsWrapper(onError: (error, handler) {
       var foundFlag = error.response!.headers.value("errorflag");
-
+            
       if (foundFlag == "true") {
         var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
             ErrorResponseModel(), error.response!.data);
@@ -56,7 +57,9 @@ class NetworkManagerOfDio with INetworkManager {
       //throw NotFoundException(ExceptionEventTypes.NOT_FOUND_USER);
 
       //  throw ErrorResponseModel();
-    }));
+    },
+ 
+    ));
   }
 
   @override
