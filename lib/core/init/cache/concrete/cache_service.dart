@@ -61,4 +61,16 @@ class CacheService implements ICacheService {
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) {
     return _manager.updateRefreshToken(refreshToken, email: email);
   }
+
+  @override
+  Future<bool> deleteAccesToken(String AccesToken, {String? email}) {
+    // TODO: implement deleteAccesToken
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteRefreshToken(String refreshToken, {String? email}) {
+    // TODO: implement deleteRefreshToken
+    throw UnimplementedError();
+  }
 }

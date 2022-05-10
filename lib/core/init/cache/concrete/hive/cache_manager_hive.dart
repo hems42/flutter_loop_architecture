@@ -98,4 +98,14 @@ class CacheManagerOfHive with ICacheManager {
     Hive.init(cacheFoldePath);
     isInitialized = true;
   }
+
+  @override
+  Future<bool> deleteAccesToken(String AccesToken, {String? email}) {
+      return Future(() => true);
+  }
+
+  @override
+  Future<bool> deleteRefreshToken(String refreshToken, {String? email}) async {
+    return Future(() => true);
+  }
 }

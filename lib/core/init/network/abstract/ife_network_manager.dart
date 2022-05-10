@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/constant/static/network/network_statics.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../constant/static/app/application_statics.dart';
 import 'ife_network_service.dart';
@@ -36,6 +37,8 @@ mixin INetworkManager implements INetworService {
   final String _baseLocalDirectory = "";
 
   get baseUrl => _baseUrl;
+
+  get refreshTokenUrl => NetworkConstants.REFRESH_TOKEN_URL;
 
   get connectionTimeOut => _connectionTimeOut;
 

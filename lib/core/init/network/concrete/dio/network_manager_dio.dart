@@ -1,5 +1,7 @@
-import 'package:dio/dio.dart';
+// ignore_for_file: unused_field, unused_element
 import 'dart:io';
+import 'package:dio/dio.dart';
+import '../../../../util/mixin/core_mixin_cache_service.dart';
 import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
 import '../../../../constant/enum/network/http_request_types_enum.dart';
@@ -11,7 +13,10 @@ import '../../abstract/ife_network_manager.dart';
 
 part 'network_manager_dio_accesss_token_renew.dart';
 
-class NetworkManagerOfDio with INetworkManager {
+class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
+  RequestOptions? _requestOptions;
+  String? accessToken;
+
   static NetworkManagerOfDio? _instance;
   late final Dio _dio;
 
@@ -26,21 +31,29 @@ class NetworkManagerOfDio with INetworkManager {
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
-      
-    _dio.interceptors.add(InterceptorsWrapper(onError: (error, handler) {
-      var foundFlag = error.response!.headers.value("errorflag");
-            
-      if (foundFlag == "true") {
-        var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
-            ErrorResponseModel(), error.response!.data);
-        model!.statusCode = error.response!.statusCode.toString();
-        error.type = DioErrorType.other;
+    cacheService.getAccesToken().then((value) => accessToken = value);
 
-        error.error = model;
-      }
+    _dio.interceptors.add(QueuedInterceptorsWrapper(
+        onError: (error, handler) {
+          var foundFlag = error.response!.headers.value("errorflag");
+          if (foundFlag == "true") {
+            var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
+                ErrorResponseModel(), error.response!.data);
+            model!.statusCode = error.response!.statusCode.toString();
+            error.type = DioErrorType.other;
 
-      //  return handler.next(error);
-      // print("gelen hata error : " + error.response!.data);
+            error.error = model;}
+/*
+          if ((error.response?.statusCode == 401 &&
+          error.response?.data['message'] == "Invalid JWT")) {
+        if (await _storage.containsKey(key: 'refreshToken')) {
+          if (await refreshToken()) {
+            return handler.resolve(await _retry(error.requestOptions));
+          }
+        }
+      }*/
+          //  return handler.next(error);
+          // print("gelen hata error : " + error.response!.data);
 
 /*
       throw ErrorResponseModel(
@@ -52,14 +65,17 @@ class NetworkManagerOfDio with INetworkManager {
       );
       */
 
-      handler.next(error);
+          handler.next(error);
 
-      //throw NotFoundException(ExceptionEventTypes.NOT_FOUND_USER);
+          //throw NotFoundException(ExceptionEventTypes.NOT_FOUND_USER);
 
-      //  throw ErrorResponseModel();
-    },
- 
-    ));
+          //  throw ErrorResponseModel();
+        },
+        onRequest: (requestOption, handler) {
+          _updateRequestoption(requestOption);
+          requestOption.headers['Authorization'] = 'Bearer $accessToken';
+          return handler.next(requestOption);},
+        onResponse: (response, handler) {}));
   }
 
   @override
@@ -125,4 +141,28 @@ class NetworkManagerOfDio with INetworkManager {
       throw error;
     }
   }
+
+  _updateRequestoption(RequestOptions requestOptions) {
+    _requestOptions = null;
+    _requestOptions = requestOptions;
+  }
+  
+  _updateRefreshToken() async {
+        final refreshToken = await cacheService.getRefreshToken();
+    final response = await _dio
+        .post(refreshTokenUrl, data: {'refreshToken': refreshToken});
+
+    if (response.statusCode == 201) {
+      accessToken = response.data;
+     await cacheService.updateAccesToken(accessToken!);
+      return true;
+    } else {
+      cacheService.deleteAccesToken(accessToken!);
+      cacheService.deleteRefreshToken(refreshToken);
+      accessToken = null;
+      
+      return false;
+    }
+  }
+
 }
