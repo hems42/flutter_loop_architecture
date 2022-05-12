@@ -1,4 +1,6 @@
 import 'package:flutter_notebook/core/constant/static/app/application_statics.dart';
+import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_service.dart';
+import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 
@@ -18,9 +20,12 @@ void main() {
     });
   });
 
-  test("ıhı", () {
-   
-   //var a = TargetPlatform.
+  test("ıhı", () async {
+    ICacheService cacheService = CacheService.instance;
+    await cacheService.saveAccesToken("enflasyon", email: "enflasyon@enflsyon");
 
+    var b = await cacheService.getAccessTokenEmail(checkEmail: (email) {
+      print("gelen email adresi : "+ email!);
+    });
   });
 }

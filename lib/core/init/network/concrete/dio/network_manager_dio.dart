@@ -42,7 +42,8 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
             model!.statusCode = error.response!.statusCode.toString();
             error.type = DioErrorType.other;
 
-            error.error = model;}
+            error.error = model;
+          }
 /*
           if ((error.response?.statusCode == 401 &&
           error.response?.data['message'] == "Invalid JWT")) {
@@ -74,7 +75,8 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
         onRequest: (requestOption, handler) {
           _updateRequestoption(requestOption);
           requestOption.headers['Authorization'] = 'Bearer $accessToken';
-          return handler.next(requestOption);},
+          return handler.next(requestOption);
+        },
         onResponse: (response, handler) {}));
   }
 
@@ -109,6 +111,7 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
       dynamic data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
+
     return _getResponseFromRequest(path,
         data: data, type: type, parseModel: parseModel);
   }
@@ -146,23 +149,34 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     _requestOptions = null;
     _requestOptions = requestOptions;
   }
-  
+
   _updateRefreshToken() async {
-        final refreshToken = await cacheService.getRefreshToken();
-    final response = await _dio
-        .post(refreshTokenUrl, data: {'refreshToken': refreshToken});
+    final refreshToken = await cacheService.getRefreshToken();
+    final response =
+        await _dio.post(refreshTokenUrl, data: {'refreshToken': refreshToken});
 
     if (response.statusCode == 201) {
       accessToken = response.data;
-     await cacheService.updateAccesToken(accessToken!);
+      await cacheService.updateAccesToken(accessToken!);
       return true;
     } else {
       cacheService.deleteAccesToken(accessToken!);
       cacheService.deleteRefreshToken(refreshToken);
       accessToken = null;
-      
+
       return false;
     }
   }
 
+  Future<Response<dynamic>> _retry(
+      Dio dio, RequestOptions requestOptions) async {
+    final options = new Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+    return dio.request<dynamic>(requestOptions.path,
+        data: requestOptions.data,
+        queryParameters: requestOptions.queryParameters,
+        options: options);
+  }
 }

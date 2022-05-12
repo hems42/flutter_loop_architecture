@@ -28,7 +28,15 @@ mixin ICacheManager implements ICacheService {
 
   // util metods ...
   String getTokenSearchItem(String? email, CachingKeysEnum key) {
-    var tokenSearchItem = email != null ? key.toRaw + "--" + email : key.toRaw;
+    var tokenSearchItem =
+        email != null ? "t" + key.toRaw + "--" + email : "f" + key.toRaw;
     return tokenSearchItem;
+  }
+
+  String? getEmailFromTokenSearchItem(
+      String tokenSearchItem, CachingKeysEnum key) {
+    return tokenSearchItem.substring(0, 1) == "f"
+        ? null
+        : tokenSearchItem.substring(key.toRaw.length + 3);
   }
 }

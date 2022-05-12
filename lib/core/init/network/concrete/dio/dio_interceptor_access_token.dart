@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_service.dart';
+import '../../../cache/abstract/ife_cache_service.dart';
 
 class DioAccessTokenInterceptor extends QueuedInterceptor {
   late ICacheService cacheService;

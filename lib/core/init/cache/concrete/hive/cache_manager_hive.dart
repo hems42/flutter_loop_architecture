@@ -101,11 +101,36 @@ class CacheManagerOfHive with ICacheManager {
 
   @override
   Future<bool> deleteAccesToken(String AccesToken, {String? email}) {
-      return Future(() => true);
+    return Future(() => true);
   }
 
   @override
   Future<bool> deleteRefreshToken(String refreshToken, {String? email}) async {
     return Future(() => true);
+  }
+
+  @override
+  Future<String> getAccessTokenEmail(
+      {Function(String? email)? checkEmail}) async {
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    var searchItem = getSearchItemFromKeys(authenticationBox);
+    var token = await authenticationBox.get(searchItem);
+    authenticationBox.close();
+    checkEmail?.call(getEmailFromTokenSearchItem(searchItem!, CachingKeysEnum.ACCESS_TOKEN));
+    return token;
+  }
+
+  String? getSearchItemFromKeys(Box<dynamic> box) {
+    String? searchItemKey = null;
+    box.keys.forEach((element) {
+      if (element.toString().substring(0, 1) == "t") {
+        searchItemKey = element.toString();
+      } else if (element.toString().substring(0, 1) == "f") {
+        searchItemKey = element.toString();
+      } else {
+        searchItemKey = null;
+      }
+    });
+    return searchItemKey;
   }
 }

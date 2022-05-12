@@ -73,4 +73,10 @@ class CacheService implements ICacheService {
     // TODO: implement deleteRefreshToken
     throw UnimplementedError();
   }
+
+  @override
+  Future<String> getAccessTokenEmail({Function(String? email)? checkEmail}) {
+    return _manager.getAccessTokenEmail(checkEmail: checkEmail);
+  }
+
 }
