@@ -11,7 +11,7 @@ abstract class ICacheService {
   Future<bool> saveRefreshToken(String refreshToken, {String? email});
   Future<bool> updateRefreshToken(String refreshToken, {String? email});
   Future<String> getRefreshToken({String? email});
-  Future<String> getAccessTokenEmail({checkEmail (String? email)?});
+  Future<String?> getAccessTokenEmail({checkEmail (String? email)?});
   // acces token save
 
   // refresh token

@@ -10,6 +10,15 @@ mixin ICacheManager implements ICacheService {
   final String cacheAuthenticationName =
       ApplicationConstants.CACHE_AUTHENTICATION_NAME;
 
+  String? _currentEmail;
+
+  setCurrentEmail(String? email) {
+    _currentEmail = null;
+    _currentEmail = email;
+  }
+
+  get currentEmail => _currentEmail;
+
   // util document path
 
   Future<String> getCacheFolderPath() async {
@@ -27,9 +36,9 @@ mixin ICacheManager implements ICacheService {
   }
 
   // util metods ...
-  String getTokenSearchItem(String? email, CachingKeysEnum key) {
+  String generateTokenKey(String? email, CachingKeysEnum key) {
     var tokenSearchItem =
-        email != null ? "t" + key.toRaw + "--" + email : "f" + key.toRaw;
+        email != null ? "t-" + key.name + "--" + email : "f-" + key.name;
     return tokenSearchItem;
   }
 
@@ -37,6 +46,6 @@ mixin ICacheManager implements ICacheService {
       String tokenSearchItem, CachingKeysEnum key) {
     return tokenSearchItem.substring(0, 1) == "f"
         ? null
-        : tokenSearchItem.substring(key.toRaw.length + 3);
+        : tokenSearchItem.substring(key.name.length + 3);
   }
 }

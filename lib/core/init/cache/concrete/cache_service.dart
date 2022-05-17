@@ -75,7 +75,7 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<String> getAccessTokenEmail({Function(String? email)? checkEmail}) {
+  Future<String?> getAccessTokenEmail({Function(String? email)? checkEmail}) {
     return _manager.getAccessTokenEmail(checkEmail: checkEmail);
   }
 

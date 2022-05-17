@@ -63,4 +63,10 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
     // TODO: implement deleteRefreshToken
     throw UnimplementedError();
   }
+
+  @override
+  Future<String> getAccessTokenEmail({Function(String? email)? checkEmail}) {
+    // TODO: implement getAccessTokenEmail
+    throw UnimplementedError();
+  }
 }

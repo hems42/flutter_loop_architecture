@@ -34,7 +34,7 @@ class CacheManagerOfHive with ICacheManager {
   @override
   Future<String> getAccesToken({String? email}) async {
     var accessTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.ACCESS_TOKEN);
+        generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     String accessToken = await authenticationBox.get(accessTokenSearchItem);
     authenticationBox.close();
@@ -44,7 +44,7 @@ class CacheManagerOfHive with ICacheManager {
   @override
   Future<String> getRefreshToken({String? email}) async {
     var refreshTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.REFRESH_TOKEN);
+        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     String refreshToken = await authenticationBox.get(refreshTokenSearchItem);
     await authenticationBox.close();
@@ -53,8 +53,9 @@ class CacheManagerOfHive with ICacheManager {
 
   @override
   Future<bool> saveAccesToken(String accesToken, {String? email}) async {
+    setCurrentEmail(email);
     var accessTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.ACCESS_TOKEN);
+        generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     await authenticationBox.put(accessTokenSearchItem, accesToken);
     await authenticationBox.close();
@@ -64,7 +65,7 @@ class CacheManagerOfHive with ICacheManager {
   @override
   Future<bool> saveRefreshToken(String refreshToken, {String? email}) async {
     var refreshTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.REFRESH_TOKEN);
+        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     await authenticationBox.put(refreshTokenSearchItem, refreshToken);
     await authenticationBox.close();
@@ -73,10 +74,9 @@ class CacheManagerOfHive with ICacheManager {
 
   @override
   Future<bool> updateAccesToken(String accesToken, {String? email}) async {
-    var accessTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    await authenticationBox.put(accessTokenSearchItem, accesToken);
+    await authenticationBox.put(
+        generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN), accesToken);
     await authenticationBox.close();
     return true;
   }
@@ -84,19 +84,11 @@ class CacheManagerOfHive with ICacheManager {
   @override
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) async {
     var refreshTokenSearchItem =
-        getTokenSearchItem(email, CachingKeysEnum.REFRESH_TOKEN);
+        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     await authenticationBox.put(refreshTokenSearchItem, refreshToken);
     await authenticationBox.close();
     return true;
-  }
-
-  // util metods
-
-  Future<void> initHive() async {
-    String cacheFoldePath = await getCacheFolderPath();
-    Hive.init(cacheFoldePath);
-    isInitialized = true;
   }
 
   @override
@@ -110,27 +102,21 @@ class CacheManagerOfHive with ICacheManager {
   }
 
   @override
-  Future<String> getAccessTokenEmail(
+  Future<String?> getAccessTokenEmail(
       {Function(String? email)? checkEmail}) async {
+    var c = generateTokenKey(currentEmail, CachingKeysEnum.ACCESS_TOKEN);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    var searchItem = getSearchItemFromKeys(authenticationBox);
-    var token = await authenticationBox.get(searchItem);
+    String? token = authenticationBox.get(c);
     authenticationBox.close();
-    checkEmail?.call(getEmailFromTokenSearchItem(searchItem!, CachingKeysEnum.ACCESS_TOKEN));
+    checkEmail?.call(currentEmail);
     return token;
   }
 
-  String? getSearchItemFromKeys(Box<dynamic> box) {
-    String? searchItemKey = null;
-    box.keys.forEach((element) {
-      if (element.toString().substring(0, 1) == "t") {
-        searchItemKey = element.toString();
-      } else if (element.toString().substring(0, 1) == "f") {
-        searchItemKey = element.toString();
-      } else {
-        searchItemKey = null;
-      }
-    });
-    return searchItemKey;
+  // util metods
+
+  Future<void> initHive() async {
+    String cacheFoldePath = await getCacheFolderPath();
+    Hive.init(cacheFoldePath);
+    isInitialized = true;
   }
 }
