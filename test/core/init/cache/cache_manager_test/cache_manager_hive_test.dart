@@ -20,8 +20,8 @@ void main() {
   });
 
   test(' -: cache manager hive get access token test', () async {
-    String resultAccessToken =
-        await cacheManager.getAccesToken(email: CacheTestConstant.cacheEmail);
+    String? resultAccessToken =
+        await cacheManager.getAccessToken();
 
     expect(resultAccessToken, CacheTestConstant.cachedAccessToken);
   });
@@ -29,8 +29,8 @@ void main() {
   test(' -: cache manager hive update access token test', () async {
     bool resultUpdated = await cacheManager
         .updateAccesToken(CacheTestConstant.updatedAccessToken, email: CacheTestConstant.cacheEmail);
-    String updatedAccessToken =
-        await cacheManager.getAccesToken(email: CacheTestConstant.cacheEmail);
+    String? updatedAccessToken =
+        await cacheManager.getAccessToken();
 
     expect(resultUpdated, true);
     expect(updatedAccessToken, CacheTestConstant.updatedAccessToken);
@@ -69,8 +69,8 @@ void main() {
   });
 
   test(' -: cache manager hive without email get access token test', () async {
-    String resultAccessToken =
-        await cacheManager.getAccesToken();
+    String? resultAccessToken =
+        await cacheManager.getAccessToken();
 
     expect(resultAccessToken, CacheTestConstant.cachedAccessToken);
   });
@@ -78,8 +78,8 @@ void main() {
   test(' -: cache manager hive without email update access token test', () async {
     bool resultUpdated = await cacheManager
         .updateAccesToken(CacheTestConstant.updatedAccessToken);
-    String updatedAccessToken =
-        await cacheManager.getAccesToken();
+    String? updatedAccessToken =
+        await cacheManager.getAccessToken();
 
     expect(resultUpdated, true);
     expect(updatedAccessToken, CacheTestConstant.updatedAccessToken);

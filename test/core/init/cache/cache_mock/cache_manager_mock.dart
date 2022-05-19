@@ -53,7 +53,7 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   }
 
   @override
-  Future<bool> deleteAccesToken(String AccesToken, {String? email}) {
+  Future<bool> deleteAccesToken({String? email, checkEmail (String? email)?}) {
     // TODO: implement deleteAccesToken
     throw UnimplementedError();
   }
@@ -67,6 +67,12 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   @override
   Future<String> getAccessTokenEmail({Function(String? email)? checkEmail}) {
     // TODO: implement getAccessTokenEmail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String?> getAccessToken({Function(String? email)? checkEmail}) {
+    // TODO: implement getAccessToken
     throw UnimplementedError();
   }
 }

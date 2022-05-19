@@ -33,11 +33,6 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<String> getAccesToken({String? email}) {
-    return _manager.getAccesToken(email: email);
-  }
-
-  @override
   Future<String> getRefreshToken({String? email}) {
     return _manager.getRefreshToken(email: email);
   }
@@ -63,7 +58,7 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<bool> deleteAccesToken(String AccesToken, {String? email}) {
+  Future<bool> deleteAccesToken({String? email, checkEmail (String? email)?}) {
     // TODO: implement deleteAccesToken
     throw UnimplementedError();
   }
@@ -75,8 +70,8 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<String?> getAccessTokenEmail({Function(String? email)? checkEmail}) {
-    return _manager.getAccessTokenEmail(checkEmail: checkEmail);
+  Future<String?> getAccessToken({Function(String? email)? checkEmail}) {
+    return _manager.getAccessToken(checkEmail: checkEmail);
   }
 
 }

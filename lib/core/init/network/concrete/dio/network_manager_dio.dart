@@ -31,7 +31,7 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     //_dio.options.connectTimeout = connectionTimeOut;
     //_dio.options.receiveTimeout = receivingTimeOut;
 
-    cacheService.getAccesToken().then((value) => accessToken = value);
+    cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
         onError: (error, handler) {
@@ -160,7 +160,7 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
       await cacheService.updateAccesToken(accessToken!);
       return true;
     } else {
-      cacheService.deleteAccesToken(accessToken!);
+      cacheService.deleteAccesToken();
       cacheService.deleteRefreshToken(refreshToken);
       accessToken = null;
 

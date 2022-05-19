@@ -1,5 +1,4 @@
 import 'dart:io';
-import '../../../extension/cache_extension.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../constant/static/app/application_statics.dart';
