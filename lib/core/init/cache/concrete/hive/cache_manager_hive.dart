@@ -18,9 +18,9 @@ class CacheManagerOfHive with ICacheManager {
   }
 
   @override
-  Future<bool> ensureInit() {
+  Future<bool> ensureInit() async {
     if (!isInitialized) {
-      initHive();
+     await initHive();
     }
     return Future.value(true);
   }
@@ -30,47 +30,89 @@ class CacheManagerOfHive with ICacheManager {
     throw UnimplementedError();
   }
 
-
   // refresh token
   @override
-  Future<String> getRefreshToken({String? email}) async {
-    var refreshTokenSearchItem =
-        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
+  Future<String?> getRefreshToken({Function(String? email)? checkEmail}) async {
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    String refreshToken = await authenticationBox.get(refreshTokenSearchItem);
+    String? token = await authenticationBox
+        .get(generateTokenKey(currentEmail, CachingKeysEnum.REFRESH_TOKEN));
     await authenticationBox.close();
-    return refreshToken;
+    checkEmail?.call(currentEmail);
+    return token;
   }
 
   @override
   Future<bool> saveRefreshToken(String refreshToken, {String? email}) async {
-    var refreshTokenSearchItem =
-        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
+    applyEmail(email);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    await authenticationBox.put(refreshTokenSearchItem, refreshToken);
+    await authenticationBox.put(
+        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN), refreshToken);
     await authenticationBox.close();
     return true;
   }
 
   @override
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) async {
-    var refreshTokenSearchItem =
-        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN);
+    applyEmail(email);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    await authenticationBox.put(refreshTokenSearchItem, refreshToken);
+    await authenticationBox.put(
+        generateTokenKey(email, CachingKeysEnum.REFRESH_TOKEN), refreshToken);
     await authenticationBox.close();
     return true;
   }
 
   @override
-  Future<bool> deleteRefreshToken(String refreshToken, {String? email}) async {
-    return Future(() => true);
-  }
+  Future<bool> deleteRefreshToken(
+      {String? email, Function(String? email)? checkEmail}) async {
+    bool result = false;
+    applyEmail(email);
+    final authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    var key = generateTokenKey(currentEmail, CachingKeysEnum.REFRESH_TOKEN);
+    if (authenticationBox.length > 0 &&
+        await authenticationBox.get(key) != null) {
+      await authenticationBox.delete(key);
+      await authenticationBox.get(generateTokenKey(
+                  currentEmail, CachingKeysEnum.REFRESH_TOKEN)) ==
+              null
+          ? result = true
+          : result = false;
+      await authenticationBox.close();
+    } else {
+      result = false;
+    }
 
+    checkEmail?.call(currentEmail);
+    return result;
+  }
 
   // acces token
  @override
+  Future<String?> getAccessToken({Function(String? email)? checkEmail}) async {
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+
+    String? token = await authenticationBox
+        .get(generateTokenKey(currentEmail, CachingKeysEnum.ACCESS_TOKEN));
+
+    await authenticationBox.close();
+
+    checkEmail?.call(currentEmail);
+
+    return token;
+  }
+
+  @override
+  Future<bool> saveAccesToken(String accessToken, {String? email}) async {
+    applyEmail(email);
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+    await authenticationBox.put(
+        generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN), accessToken);
+    await authenticationBox.close();
+    return true;
+  }
+  
+  @override
   Future<bool> updateAccesToken(String accesToken, {String? email}) async {
+    applyEmail(email);
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
     await authenticationBox.put(
         generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN), accesToken);
@@ -79,22 +121,16 @@ class CacheManagerOfHive with ICacheManager {
   }
 
   @override
-  Future<bool> saveAccesToken(String accesToken, {String? email}) async {
-    setCurrentEmail(email);
-    var accessTokenSearchItem =
-        generateTokenKey(email, CachingKeysEnum.ACCESS_TOKEN);
-    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    await authenticationBox.put(accessTokenSearchItem, accesToken);
-    await authenticationBox.close();
-    return true;
-  }
-
-  @override
-  Future<bool> deleteAccesToken({String? email, checkEmail (String? email)?}) async {
+  Future<bool> deleteAccesToken(
+      {String? email, checkEmail(String? email)?}) async {
     bool result = false;
-    email != null ? setCurrentEmail(email) : null;
-    final authenticationBox = await Hive.openBox(cacheAuthenticationName);
+
+    applyEmail(email);
+
+    var authenticationBox = await Hive.openBox(cacheAuthenticationName);
+
     var key = generateTokenKey(currentEmail, CachingKeysEnum.ACCESS_TOKEN);
+
     if (authenticationBox.length > 0 &&
         await authenticationBox.get(key) != null) {
       await authenticationBox.delete(key);
@@ -109,19 +145,10 @@ class CacheManagerOfHive with ICacheManager {
     }
 
     checkEmail?.call(currentEmail);
+
     return result;
   }
 
-  @override
-  Future<String?> getAccessToken(
-      {Function(String? email)? checkEmail}) async {
-    final authenticationBox = await Hive.openBox(cacheAuthenticationName);
-    String? token = await authenticationBox
-        .get(generateTokenKey(currentEmail, CachingKeysEnum.ACCESS_TOKEN));
-    await authenticationBox.close();
-    checkEmail?.call(currentEmail);
-    return token;
-  }
 
   // util metods
 
@@ -130,4 +157,6 @@ class CacheManagerOfHive with ICacheManager {
     Hive.init(cacheFoldePath);
     isInitialized = true;
   }
+
+  applyEmail(String? email) => email != null ? setCurrentEmail(email) : null;
 }

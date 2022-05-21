@@ -14,7 +14,6 @@ import '../../abstract/ife_network_manager.dart';
 part 'network_manager_dio_accesss_token_renew.dart';
 
 class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
-  RequestOptions? _requestOptions;
   String? accessToken;
 
   static NetworkManagerOfDio? _instance;
@@ -34,17 +33,26 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
-        onError: (error, handler) {
+        onError: (error, handler) async {
           var foundFlag = error.response!.headers.value("errorflag");
           if (foundFlag == "true") {
             var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
                 ErrorResponseModel(), error.response!.data);
             model!.statusCode = error.response!.statusCode.toString();
             error.type = DioErrorType.other;
-
             error.error = model;
           }
-/*
+          if (error.response?.statusCode == 401) {
+            if (updateAccessToken() == true) {
+              var retryResponse =  await _retry(error.requestOptions);
+            return handler.resolve(retryResponse);
+          } else {
+            return handler.next(error);
+          }
+          }
+
+
+           /*
           if ((error.response?.statusCode == 401 &&
           error.response?.data['message'] == "Invalid JWT")) {
         if (await _storage.containsKey(key: 'refreshToken')) {
@@ -52,11 +60,11 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
             return handler.resolve(await _retry(error.requestOptions));
           }
         }
-      }*/
+      }
           //  return handler.next(error);
           // print("gelen hata error : " + error.response!.data);
 
-/*
+
       throw ErrorResponseModel(
         statusCode: error.response!.statusCode.toString(),
         errorCode: model!.errorCode,
@@ -72,9 +80,8 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
 
           //  throw ErrorResponseModel();
         },
-        onRequest: (requestOption, handler) {
-          _updateRequestoption(requestOption);
-          requestOption.headers['Authorization'] = 'Bearer $accessToken';
+        onRequest: (requestOption, handler) async {
+          requestOption.headers['Authorization'] = 'Bearer ${await cacheService.getAccessToken()}';
           return handler.next(requestOption);
         },
         onResponse: (response, handler) {}));
@@ -111,7 +118,6 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
       dynamic data,
       Map<String, Object>? queryParameters,
       void Function(int p1, int p2)? onReceiveProgress}) async {
-
     return _getResponseFromRequest(path,
         data: data, type: type, parseModel: parseModel);
   }
@@ -145,36 +151,36 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     }
   }
 
-  _updateRequestoption(RequestOptions requestOptions) {
-    _requestOptions = null;
-    _requestOptions = requestOptions;
-  }
 
-  _updateRefreshToken() async {
+
+  // util metod
+  Future<bool> updateAccessToken() async {
     final refreshToken = await cacheService.getRefreshToken();
-    final response =
-        await _dio.post(refreshTokenUrl, data: {'refreshToken': refreshToken});
+    if (refreshToken != null) {
+      final response = await _dio
+          .post(refreshTokenUrl, data: {'refreshToken': refreshToken});
 
-    if (response.statusCode == 201) {
-      accessToken = response.data;
-      await cacheService.updateAccesToken(accessToken!);
-      return true;
+      if (response.statusCode == 201) {
+        accessToken = response.data;
+        cacheService.saveAccesToken(accessToken!);
+        return true;
+      } else {
+        await cacheService.deleteAccesToken();
+        await cacheService.deleteRefreshToken();
+        return false;}
     } else {
-      cacheService.deleteAccesToken();
-      cacheService.deleteRefreshToken(refreshToken);
-      accessToken = null;
-
+      await cacheService.deleteAccesToken();
+      await cacheService.deleteRefreshToken();
       return false;
     }
   }
 
-  Future<Response<dynamic>> _retry(
-      Dio dio, RequestOptions requestOptions) async {
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
     final options = new Options(
       method: requestOptions.method,
       headers: requestOptions.headers,
     );
-    return dio.request<dynamic>(requestOptions.path,
+    return Dio().request<dynamic>(requestOptions.path,
         data: requestOptions.data,
         queryParameters: requestOptions.queryParameters,
         options: options);

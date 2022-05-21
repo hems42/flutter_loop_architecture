@@ -32,9 +32,15 @@ class CacheService implements ICacheService {
     return _manager.getCurrentThme();
   }
 
+  // access token
   @override
-  Future<String> getRefreshToken({String? email}) {
-    return _manager.getRefreshToken(email: email);
+  Future<String?> getAccessToken({Function(String? email)? checkEmail}) {
+    return _manager.getAccessToken(checkEmail: checkEmail);
+  }
+
+  @override
+  Future<bool> deleteAccesToken({String? email, checkEmail(String? email)?}) {
+    return _manager.deleteAccesToken(checkEmail: checkEmail, email: email);
   }
 
   @override
@@ -43,35 +49,28 @@ class CacheService implements ICacheService {
   }
 
   @override
-  Future<bool> saveRefreshToken(String refreshToken, {String? email}) {
-    return _manager.saveRefreshToken(refreshToken, email: email);
+  Future<bool> updateAccesToken(String accesToken, {String? email}) {
+    return _manager.updateAccesToken(accesToken, email: email);
+  }
+
+  // refresh token
+  @override
+  Future<String?> getRefreshToken({Function(String? email)? checkEmail}) {
+    return _manager.getRefreshToken(checkEmail: checkEmail);
   }
 
   @override
-  Future<bool> updateAccesToken(String AccesToken, {String? email}) {
-    return _manager.updateAccesToken(AccesToken, email: email);
+  Future<bool> deleteRefreshToken({String? email, checkEmail(String? email)?}) {
+    return _manager.deleteRefreshToken(checkEmail: checkEmail, email: email);
+  }
+
+  @override
+  Future<bool> saveRefreshToken(String refreshToken, {String? email}) {
+    return _manager.saveRefreshToken(refreshToken, email: email);
   }
 
   @override
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) {
     return _manager.updateRefreshToken(refreshToken, email: email);
   }
-
-  @override
-  Future<bool> deleteAccesToken({String? email, checkEmail (String? email)?}) {
-    // TODO: implement deleteAccesToken
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> deleteRefreshToken(String refreshToken, {String? email}) {
-    // TODO: implement deleteRefreshToken
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String?> getAccessToken({Function(String? email)? checkEmail}) {
-    return _manager.getAccessToken(checkEmail: checkEmail);
-  }
-
 }

@@ -44,8 +44,8 @@ void main() {
   });
 
   test(' -: cache manager hive get refresh token test', () async {
-    String refreshToken =
-        await cacheManager.getRefreshToken(email: CacheTestConstant.cacheEmail);
+    String? refreshToken =
+        await cacheManager.getRefreshToken();
 
     expect(refreshToken, CacheTestConstant.cachedRefreshToken);
   });
@@ -54,8 +54,8 @@ void main() {
     bool result = await cacheManager.updateRefreshToken(CacheTestConstant.updatedRefreshToken,
         email: CacheTestConstant.cacheEmail);
 
-    String updatedRefreshToken =
-        await cacheManager.getRefreshToken(email: CacheTestConstant.cacheEmail);
+    String? updatedRefreshToken =
+        await cacheManager.getRefreshToken();
 
     expect(result, true);
     expect(updatedRefreshToken, CacheTestConstant.updatedRefreshToken);
@@ -92,7 +92,7 @@ void main() {
   });
 
   test(' -: cache manager hive without email get refresh token test', () async {
-    String refreshToken =
+    String? refreshToken =
         await cacheManager.getRefreshToken();
 
     expect(refreshToken, CacheTestConstant.cachedRefreshToken);
@@ -101,7 +101,7 @@ void main() {
   test(' -: cache manager hive without email update refresh token test', () async {
     bool result = await cacheManager.updateRefreshToken(CacheTestConstant.updatedRefreshToken);
 
-    String updatedRefreshToken =
+    String? updatedRefreshToken =
         await cacheManager.getRefreshToken();
 
     expect(result, true);

@@ -4,6 +4,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_notebook/core/base/model/concrete/error_response_model.dart';
 import 'package:flutter_notebook/core/constant/static/app/application_statics.dart';
+import 'package:flutter_notebook/core/init/cache/concrete/hive/cache_manager_hive.dart';
+import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/signup_request_model.dart';
+import 'package:flutter_notebook/view/authentication/_signup/service/concrete/signup_cache_service.dart';
+import 'package:flutter_notebook/view/authentication/_signup/service/concrete/signup_network_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -81,6 +86,23 @@ void main() {
         "https://69f648e2-5a86-4a7f-ab23-6b9121fab04f.mock.pstmn.io/test_get_list_metod");
 
     print("en sonunda gelen oğlan : " + b.data);
+  });
+
+  test("fgfg", () async {
+  var a = await CacheManagerOfHive.instance!.ensureInit();
+
+    SignupNetworkService networkService = SignupNetworkService();
+    SingupCacheService cacheService = SingupCacheService();
+
+    /* var signupResponse = await networkService.signup(SignupRequestModel(
+        eMail: "mopi@mopi", userNickName: "mopi", password: "mopi")); */
+    var accesTokenSaved = await cacheService.saveAccesToken(
+        "signupResponse!.accessToken.toString()",
+        email: "signupResponse.email");
+
+    var refreshTokenSaved = await cacheService.saveRefreshToken(
+        "signupResponse.refreshToken.toString()",
+        email: "signupResponse.email");
   });
 }
 

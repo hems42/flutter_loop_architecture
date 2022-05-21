@@ -86,7 +86,7 @@ class Api {
     final refreshToken = await _storage.read(key: 'refreshToken');
     final response = await api
         .post('/auth/refresh', data: {'refreshToken': refreshToken});
-
+ 
     if (response.statusCode == 201) {
       accessToken = response.data;
       return true;

@@ -9,12 +9,12 @@ void main() {
     Hive.init(ApplicationConstants.CACHE_FOLDER_NAME);
   });
 
-  test('ffgf', () async {
+  test('tüm kayıtlar', () async {
     var box =
         await Hive.openBox(ApplicationConstants.CACHE_AUTHENTICATION_NAME);
 
     print("sayısı : " + box.length.toString());
-   
+
     box.keys.forEach((element) {
       print("gelen key : " + element.toString());
       print("gelen değer : " + box.get(element.toString()));
@@ -23,9 +23,9 @@ void main() {
     await box.close();
   });
 
-  test("ıhı", () async {
+  test("access token", () async {
     ICacheManager cacheService = CacheManagerOfHive.instance!;
-    var d = await cacheService.saveAccesToken("uzanan iki el",
+    var d = await cacheService.saveAccesToken("access token",
         email: "enflasyon@enflasyon");
 
     var b = await cacheService.getAccessToken(checkEmail: (email) {
@@ -38,9 +38,25 @@ void main() {
   test("ll", () async {
     ICacheManager cacheService = CacheManagerOfHive.instance!;
 
-    var b =
-        await cacheService.deleteAccesToken();
+    var b = await cacheService.deleteAccesToken(
+      email: "enflasyon@enflasyon",
+      checkEmail: (email) {
+        print("silinen email : " + email.toString());
+      },
+    );
 
     print("gelen silme sonucu : " + b.toString());
+  });
+
+  test("refresh token", () async {
+     ICacheManager cacheService = CacheManagerOfHive.instance!;
+    var d = await cacheService.saveRefreshToken("refresh token",
+        email: "enflasyon@enflasyon");
+
+    var b = await cacheService.getRefreshToken(checkEmail: (email) {
+      print("gelen email adresi refresh token : " + email.toString());
+    });
+
+    print("gelen token refresjh token: " + b.toString());
   });
 }
