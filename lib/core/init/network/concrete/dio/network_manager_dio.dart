@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field, unused_element
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter_notebook/view/authentication/token_renew_managment/refresh_token_response_model.dart';
 import '../../../../util/mixin/core_mixin_cache_service.dart';
 import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
@@ -43,8 +44,8 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
             error.error = model;
           }
           if (error.response?.statusCode == 401) {
-            if (updateAccessToken() == true) {
-              var retryResponse =  await _retry(error.requestOptions);
+            if (await updateAccessToken() == true) {
+              var retryResponse =  await _retry(error.requestOptions, _dio);
             return handler.resolve(retryResponse);
           } else {
             return handler.next(error);
@@ -157,12 +158,15 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
   Future<bool> updateAccessToken() async {
     final refreshToken = await cacheService.getRefreshToken();
     if (refreshToken != null) {
-      final response = await _dio
-          .get(refreshTokenUrl+"?refreshToken=$refreshToken");
+      IBaseResponseModel response 
+      = await fetch<RefreshTokenResponseModel,RefreshTokenResponseModel>
+          (refreshTokenUrl+"?refreshToken=$refreshToken",
+           type: HttpRequestTypesEnum.GET,
+          parseModel: RefreshTokenResponseModel());
 
-      if (response.statusCode == 201) {
-        accessToken = response.data;
-        cacheService.saveAccesToken(accessToken!);
+      if (response.success == true) {
+        var refreshTokenResponse = response.data as RefreshTokenResponseModel;
+       await cacheService.saveAccesToken(refreshTokenResponse.accessToken.toString());
         return true;
       } else {
         await cacheService.deleteAccesToken();
@@ -175,12 +179,12 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     }
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions, Dio dio) async {
     final options = new Options(
       method: requestOptions.method,
       headers: requestOptions.headers,
     );
-    return Dio().request<dynamic>(requestOptions.path,
+    return dio.request<dynamic>(requestOptions.path,
         data: requestOptions.data,
         queryParameters: requestOptions.queryParameters,
         options: options);

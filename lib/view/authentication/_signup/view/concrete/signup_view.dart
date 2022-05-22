@@ -97,7 +97,8 @@ class SignupView extends StatelessWidget {
               onPressed: () async {
                 var networkService = NetworkService.instance;
                 var cacheService = CacheService.instance;
-
+                await cacheService
+                    .saveRefreshToken("b577581e-cbfc-470b-86bb-9406eb40cafd");
                 var accessToken =
                     await cacheService.getAccessToken(checkEmail: (email) {
                   print("gelen email : " + email.toString());
@@ -116,7 +117,7 @@ class SignupView extends StatelessWidget {
                         type: HttpRequestTypesEnum.GET,
                         parseModel: HomeModel());
 
-                print("gelen home modeli : " + homeModel.toString());
+                print("gelen home modeli : " + (homeModel.data as HomeModel).toString());
               },
               child: Text("dene")),
           //  buildRaisedButtonLogin(context, value),
