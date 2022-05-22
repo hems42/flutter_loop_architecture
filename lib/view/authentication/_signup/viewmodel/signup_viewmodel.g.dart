@@ -6,10 +6,11 @@ part of 'signup_viewmodel.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SingupViewModel on _SingupViewModelBase, Store {
-  final _$isLoadingAtom = Atom(name: '_SingupViewModelBase.isLoading');
+  late final _$isLoadingAtom =
+      Atom(name: '_SingupViewModelBase.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -24,7 +25,8 @@ mixin _$SingupViewModel on _SingupViewModelBase, Store {
     });
   }
 
-  final _$isLockOpenAtom = Atom(name: '_SingupViewModelBase.isLockOpen');
+  late final _$isLockOpenAtom =
+      Atom(name: '_SingupViewModelBase.isLockOpen', context: context);
 
   @override
   bool get isLockOpen {
@@ -39,15 +41,16 @@ mixin _$SingupViewModel on _SingupViewModelBase, Store {
     });
   }
 
-  final _$signupAsyncAction = AsyncAction('_SingupViewModelBase.signup');
+  late final _$signupAsyncAction =
+      AsyncAction('_SingupViewModelBase.signup', context: context);
 
   @override
   Future<SignupResponseModel> signup() {
     return _$signupAsyncAction.run(() => super.signup());
   }
 
-  final _$_SingupViewModelBaseActionController =
-      ActionController(name: '_SingupViewModelBase');
+  late final _$_SingupViewModelBaseActionController =
+      ActionController(name: '_SingupViewModelBase', context: context);
 
   @override
   void isLoadingChange() {

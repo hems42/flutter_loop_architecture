@@ -84,7 +84,7 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
           requestOption.headers['Authorization'] = 'Bearer ${await cacheService.getAccessToken()}';
           return handler.next(requestOption);
         },
-        onResponse: (response, handler) {}));
+    ));
   }
 
   @override
@@ -158,7 +158,7 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     final refreshToken = await cacheService.getRefreshToken();
     if (refreshToken != null) {
       final response = await _dio
-          .post(refreshTokenUrl, data: {'refreshToken': refreshToken});
+          .get(refreshTokenUrl+"?refreshToken=$refreshToken");
 
       if (response.statusCode == 201) {
         accessToken = response.data;

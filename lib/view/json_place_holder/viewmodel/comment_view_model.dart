@@ -7,11 +7,11 @@ part 'comment_view_model.g.dart';
 class CommentViewModel = _CommentViewModelBase with _$CommentViewModel;
 
 abstract class _CommentViewModelBase with Store, IBaseViewModel {
-  late BuildContext context;
+  late BuildContext _context;
   late JsonPlaceHolderService service;
 
   @override
-  void setContext(BuildContext context) => this.context = context;
+  void setContext(BuildContext context) => this._context = context;
   @override
   void init() {
     service = JsonPlaceHolderService();

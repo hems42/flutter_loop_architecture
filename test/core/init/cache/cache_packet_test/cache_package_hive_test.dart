@@ -23,6 +23,20 @@ void main() {
     await box.close();
   });
 
+  test("tüm kayıtlar cachemanagar hive", () async {
+    ICacheManager cacheService = CacheManagerOfHive.instance!;
+
+    await cacheService.ensureInit();
+  /*   var d = await cacheService.saveAccesToken("access token",
+        email: "enflasyon@enflasyon"); */
+
+    var b = await cacheService.getAccessToken(checkEmail: (email) {
+      print("gelen email adresi : " + email.toString());
+    });
+
+    print("gelen token : " + b.toString());
+  });
+
   test("access token", () async {
     ICacheManager cacheService = CacheManagerOfHive.instance!;
     var d = await cacheService.saveAccesToken("access token",
@@ -49,7 +63,7 @@ void main() {
   });
 
   test("refresh token", () async {
-     ICacheManager cacheService = CacheManagerOfHive.instance!;
+    ICacheManager cacheService = CacheManagerOfHive.instance!;
     var d = await cacheService.saveRefreshToken("refresh token",
         email: "enflasyon@enflasyon");
 

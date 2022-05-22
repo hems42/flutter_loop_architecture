@@ -20,14 +20,14 @@ abstract class _SingupViewModelBase with Store, IBaseViewModel {
   late final ISignupCacheService _signupCacheService;
   late final ISignupNetworkService _signupNetworkService;
 
-  late BuildContext context;
+  late BuildContext _context;
 
   TextEditingController? usernameController;
   TextEditingController? emailController;
   TextEditingController? passwordController;
 
   @override
-  void setContext(BuildContext context) => this.context = context;
+  void setContext(BuildContext context) => this._context = context;
 
   @override
   void init() {

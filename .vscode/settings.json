@@ -12,6 +12,19 @@
             "database": "notebook",
             "username": "d",
             "password": "d"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "94.73.150.250",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "mysql_natro",
+            "database": "db5C3",
+            "username": "user5C3",
+            "password": "TELznmh35nMZE3X"
         }
     ]
 }

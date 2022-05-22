@@ -13,7 +13,7 @@ class SignupNetworkService extends ISignupNetworkService {
           .send<SignupResponseModel, SignupResponseModel>(signupUrl,
               type: HttpRequestTypesEnum.POST,
               parseModel: SignupResponseModel(),
-              data: signupRequestModel);
+              data: signupRequestModel.toJson());
 
       if (response.data is SignupResponseModel) {
         return response.data;

@@ -3,10 +3,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_notebook/core/base/model/concrete/error_response_model.dart';
+import 'package:flutter_notebook/core/constant/enum/network/http_request_types_enum.dart';
 import 'package:flutter_notebook/core/constant/static/app/application_statics.dart';
 import 'package:flutter_notebook/core/init/cache/concrete/hive/cache_manager_hive.dart';
 import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
 import 'package:flutter_notebook/view/authentication/_signup/model/signup_request_model.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/signup_response_model.dart';
 import 'package:flutter_notebook/view/authentication/_signup/service/concrete/signup_cache_service.dart';
 import 'package:flutter_notebook/view/authentication/_signup/service/concrete/signup_network_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -89,20 +91,39 @@ void main() {
   });
 
   test("fgfg", () async {
-  var a = await CacheManagerOfHive.instance!.ensureInit();
-
-    SignupNetworkService networkService = SignupNetworkService();
+    var a = await CacheManagerOfHive.instance!.ensureInit();
     SingupCacheService cacheService = SingupCacheService();
+    SignupNetworkService networkService = SignupNetworkService();
+/* 
+    var signupResponse = await networkService.signup(SignupRequestModel(
+        eMail: "12mopi@mopi", userNickName: "12mopi", password: "mopi"));
 
-    /* var signupResponse = await networkService.signup(SignupRequestModel(
-        eMail: "mopi@mopi", userNickName: "mopi", password: "mopi")); */
+    print("gelen response :" + signupResponse.toString());
     var accesTokenSaved = await cacheService.saveAccesToken(
         "signupResponse!.accessToken.toString()",
         email: "signupResponse.email");
 
     var refreshTokenSaved = await cacheService.saveRefreshToken(
         "signupResponse.refreshToken.toString()",
-        email: "signupResponse.email");
+        email: "signupResponse.email"); */
+    print("gelen token : " + await cacheService.getAccessToken().toString());
+  });
+
+  test("kjdfjfdkl", () async {
+    //  var b = await CacheManagerOfHive.instance!.ensureInit();
+    var a = await NetworkManagerOfDio.instance!
+        .send<SignupResponseModel, SignupResponseModel>(
+            ApplicationConstants.SIGN_UP_URL,
+            type: HttpRequestTypesEnum.POST,
+            parseModel: SignupResponseModel(),
+            data: SignupRequestModel(
+                    eMail: "7mopi@mopi",
+                    userNickName: "7mopi",
+                    password: "mopi")
+                .toJson());
+
+    print("gelen tokenlar : " +
+        (a.data as SignupResponseModel).accessToken.toString());
   });
 }
 

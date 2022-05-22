@@ -28,8 +28,8 @@ class CacheService implements ICacheService {
   }
 
   @override
-  ThemeTypesEnum getCurrentThme() {
-    return _manager.getCurrentThme();
+  ThemeTypesEnum getCurrentTheme() {
+    return _manager.getCurrentTheme();
   }
 
   // access token

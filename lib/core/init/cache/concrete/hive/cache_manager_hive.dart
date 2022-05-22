@@ -20,13 +20,13 @@ class CacheManagerOfHive with ICacheManager {
   @override
   Future<bool> ensureInit() async {
     if (!isInitialized) {
-     await initHive();
+      await initHive();
     }
     return Future.value(true);
   }
 
   @override
-  ThemeTypesEnum getCurrentThme() {
+  ThemeTypesEnum getCurrentTheme() {
     throw UnimplementedError();
   }
 
@@ -86,7 +86,7 @@ class CacheManagerOfHive with ICacheManager {
   }
 
   // acces token
- @override
+  @override
   Future<String?> getAccessToken({Function(String? email)? checkEmail}) async {
     var authenticationBox = await Hive.openBox(cacheAuthenticationName);
 
@@ -109,7 +109,7 @@ class CacheManagerOfHive with ICacheManager {
     await authenticationBox.close();
     return true;
   }
-  
+
   @override
   Future<bool> updateAccesToken(String accesToken, {String? email}) async {
     applyEmail(email);
@@ -149,12 +149,13 @@ class CacheManagerOfHive with ICacheManager {
     return result;
   }
 
-
   // util metods
 
   Future<void> initHive() async {
-    String cacheFoldePath = await getCacheFolderPath();
-    Hive.init(cacheFoldePath);
+
+    
+  /*   String cacheFoldePath = await getCacheFolderPath();
+    Hive.init(cacheFoldePath); */
     isInitialized = true;
   }
 

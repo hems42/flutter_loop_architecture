@@ -26,4 +26,6 @@ class ApplicationConstants {
   static const LOGOUT_URL = API_BASE_URL + "/authentication/logout";
   static const FORGET_PASSWORD_URL = "/authentication/_?";
   static const RESEND_EMAIL_URL = API_BASE_URL + "/authentication/_?";
+  static const DENE_HOME =
+      API_BASE_URL + "/users/dene_user";
 }

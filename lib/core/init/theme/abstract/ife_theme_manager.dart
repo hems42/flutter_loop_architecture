@@ -8,7 +8,7 @@ mixin IThemeManager implements IThemeService {
   final ICacheService getCacheService = CacheService.instance;
 
   ThemeData getCurrentThemeFromCache() {
-    return selectThemeFromAppThemeTypes(getCacheService.getCurrentThme());
+    return selectThemeFromAppThemeTypes(getCacheService.getCurrentTheme());
   }
 
   void updateSelectedThemeOnCache(ThemeTypesEnum type) {}

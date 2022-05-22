@@ -3,4 +3,5 @@ import '../../../core/init/cache/concrete/cache_service.dart';
 
 mixin ProductMixinCacheService {
   final ICacheService cacheService = CacheService.instance;
-}
+  
+  }

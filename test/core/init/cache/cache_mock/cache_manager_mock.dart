@@ -17,11 +17,10 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   }
 
   @override
-  ThemeTypesEnum getCurrentThme() {
+  ThemeTypesEnum getCurrentTheme() {
     // TODO: implement getCurrentThme
     throw UnimplementedError();
   }
-
 
   @override
   Future<bool> saveAccesToken(String AccesToken, {String? email}) {
@@ -48,12 +47,10 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   }
 
   @override
-  Future<bool> deleteAccesToken({String? email, checkEmail (String? email)?}) {
+  Future<bool> deleteAccesToken({String? email, checkEmail(String? email)?}) {
     // TODO: implement deleteAccesToken
     throw UnimplementedError();
   }
-
-  
 
   @override
   Future<String> getAccessTokenEmail({Function(String? email)? checkEmail}) {
@@ -66,15 +63,16 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
     // TODO: implement getAccessToken
     throw UnimplementedError();
   }
-  
+
   @override
   Future<String?> getRefreshToken({Function(String? email)? checkEmail}) {
     // TODO: implement getRefreshToken
     throw UnimplementedError();
   }
-  
+
   @override
-  Future<bool> deleteRefreshToken({String? email, Function(String? email)? checkEmail}) {
+  Future<bool> deleteRefreshToken(
+      {String? email, Function(String? email)? checkEmail}) {
     // TODO: implement deleteRefreshToken
     throw UnimplementedError();
   }

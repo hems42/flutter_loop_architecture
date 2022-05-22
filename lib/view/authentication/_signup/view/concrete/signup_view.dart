@@ -1,12 +1,28 @@
+// ignore_for_file: deprecated_member_use, unused_local_variable
+
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
+import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
+import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/home_model.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/home_model.dart';
+import 'package:flutter_notebook/view/authentication/_signup/model/signup_response_model.dart';
 import '../../../../../core/constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../core/constant/enum/navigation/navigation_pages_enum.dart';
+import '../../../../../core/constant/enum/network/http_request_types_enum.dart';
+import '../../../../../core/constant/static/app/application_statics.dart';
+import '../../../../../core/init/cache/concrete/hive/cache_manager_hive.dart';
 import '../../../../../core/init/navigation/concrete/navigation_service.dart';
 import '../../../../../core/base/view/concrete/base_widget.dart';
 import '../../../../../core/extension/string_extension.dart';
+import '../../model/home_model.dart';
+import '../../model/signup_request_model.dart';
+import '../../service/concrete/signup_cache_service.dart';
+import '../../service/concrete/signup_network_service.dart';
 import '../../viewmodel/signup_viewmodel.dart';
 
 class SignupView extends StatelessWidget {
@@ -59,6 +75,10 @@ class SignupView extends StatelessWidget {
           FlatButton(
               onPressed: () async {
                 var response = await value.signup();
+                print("gelen reponse access token :" +
+                    response.accessToken.toString());
+                print("gelen reponse refresh token :" +
+                    response.refreshToken.toString());
               },
               child: Text("signup", style: TextStyle(color: Colors.white)),
               color: Colors.red),
@@ -71,12 +91,32 @@ class SignupView extends StatelessWidget {
                     data: null,
                     selectedAnimation: NavigationAnimationsEnum.FADE);
               },
-              child: Text("goto not found")),
+              child: Text("Not Found!!!")),
           SizedBox(height: 20),
           FlatButton(
-              onPressed: () {
-                print(
-                    "işletim sistemi: " + Platform.operatingSystem.toString());
+              onPressed: () async {
+                var networkService = NetworkService.instance;
+                var cacheService = CacheService.instance;
+
+                var accessToken =
+                    await cacheService.getAccessToken(checkEmail: (email) {
+                  print("gelen email : " + email.toString());
+                });
+
+                var refreshToken =
+                    await cacheService.getRefreshToken(checkEmail: (email) {
+                  print("gelen email : " + email.toString());
+                });
+
+                print("acces token : " + accessToken.toString());
+                print("refresh token : " + refreshToken.toString());
+
+                var homeModel = await networkService
+                    .fetch<HomeModel, HomeModel>(ApplicationConstants.DENE_HOME,
+                        type: HttpRequestTypesEnum.GET,
+                        parseModel: HomeModel());
+
+                print("gelen home modeli : " + homeModel.toString());
               },
               child: Text("dene")),
           //  buildRaisedButtonLogin(context, value),
