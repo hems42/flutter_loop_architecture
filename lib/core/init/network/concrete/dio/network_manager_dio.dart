@@ -34,57 +34,30 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
-        onError: (error, handler) async {
-          var foundFlag = error.response!.headers.value("errorflag");
-          if (foundFlag == "true") {
-            var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
-                ErrorResponseModel(), error.response!.data);
-            model!.statusCode = error.response!.statusCode.toString();
-            error.type = DioErrorType.other;
-            error.error = model;
-          }
-          if (error.response?.statusCode == 401) {
-            if (await updateAccessToken() == true) {
-              var retryResponse =  await _retry(error.requestOptions, _dio);
+      onError: (error, handler) async {
+        var foundFlag = error.response!.headers.value("errorflag");
+        if (error.response?.statusCode == 401) {
+          if (await updateAccessToken() == true) {
+            var retryResponse = await _retry(error.requestOptions, _dio);
             return handler.resolve(retryResponse);
           } else {
             return handler.next(error);
           }
-          }
-
-
-           /*
-          if ((error.response?.statusCode == 401 &&
-          error.response?.data['message'] == "Invalid JWT")) {
-        if (await _storage.containsKey(key: 'refreshToken')) {
-          if (await refreshToken()) {
-            return handler.resolve(await _retry(error.requestOptions));
-          }
+        } else if (foundFlag == "true") {
+          var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
+              ErrorResponseModel(), error.response!.data);
+          model!.statusCode = error.response!.statusCode.toString();
+          error.type = DioErrorType.other;
+          error.error = model;
         }
-      }
-          //  return handler.next(error);
-          // print("gelen hata error : " + error.response!.data);
 
-
-      throw ErrorResponseModel(
-        statusCode: error.response!.statusCode.toString(),
-        errorCode: model!.errorCode,
-        errorDescription: model.errorDescription,
-        errorMessage: model.errorMessage,
-        timestamp: model.timestamp
-      );
-      */
-
-          handler.next(error);
-
-          //throw NotFoundException(ExceptionEventTypes.NOT_FOUND_USER);
-
-          //  throw ErrorResponseModel();
-        },
-        onRequest: (requestOption, handler) async {
-          requestOption.headers['Authorization'] = 'Bearer ${await cacheService.getAccessToken()}';
-          return handler.next(requestOption);
-        },
+        handler.next(error);
+      },
+      onRequest: (requestOption, handler) async {
+        requestOption.headers['Authorization'] =
+            'Bearer ${await cacheService.getAccessToken()}';
+        return handler.next(requestOption);
+      },
     ));
   }
 
@@ -152,26 +125,26 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     }
   }
 
-
-
   // util metod
   Future<bool> updateAccessToken() async {
     final refreshToken = await cacheService.getRefreshToken();
     if (refreshToken != null) {
-      IBaseResponseModel response 
-      = await fetch<RefreshTokenResponseModel,RefreshTokenResponseModel>
-          (refreshTokenUrl+"?refreshToken=$refreshToken",
-           type: HttpRequestTypesEnum.GET,
-          parseModel: RefreshTokenResponseModel());
+      IBaseResponseModel response =
+          await fetch<RefreshTokenResponseModel, RefreshTokenResponseModel>(
+              refreshTokenUrl + "?refreshToken=$refreshToken",
+              type: HttpRequestTypesEnum.GET,
+              parseModel: RefreshTokenResponseModel());
 
       if (response.success == true) {
         var refreshTokenResponse = response.data as RefreshTokenResponseModel;
-       await cacheService.saveAccesToken(refreshTokenResponse.accessToken.toString());
+        await cacheService
+            .saveAccesToken(refreshTokenResponse.accessToken.toString());
         return true;
       } else {
         await cacheService.deleteAccesToken();
         await cacheService.deleteRefreshToken();
-        return false;}
+        return false;
+      }
     } else {
       await cacheService.deleteAccesToken();
       await cacheService.deleteRefreshToken();
@@ -179,7 +152,8 @@ class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
     }
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions, Dio dio) async {
+  Future<Response<dynamic>> _retry(
+      RequestOptions requestOptions, Dio dio) async {
     final options = new Options(
       method: requestOptions.method,
       headers: requestOptions.headers,
