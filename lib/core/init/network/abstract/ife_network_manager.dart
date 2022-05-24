@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/constant/static/network/network_statics.dart';
+import '../../../constant/static/network/network_statics.dart';
+import '../../../util/workbench/core_manager_workbench.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../constant/static/app/application_statics.dart';
 import 'ife_network_service.dart';
@@ -21,10 +22,8 @@ mixin INetworkManager implements INetworService {
   //
 
   // util serviceses...
-  // ignore: prefer_typing_uninitialized_variables
-  var cacheService;
-  // ignore: prefer_typing_uninitialized_variables
-  var logService;
+  var cacheService = CoreManagerWorkBench.instance.cacheService;
+  var logService = CoreManagerWorkBench.instance.logService;
 
   // rule - connection properties...
   final double _connectionTimeOut = 50.0;
@@ -57,7 +56,6 @@ mixin INetworkManager implements INetworService {
   Function? onConnectionLostF;
   VoidCallback? onReConnectedV;
   Function? onReConnectedF;
-
   // util methods...
   R? responseParser<R, T>(IBaseNetworkModel model, dynamic data) {
     if (data is List) {

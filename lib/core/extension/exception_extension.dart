@@ -1,63 +1,14 @@
-import '../constant/enum/exception/exception_error_types_enum.dart';
-import '../constant/enum/exception/exception_event_types_enum.dart';
+import '../base/model/abstract/ife_base_exception_model.dart';
+import '../base/model/concrete/error_response_model.dart';
 
-extension ExtensionOfExceptionErrorTypes on ExceptionErrorTypes {
-  String get toErrorCode {
-    switch (this) {
-      case ExceptionErrorTypes.NOT_FOUND:
-        return "404";
-
-      default:
-        return "000";
-    }
-  }
-
-  String get toErrorTitle {
-    switch (this) {
-      case ExceptionErrorTypes.NOT_FOUND:
-        return "NOT_FOUND_EXCEPTION";
-
-      default:
-        return "EXCEPTION";
-    }
-  }
-  // to error code
-  // to error title
-  //
-
+extension ExtensionOfIBaseExceptionModel on IBaseExceptionModel {
+  String get errorBase => this.errorCode.toString().substring(0,4);
+  String get errorTopic => this.errorCode.toString().substring(4,7);
+  String get errorDetail => this.errorCode.toString().substring(7);
 }
 
-extension ExtensionOfExceptEventTypes on ExceptionEventTypes {
-  String get toErrorCode {
-    switch (this) {
-      case ExceptionEventTypes.NOT_FOUND_USER:
-        return "100";
-
-      default:
-        return "111";
-    }
-  }
-
-  String get toErrorName {
-    switch (this) {
-      case ExceptionEventTypes.NOT_FOUND_USER:
-        return "USER_";
-
-      default:
-        return "";
-    }
-  }
-
-  String get toErrorMessage {
-    switch (this) {
-      case ExceptionEventTypes.NOT_FOUND_USER:
-        return "not found user";
-
-      default:
-        return "";
-    }
-  }
-  // to error code
-  // to error message
-  //
+extension ExtensionOfErrorResponseModel on ErrorResponseModel {
+  String get errorBase => this.errorCode.toString().substring(0,4);
+  String get errorTopic => this.errorCode.toString().substring(4,7);
+  String get errorDetail => this.errorCode.toString().substring(7);
 }

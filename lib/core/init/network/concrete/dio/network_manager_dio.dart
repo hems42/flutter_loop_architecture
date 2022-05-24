@@ -2,7 +2,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_notebook/view/authentication/token_renew_managment/refresh_token_response_model.dart';
-import '../../../../util/mixin/core_mixin_cache_service.dart';
 import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
 import '../../../../constant/enum/network/http_request_types_enum.dart';
@@ -14,7 +13,7 @@ import '../../abstract/ife_network_manager.dart';
 
 part 'network_manager_dio_accesss_token_renew.dart';
 
-class NetworkManagerOfDio with INetworkManager, CoreMixinCacheService {
+class NetworkManagerOfDio with INetworkManager {
   String? accessToken;
 
   static NetworkManagerOfDio? _instance;

@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable
+/* // ignore_for_file: unused_local_variable
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -137,3 +137,4 @@ Future<Response<dynamic>> _retry(Dio dio, RequestOptions requestOptions) async {
       queryParameters: requestOptions.queryParameters,
       options: options);
 }
+ */
