@@ -38,29 +38,4 @@ mixin INavigationManager implements INavigationService {
   }
 
   PlatformTypesEnum? currentPlatform;
-
- /*  PlatformTypesEnum defineCurrentPlatfrom() {
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return PlatformTypesEnum.ANDROID;
-
-      case TargetPlatform.iOS:
-        return PlatformTypesEnum.IOS;
-
-      case TargetPlatform.windows:
-        return PlatformTypesEnum.WINDOWS;
-
-      case TargetPlatform.linux:
-        return PlatformTypesEnum.LINUX;
-
-      case TargetPlatform.fuchsia:
-        return PlatformTypesEnum.FUCHSIA;
-
-      case TargetPlatform.macOS:
-        return PlatformTypesEnum.MACOS;
-
-      default:
-        return PlatformTypesEnum.WEB;
-    }
-  } */
 }

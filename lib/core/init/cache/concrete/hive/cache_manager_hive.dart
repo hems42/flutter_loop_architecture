@@ -1,11 +1,13 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'package:flutter_notebook/core/util/mixin/core_mixin_platform_selector_service.dart';
+
 import '../../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../../constant/enum/theme/theme_types_enum.dart';
 import '../../abstract/ife_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class CacheManagerOfHive with ICacheManager {
+class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
   static CacheManagerOfHive? _instance;
   bool isInitialized = false;
   static CacheManagerOfHive? get instance {
@@ -152,9 +154,9 @@ class CacheManagerOfHive with ICacheManager {
   // util metods
 
   Future<void> initHive() async {
+    //getCachingPath(platformSelectorService);
 
-    
-  /*   String cacheFoldePath = await getCacheFolderPath();
+    /*   String cacheFoldePath = await getCacheFolderPath();
     Hive.init(cacheFoldePath); */
     isInitialized = true;
   }

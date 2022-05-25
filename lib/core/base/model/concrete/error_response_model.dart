@@ -39,8 +39,4 @@ class ErrorResponseModel extends IBaseNetworkModel {
         "timestamp : $timestamp";
   }
   
-  @override
-  // TODO: implement timeStamp
-  String get timeStamp => throw UnimplementedError();
-
 }

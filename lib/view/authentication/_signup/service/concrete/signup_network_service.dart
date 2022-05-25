@@ -21,6 +21,7 @@ class SignupNetworkService extends ISignupNetworkService {
         return null;
       }
     } on ErrorResponseModel catch (e) {
+   
       print("serviste patlayan hata : " + e.toString());
     }
   }

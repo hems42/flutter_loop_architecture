@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../constant/static/app/application_statics.dart';
+import '../../stuff/platform_selector/abstract/ife_platform_selector_service.dart';
 import 'ife_cache_service.dart';
 
 mixin ICacheManager implements ICacheService {
@@ -18,7 +20,12 @@ mixin ICacheManager implements ICacheService {
 
   get currentEmail => _currentEmail;
 
-  // util document path
+String? getCachingPath(IPlatformSelectorService platformSelectorService){
+  if(platformSelectorService.getCurrentPlatform()!=PlatformTypesEnum.WEB){
+
+  }
+}
+
 
   Future<String> getCacheFolderPath() async {
     Directory document = await getApplicationDocumentsDirectory();
