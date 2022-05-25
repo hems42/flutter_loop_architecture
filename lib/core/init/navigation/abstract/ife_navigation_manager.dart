@@ -1,6 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_notebook/core/init/stuff/platform_selector/concrete/platform_selector_service.dart';
-import 'package:flutter_notebook/core/util/workbench/core_manager_workbench.dart';
 import '../../../constant/enum/system/platform_types_enum.dart';
 import '../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../constant/enum/navigation/navigation_pages_enum.dart';
