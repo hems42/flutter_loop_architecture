@@ -1,22 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/view/authentication/login/view/login_view.dart';
+import '../../../../../view/authentication/login/view/login_view.dart';
 import '../../../../constant/enum/system/platform_types_enum.dart';
 import '../../../../../view/util/view/not_found_page.dart';
 import '../../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../view/authentication/_signup/view/concrete/signup_view.dart';
 import '../../../../constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../../constant/static/navigation/navigation_statics.dart';
+import '../../../../util/mixin/core_mixin_platform_selector_service.dart';
 import '../../abstract/ife_navigation_manager.dart';
 
-part 'navigation_manager_core_animations.dart';
+part 'navigation_manager_stock_animations.dart';
 
-class NavigationManagerOfCore with INavigationManager {
-  static final NavigationManagerOfCore _instance =
-  NavigationManagerOfCore._init();
-  static NavigationManagerOfCore get instance => _instance;
-  NavigationManagerOfCore._init() {
-    currentPlatform = defineCurrentPlatfrom();
+class NavigationManagerOfStock with INavigationManager, CoreMixinPlatformSelectorService {
+  static final NavigationManagerOfStock _instance =
+  NavigationManagerOfStock._init();
+  static NavigationManagerOfStock get instance => _instance;
+  NavigationManagerOfStock._init() {
+    currentPlatform = platformSelectorService.getCurrentPlatform();
     if (currentPlatform == null) {
       currentPlatform = PlatformTypesEnum.UNDEFINED;
     }

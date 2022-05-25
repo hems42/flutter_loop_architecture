@@ -1,8 +1,8 @@
+import 'stock_navigation/navigation_manager_stock.dart';
 import '../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../constant/enum/navigation/navigation_manager_types_enum.dart';
 import '../abstract/ife_navigation_service.dart';
-import 'core_navigation/navigation_manager_core.dart';
 import '../abstract/ife_navigation_manager.dart';
 
 class NavigationService implements INavigationService {
@@ -10,15 +10,15 @@ class NavigationService implements INavigationService {
   late final INavigationManager _manager;
   static NavigationService get instance => _instance;
   NavigationService._init() {
-    _manager = _selectManager(NavigationManagerTypesEnum.CORE_NAVIGATION);
+    _manager = _selectManager(NavigationManagerTypesEnum.STOCK_NAVIGATION);
   }
 
   INavigationManager _selectManager(NavigationManagerTypesEnum types) {
     switch (types) {
-      case NavigationManagerTypesEnum.CORE_NAVIGATION:
-        return NavigationManagerOfCore.instance;
+      case NavigationManagerTypesEnum.STOCK_NAVIGATION:
+        return NavigationManagerOfStock.instance;
       default:
-        return NavigationManagerOfCore.instance;
+        return NavigationManagerOfStock.instance;
     }
   }
 

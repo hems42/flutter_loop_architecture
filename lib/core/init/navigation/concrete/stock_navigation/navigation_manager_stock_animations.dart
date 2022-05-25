@@ -1,5 +1,5 @@
 // ignore_for_file: unused_element, unused_field
-part of "navigation_manager_core.dart";
+part of 'navigation_manager_stock.dart';
 
 PageRouteBuilder createPageRoute(Widget page,
     {RouteSettings? settings,

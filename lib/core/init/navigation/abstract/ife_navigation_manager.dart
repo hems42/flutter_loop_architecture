@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_notebook/core/init/stuff/platform_selector/concrete/platform_selector_service.dart';
+import 'package:flutter_notebook/core/util/workbench/core_manager_workbench.dart';
 import '../../../constant/enum/system/platform_types_enum.dart';
 import '../../../constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../constant/enum/navigation/navigation_pages_enum.dart';
@@ -6,11 +8,11 @@ import '../../../constant/static/navigation/navigation_statics.dart';
 import 'ife_navigation_service.dart';
 
 mixin INavigationManager implements INavigationService {
- NavigationAnimationsEnum? _selectedAnimation;
+
+  NavigationAnimationsEnum? _selectedAnimation;
   get selectedAnimation => _selectedAnimation;
 
-  void updateSelectedAnimation(NavigationAnimationsEnum? selectedAnimation) 
-  {
+  void updateSelectedAnimation(NavigationAnimationsEnum? selectedAnimation) {
     _selectedAnimation = null;
     _selectedAnimation = selectedAnimation;
   }
@@ -40,7 +42,7 @@ mixin INavigationManager implements INavigationService {
 
   PlatformTypesEnum? currentPlatform;
 
-  PlatformTypesEnum defineCurrentPlatfrom() {
+ /*  PlatformTypesEnum defineCurrentPlatfrom() {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return PlatformTypesEnum.ANDROID;
@@ -63,5 +65,5 @@ mixin INavigationManager implements INavigationService {
       default:
         return PlatformTypesEnum.WEB;
     }
-  }
+  } */
 }

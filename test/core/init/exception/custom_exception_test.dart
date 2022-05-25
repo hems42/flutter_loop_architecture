@@ -1,7 +1,7 @@
 import 'package:flutter_notebook/core/constant/enum/exception/exception_event_types_enum.dart';
 import 'package:flutter_notebook/core/constant/static/exception/exception_error_code_statics.dart';
 import 'package:flutter_notebook/core/extension/exception_extension.dart';
-import 'package:flutter_notebook/core/init/exception/concrete/exception_models/not_found_exception.dart';
+import 'package:flutter_notebook/core/init/exception/exception_models/not_found_exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

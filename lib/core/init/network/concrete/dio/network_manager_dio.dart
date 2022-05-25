@@ -1,21 +1,18 @@
 // ignore_for_file: unused_field, unused_element
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter_notebook/view/authentication/token_renew_managment/refresh_token_response_model.dart';
+import '../../../../../view/authentication/token_renew_managment/refresh_token_response_model.dart';
 import '../../../../base/model/concrete/error_response_model.dart';
 import '../../../../base/model/concrete/response_model.dart';
 import '../../../../constant/enum/network/http_request_types_enum.dart';
-import '../../../../extension/network_extension.dart';
 import '../../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../../base/model/abstract/ife_base_response_model.dart';
 import '../../../../base/model/concrete/error_model.dart';
 import '../../abstract/ife_network_manager.dart';
 
-part 'network_manager_dio_accesss_token_renew.dart';
-
 class NetworkManagerOfDio with INetworkManager {
   String? accessToken;
-
+  String? currentEmail;
   static NetworkManagerOfDio? _instance;
   late final Dio _dio;
 
@@ -26,15 +23,14 @@ class NetworkManagerOfDio with INetworkManager {
 
   NetworkManagerOfDio._init() {
     _dio = Dio();
-    //  _dio.options.baseUrl = baseUrl;
-    //_dio.options.connectTimeout = connectionTimeOut;
-    //_dio.options.receiveTimeout = receivingTimeOut;
+    _dio.options.baseUrl = baseUrl;
+    _dio.options.connectTimeout = connectionTimeOut;
+    _dio.options.receiveTimeout = receivingTimeOut;
 
     cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
       onError: (error, handler) async {
-        var foundFlag = error.response!.headers.value("errorflag");
         if (error.response?.statusCode == 401) {
           if (await updateAccessToken() == true) {
             var retryResponse = await _retry(error.requestOptions, _dio);
@@ -42,7 +38,7 @@ class NetworkManagerOfDio with INetworkManager {
           } else {
             return handler.next(error);
           }
-        } else if (foundFlag == "true") {
+        } else if (error.response!.headers.value("errorflag") == "true") {
           var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
               ErrorResponseModel(), error.response!.data);
           model!.statusCode = error.response!.statusCode.toString();
@@ -104,7 +100,7 @@ class NetworkManagerOfDio with INetworkManager {
           void Function(int p1, int p2)? onReceiveProgress}) async {
     try {
       final response = await _dio.request(path,
-          data: data, options: Options(method: type.toMethod));
+          data: data, options: Options(method: type.name));
 
       switch (response.statusCode) {
         case HttpStatus.ok:
@@ -126,7 +122,8 @@ class NetworkManagerOfDio with INetworkManager {
 
   // util metod
   Future<bool> updateAccessToken() async {
-    final refreshToken = await cacheService.getRefreshToken();
+    final refreshToken = await cacheService
+    .getRefreshToken(checkEmail: (email) => currentEmail = email);
     if (refreshToken != null) {
       IBaseResponseModel response =
           await fetch<RefreshTokenResponseModel, RefreshTokenResponseModel>(
@@ -140,13 +137,13 @@ class NetworkManagerOfDio with INetworkManager {
             .saveAccesToken(refreshTokenResponse.accessToken.toString());
         return true;
       } else {
-        await cacheService.deleteAccesToken();
-        await cacheService.deleteRefreshToken();
+        await cacheService.deleteAccesToken(email: currentEmail);
+        await cacheService.deleteRefreshToken(email: currentEmail);
         return false;
       }
     } else {
-      await cacheService.deleteAccesToken();
-      await cacheService.deleteRefreshToken();
+      await cacheService.deleteAccesToken(email: currentEmail);
+      await cacheService.deleteRefreshToken(email: currentEmail);
       return false;
     }
   }

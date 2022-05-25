@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
+import 'package:flutter_notebook/core/init/log/concrete/log_service.dart';
 import '../../../constant/static/network/network_statics.dart';
 import '../../../util/workbench/core_manager_workbench.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
@@ -8,7 +10,6 @@ import 'ife_network_service.dart';
 mixin INetworkManager implements INetworService {
   // ignore: todo
   // TODO List :
-  // - token resfresh mechanism
   // - internet connection checking management
   // - request encode
   // - response decode
@@ -22,12 +23,12 @@ mixin INetworkManager implements INetworService {
   //
 
   // util serviceses...
-  var cacheService = CoreManagerWorkBench.instance.cacheService;
-  var logService = CoreManagerWorkBench.instance.logService;
+  var cacheService = CoreManagerWorkBench.instance.cacheService as CacheService;
+  var logService = CoreManagerWorkBench.instance.logService as LogService;
 
   // rule - connection properties...
-  final double _connectionTimeOut = 50.0;
-  final double _receivingTimeOut = 3.0;
+  final double _connectionTimeOut = 30.0;
+  final double _receivingTimeOut = 5.0;
 
   // base url - paths
   final String _baseUrl = ApplicationConstants.API_BASE_URL;
