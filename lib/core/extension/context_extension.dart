@@ -1,6 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import '../base/model/abstract/ife_base_theme_model.dart';
+import '../util/workbench/core_service_workbench.dart';
 
 extension ContextExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
@@ -18,6 +19,8 @@ extension MediaQueryExtension on BuildContext {
 
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
+  IBaseThemeModel  get themeModel => CoreServiceWorkBench.themeService.themeModel;
+  ThemeData  get themeStockModel => CoreServiceWorkBench.themeService.getStockTheme;
   TextTheme get textTheme => theme.textTheme;
   ColorScheme get colors => theme.colorScheme;
 }

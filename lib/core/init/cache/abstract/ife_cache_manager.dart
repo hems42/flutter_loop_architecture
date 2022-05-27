@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
+import '../../../constant/enum/system/platform_types_enum.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../constant/static/app/application_statics.dart';

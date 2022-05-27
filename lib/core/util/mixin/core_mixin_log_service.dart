@@ -1,6 +1,6 @@
 import '../../init/log/abstract/ife_log_service.dart';
-import '../../init/log/concrete/log_service.dart';
+import '../workbench/core_service_workbench.dart';
 
 mixin CoreMixinLogService {
-  final ILogService logService = LogService.instance;
+  final ILogService logService = CoreServiceWorkBench.logService;
 }

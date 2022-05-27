@@ -10,11 +10,9 @@ class ThemeManagerOfNotifier extends ChangeNotifier with IThemeManager {
     return _instance!;
   }
 
-  ThemeManagerOfNotifier._init();
-
-  @override
-  ThemeData get theme {
-    return getCurrentThemeFromCache();
+  ThemeManagerOfNotifier._init() {
+    currentTheme = getCurrentThemeFromCache();
+    currentStockTheme = ThemeData();
   }
 
   @override
@@ -24,6 +22,8 @@ class ThemeManagerOfNotifier extends ChangeNotifier with IThemeManager {
   }
 
   @override
-  // TODO: implement themeModel
-  IBaseThemeModel get themeModel => throw UnimplementedError();
+  IBaseThemeModel get themeModel => currentTheme;
+
+  @override
+  ThemeData get getStockTheme => currentStockTheme;
 }

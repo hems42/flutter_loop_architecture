@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notebook/core/extension/context_extension.dart';
 import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
 import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
 import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
@@ -118,7 +119,9 @@ class SignupView extends StatelessWidget {
 
                 print("gelen home modeli : " + (homeModel.data as HomeModel).toString());
               },
-              child: Text("dene")),
+              child: Text("dene", style: TextStyle(
+              
+              ),)),
           //  buildRaisedButtonLogin(context, value),
           // buildWrapForgot(),
           Spacer(),

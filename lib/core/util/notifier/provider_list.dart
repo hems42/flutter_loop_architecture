@@ -1,4 +1,4 @@
-import '../../init/theme/concrete/theme_notifier/theme_manager_notifier.dart';
+import '../../init/theme/concrete/notifier/theme_manager_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

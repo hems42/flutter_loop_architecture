@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
-import 'package:flutter_notebook/core/init/log/concrete/log_service.dart';
 import '../../../constant/static/network/network_statics.dart';
-import '../../../util/workbench/core_manager_workbench.dart';
+import '../../../util/workbench/core_service_workbench.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
 import '../../../constant/static/app/application_statics.dart';
 import 'ife_network_service.dart';
@@ -23,8 +21,8 @@ mixin INetworkManager implements INetworService {
   //
 
   // util serviceses...
-  var cacheService = CoreManagerWorkBench.instance.cacheService as CacheService;
-  var logService = CoreManagerWorkBench.instance.logService as LogService;
+  var cacheService = CoreServiceWorkBench.cacheService;
+  var logService = CoreServiceWorkBench.logService;
 
   // rule - connection properties...
   final double _connectionTimeOut = 30.0;
