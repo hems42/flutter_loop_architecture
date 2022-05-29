@@ -31,13 +31,17 @@ class NetworkManagerOfDio with INetworkManager {
     cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
+
       onError: (error, handler) async {
         if (error.response?.statusCode == 401) {
-          if (await updateAccessToken() == true) {
-            var retryResponse = await _retry(error.requestOptions, _dio);
-            return handler.resolve(retryResponse);
-          } else {
-            return handler.next(error);
+
+          for (int i = 0; i <= updateAccessTokenRefreshRetryTime; i++) {
+            if (await updateAccessToken() == true) {
+              var retryResponse = await _retry(error.requestOptions, _dio);
+              return handler.resolve(retryResponse);
+            } else {
+              return handler.next(error);
+            }
           }
         } else if (error.response!.headers.value("errorflag") == "true") {
           var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
@@ -50,12 +54,12 @@ class NetworkManagerOfDio with INetworkManager {
         handler.next(error);
       },
       onRequest: (requestOption, handler) async {
-        if(!duringUpdateAccessToken) {
-            requestOption.headers['Authorization'] =
-            'Bearer ${await cacheService.getAccessToken()}';
-        return handler.next(requestOption);
+        if (!duringUpdateAccessToken) {
+          requestOption.headers['Authorization'] =
+              'Bearer ${await cacheService.getAccessToken()}';
+          return handler.next(requestOption);
         }
-      return handler.next(requestOption);
+        return handler.next(requestOption);
       },
     ));
   }

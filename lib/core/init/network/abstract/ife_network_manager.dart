@@ -34,6 +34,9 @@ mixin INetworkManager implements INetworService {
   // local directory paths
   final String _baseLocalDirectory = "";
 
+  // acces token refesh retry time number
+  int updateAccessTokenRefreshRetryTime = 3;
+
   get baseUrl => _baseUrl;
 
   get refreshTokenUrl => NetworkConstants.REFRESH_TOKEN_URL;
