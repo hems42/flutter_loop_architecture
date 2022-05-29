@@ -1,3 +1,4 @@
+import '../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../constant/enum/cache/cache_manager_types_enum.dart';
 import '../../../constant/enum/theme/theme_types_enum.dart';
 import 'hive/cache_manager_hive.dart';
@@ -72,5 +73,29 @@ class CacheService implements ICacheService {
   @override
   Future<bool> updateRefreshToken(String refreshToken, {String? email}) {
     return _manager.updateRefreshToken(refreshToken, email: email);
+  }
+
+  @override
+  Future deleteValue(CachingKeysEnum cachingKey, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement deleteValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getValue(CachingKeysEnum cachingKey, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement getValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future saveValue(CachingKeysEnum cachingKey, valueForSave, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement saveValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateValue(CachingKeysEnum cachingKey, valueForSave, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement updateValue
+    throw UnimplementedError();
   }
 }

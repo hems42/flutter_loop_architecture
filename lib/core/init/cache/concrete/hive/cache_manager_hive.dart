@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
+import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
 
-import 'package:flutter_notebook/core/util/mixin/core_mixin_platform_selector_service.dart';
-
+import '../../../../util/mixin/core_mixin_platform_selector_service.dart';
 import '../../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../../constant/enum/theme/theme_types_enum.dart';
 import '../../abstract/ife_cache_manager.dart';
@@ -151,13 +151,44 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
     return result;
   }
 
+  @override
+  Future deleteValue(CachingKeysEnum cachingKey,
+      {String? cacheTopic, cacheUtil}) {
+    // TODO: implement deleteValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getValue(CachingKeysEnum cachingKey, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement getValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future saveValue(CachingKeysEnum cachingKey, valueForSave,
+      {String? cacheTopic, cacheUtil}) async {
+    var cacheBox = await Hive.openBox(cacheTopic ??= "");
+    await cacheBox.put(cachingKey.name, valueForSave);
+    
+  }
+
+  @override
+  Future updateValue(CachingKeysEnum cachingKey, valueForSave,
+      {String? cacheTopic, cacheUtil}) {
+    // TODO: implement updateValue
+    throw UnimplementedError();
+  }
+
   // util metods
 
   Future<void> initHive() async {
-    //getCachingPath(platformSelectorService);
-
-    /*   String cacheFoldePath = await getCacheFolderPath();
-    Hive.init(cacheFoldePath); */
+/*
+   if(platformSelectorService.getCurrentPlatform()!= PlatformTypesEnum.WEB) {
+       getCachingPath(platformSelectorService);
+       String cacheFoldePath = await getCacheFolderPath();
+      Hive.init(cacheFoldePath); 
+   }    
+   */
     isInitialized = true;
   }
 

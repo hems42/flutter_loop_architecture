@@ -1,3 +1,5 @@
+import 'package:flutter_notebook/core/constant/enum/cache/caching_keys_enum.dart';
+
 import '../../../constant/enum/theme/theme_types_enum.dart';
 
 abstract class ICacheService {
@@ -15,18 +17,14 @@ abstract class ICacheService {
   Future<bool> saveRefreshToken(String refreshToken, {String? email});
   Future<bool> updateRefreshToken(String refreshToken, {String? email});
 
-  // acces token save
-
-  // refresh token
-
-  // settings
-
-  // init settings
-
-  // save models
-
-  // save personel inf
-
-  // hash-encode data
+  // general value
+  Future<dynamic> getValue(CachingKeysEnum cachingKey,
+   {String? cacheTopic, dynamic cacheUtil});
+  Future<dynamic> deleteValue(CachingKeysEnum cachingKey,
+   {String? cacheTopic, dynamic cacheUtil});
+  Future<dynamic> saveValue(CachingKeysEnum cachingKey, dynamic valueForSave,
+   {String? cacheTopic, dynamic cacheUtil});
+  Future<dynamic> updateValue(CachingKeysEnum cachingKey, dynamic valueForSave,
+   {String? cacheTopic, dynamic cacheUtil});
 
 }

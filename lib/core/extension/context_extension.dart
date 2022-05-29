@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
 import '../base/model/abstract/ife_base_theme_model.dart';
 import '../util/workbench/core_service_workbench.dart';
 
@@ -59,3 +60,4 @@ extension DurationExtension on BuildContext {
   Duration get lowDuration => Duration(milliseconds: 500);
   Duration get normalDuration => Duration(seconds: 1);
 }
+

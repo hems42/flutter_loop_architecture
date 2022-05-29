@@ -10,7 +10,9 @@ mixin ICacheManager implements ICacheService {
   final String cacheFoldername = ApplicationConstants.CACHE_FOLDER_NAME;
   final String cacheAuthenticationName =
       ApplicationConstants.CACHE_AUTHENTICATION_NAME;
-
+  final String cacheSettingsName = ApplicationConstants.CACHE_SETTINGS;
+  final String cacheSettingsSelectedLanguageType = "selected_language";
+  final String cacheSettingsSelectedThemeType = "selected_theme";
   String? _currentEmail;
 
   setCurrentEmail(String? email) {
@@ -20,12 +22,11 @@ mixin ICacheManager implements ICacheService {
 
   get currentEmail => _currentEmail;
 
-String? getCachingPath(IPlatformSelectorService platformSelectorService){
-  if(platformSelectorService.getCurrentPlatform()!=PlatformTypesEnum.WEB){
-
+  String? getCachingPath(IPlatformSelectorService platformSelectorService) {
+    if (platformSelectorService.getCurrentPlatform() !=
+        PlatformTypesEnum.WEB) {}
+    return null;
   }
-}
-
 
   Future<String> getCacheFolderPath() async {
     Directory document = await getApplicationDocumentsDirectory();

@@ -31,15 +31,16 @@ class NetworkManagerOfDio with INetworkManager {
     cacheService.getAccessToken().then((value) => accessToken = value);
 
     _dio.interceptors.add(QueuedInterceptorsWrapper(
-
       onError: (error, handler) async {
         if (error.response?.statusCode == 401) {
-
           for (int i = 0; i <= updateAccessTokenRefreshRetryTime; i++) {
             if (await updateAccessToken() == true) {
               var retryResponse = await _retry(error.requestOptions, _dio);
               return handler.resolve(retryResponse);
             } else {
+              if (duringUpdateAccessToken == 3) {
+                break;
+              }
               return handler.next(error);
             }
           }

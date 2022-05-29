@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_notebook/core/init/navigation/concrete/stock_navigation/navigation_manager_stock.dart';
+import 'core/init/navigation/concrete/stock_navigation/navigation_manager_stock.dart';
 import 'view/authentication/_signup/view/concrete/signup_view.dart';
 import 'core/constant/static/app/application_statics.dart';
 Future<void> main() async {
@@ -11,7 +11,7 @@ Future<void> main() async {
   runApp(EasyLocalization(
       path: ApplicationConstants.LANG_ASSET_PATH,
       supportedLocales: const [Locale("en", "US")],
-      startLocale: const Locale("en", "US"),
+      startLocale: const Locale("tr", "TR"),
       assetLoader: JsonAssetLoader(),
       child: const MyApp()));
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../init/lang/concrete/easy_localization/locale_keys.g.dart';
 import 'package:mobx/mobx.dart';
 
 class BaseView<T extends Store> extends StatefulWidget {
@@ -6,6 +7,7 @@ class BaseView<T extends Store> extends StatefulWidget {
   final T viewModel;
   final Function(T model) onModelReady;
   final VoidCallback? onDispose;
+  
 
   const BaseView(
       {Key? key,
@@ -20,6 +22,7 @@ class BaseView<T extends Store> extends StatefulWidget {
 }
 
 class _BaseViewState<T extends Store> extends State<BaseView<T>> {
+
   late T model;
   @override
   void initState() {

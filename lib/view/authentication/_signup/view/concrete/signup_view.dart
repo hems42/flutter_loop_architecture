@@ -1,29 +1,16 @@
-// ignore_for_file: deprecated_member_use, unused_local_variable
-
-import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_notebook/core/extension/context_extension.dart';
-import 'package:flutter_notebook/core/init/cache/concrete/cache_service.dart';
-import 'package:flutter_notebook/core/init/network/concrete/dio/network_manager_dio.dart';
-import 'package:flutter_notebook/core/init/network/concrete/network_service.dart';
-import 'package:flutter_notebook/view/authentication/_signup/model/home_model.dart';
-import 'package:flutter_notebook/view/authentication/_signup/model/home_model.dart';
-import 'package:flutter_notebook/view/authentication/_signup/model/signup_response_model.dart';
+import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
+import '../../../../../core/init/cache/concrete/cache_service.dart';
+import '../../../../../core/init/network/concrete/network_service.dart';
+import '../../model/home_model.dart';
 import '../../../../../core/constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../core/constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../../../core/constant/enum/network/http_request_types_enum.dart';
 import '../../../../../core/constant/static/app/application_statics.dart';
-import '../../../../../core/init/cache/concrete/hive/cache_manager_hive.dart';
 import '../../../../../core/init/navigation/concrete/navigation_service.dart';
 import '../../../../../core/base/view/concrete/base_widget.dart';
 import '../../../../../core/extension/string_extension.dart';
-import '../../model/home_model.dart';
-import '../../model/signup_request_model.dart';
-import '../../service/concrete/signup_cache_service.dart';
-import '../../service/concrete/signup_network_service.dart';
 import '../../viewmodel/signup_viewmodel.dart';
 
 class SignupView extends StatelessWidget {
@@ -98,7 +85,7 @@ class SignupView extends StatelessWidget {
               onPressed: () async {
                 var networkService = NetworkService.instance;
                 var cacheService = CacheService.instance;
-              
+                          
                 var accessToken =
                     await cacheService.getAccessToken(checkEmail: (email) {
                   print("gelen email : " + email.toString());
@@ -119,7 +106,7 @@ class SignupView extends StatelessWidget {
 
                 print("gelen home modeli : " + (homeModel.data as HomeModel).toString());
               },
-              child: Text("dene", style: TextStyle(
+              child: Text(LocaleKeys.giris, style: TextStyle(
               
               ),)),
           //  buildRaisedButtonLogin(context, value),
