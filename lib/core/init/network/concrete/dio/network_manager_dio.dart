@@ -13,6 +13,7 @@ import '../../abstract/ife_network_manager.dart';
 class NetworkManagerOfDio with INetworkManager {
   String? accessToken;
   String? currentEmail;
+  bool duringUpdateAccessToken = false;
   static NetworkManagerOfDio? _instance;
   late final Dio _dio;
 
@@ -49,9 +50,12 @@ class NetworkManagerOfDio with INetworkManager {
         handler.next(error);
       },
       onRequest: (requestOption, handler) async {
-        requestOption.headers['Authorization'] =
+        if(!duringUpdateAccessToken) {
+            requestOption.headers['Authorization'] =
             'Bearer ${await cacheService.getAccessToken()}';
         return handler.next(requestOption);
+        }
+      return handler.next(requestOption);
       },
     ));
   }
@@ -122,9 +126,10 @@ class NetworkManagerOfDio with INetworkManager {
 
   // util metod
   Future<bool> updateAccessToken() async {
-    final refreshToken = await cacheService
-    .getRefreshToken(checkEmail: (email) => currentEmail = email);
+    final refreshToken = await cacheService.getRefreshToken(
+        checkEmail: (email) => currentEmail = email);
     if (refreshToken != null) {
+      duringUpdateAccessToken = true;
       IBaseResponseModel response =
           await fetch<RefreshTokenResponseModel, RefreshTokenResponseModel>(
               refreshTokenUrl + "?refreshToken=$refreshToken",
@@ -135,6 +140,7 @@ class NetworkManagerOfDio with INetworkManager {
         var refreshTokenResponse = response.data as RefreshTokenResponseModel;
         await cacheService
             .saveAccesToken(refreshTokenResponse.accessToken.toString());
+        duringUpdateAccessToken = false;
         return true;
       } else {
         await cacheService.deleteAccesToken(email: currentEmail);
