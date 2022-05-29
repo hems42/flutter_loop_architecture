@@ -29,28 +29,10 @@ class LanguageService implements ILanguageService {
     }
   }
 
-  void dene() {
-    print("lang servisi çalıştı");
-    _manager?.dene2();
-  }
 
   @override
-  getLanguageKeys() {
-    // TODO: implement getLanguageKeys
-    throw UnimplementedError();
-  }
+  void changeLangue(LanguageTypesEnum type) {}
 
   @override
-  List getUtilStuffOfLanguageService() {
-    return _manager!.getUtilStuffOfLanguageService();
-  }
-
-  @override
-  void changeLangue(LanguageTypesEnum type) {
-    // TODO: implement changeLangue
-  }
-
-  @override
-  // TODO: implement context
   BuildContext get context => _context;
 }
