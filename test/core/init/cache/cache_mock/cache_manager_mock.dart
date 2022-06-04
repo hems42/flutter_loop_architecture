@@ -1,3 +1,4 @@
+import 'package:flutter_notebook/core/constant/enum/cache/caching_keys_enum.dart';
 import 'package:flutter_notebook/core/constant/enum/theme/theme_types_enum.dart';
 import 'package:flutter_notebook/core/init/cache/abstract/ife_cache_manager.dart';
 
@@ -74,6 +75,30 @@ class CacheManagerMock extends ICoreMock with ICacheManager {
   Future<bool> deleteRefreshToken(
       {String? email, Function(String? email)? checkEmail}) {
     // TODO: implement deleteRefreshToken
+    throw UnimplementedError();
+  }
+
+  @override
+  Future deleteValue(CachingKeysEnum cachingKey, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement deleteValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getValue(CachingKeysEnum cachingKey, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement getValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future saveValue(CachingKeysEnum cachingKey, valueForSave, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement saveValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateValue(CachingKeysEnum cachingKey, valueForSave, {String? cacheTopic, cacheUtil}) {
+    // TODO: implement updateValue
     throw UnimplementedError();
   }
 }
