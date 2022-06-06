@@ -1,3 +1,11 @@
+import 'package:flutter_notebook/core/constant/enum/cache/cache_property_types_enum.dart';
+
+import 'package:flutter_notebook/core/constant/enum/cache/cache_metods_enum.dart';
+
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_cache_response_model.dart';
+
+import 'package:flutter_notebook/core/base/model/abstract/ife_base_cache_request_model.dart';
+
 import '../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../constant/enum/cache/cache_manager_types_enum.dart';
 import '../../../constant/enum/theme/theme_types_enum.dart';
@@ -96,6 +104,12 @@ class CacheService implements ICacheService {
   @override
   Future updateValue(CachingKeysEnum cachingKey, valueForSave, {String? cacheTopic, cacheUtil}) {
     // TODO: implement updateValue
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<IBaseCacheResponseModel> cacheModel(IBaseCacheRequestModel cacheRequestModel, {required CacheMethodsEnum cacheMetodEnum, CachingKeysEnum? cachingKey, CachePropertTypesEnum? cachePropertyType, String? cacheTopic}) {
+    // TODO: implement cacheModel
     throw UnimplementedError();
   }
 }

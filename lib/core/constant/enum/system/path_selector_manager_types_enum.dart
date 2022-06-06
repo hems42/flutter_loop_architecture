@@ -1,3 +1,1 @@
-enum PathSelectorManagerTypesEnum {
-  PATH_PROVIDER
-}
+enum DirectoryPathSelectorManagerTypesEnum { PIGEON }

@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_null_comparison
-import 'package:flutter_notebook/core/constant/enum/system/platform_types_enum.dart';
-
+import '../../../../constant/enum/cache/cache_property_types_enum.dart';
+import '../../../../constant/enum/cache/cache_metods_enum.dart';
+import '../../../../base/model/abstract/ife_base_cache_response_model.dart';
+import '../../../../base/model/abstract/ife_base_cache_request_model.dart';
 import '../../../../util/mixin/core_mixin_platform_selector_service.dart';
 import '../../../../constant/enum/cache/caching_keys_enum.dart';
 import '../../../../constant/enum/theme/theme_types_enum.dart';
@@ -169,7 +171,6 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
       {String? cacheTopic, cacheUtil}) async {
     var cacheBox = await Hive.openBox(cacheTopic ??= "");
     await cacheBox.put(cachingKey.name, valueForSave);
-    
   }
 
   @override
@@ -192,5 +193,17 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
     isInitialized = true;
   }
 
-  applyEmail(String? email) => email != null ? setCurrentEmail(email) : null;
+
+  @override
+  Future<IBaseCacheResponseModel> cacheModel(
+      IBaseCacheRequestModel cacheRequestModel,
+      {required CacheMethodsEnum cacheMetodEnum,
+      CachingKeysEnum? cachingKey,
+      CachePropertTypesEnum? cachePropertyType,
+      String? cacheTopic}) {
+    // TODO: implement cacheModel
+    throw UnimplementedError();
+  }
+
+ applyEmail(String? email) => email != null ? setCurrentEmail(email) : null;
 }
