@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_notebook/core/constant/static/network/network_statics.dart';
 import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
 import '../../../../../core/init/cache/concrete/cache_service.dart';
 import '../../../../../core/init/network/concrete/network_service.dart';
@@ -85,7 +86,7 @@ class SignupView extends StatelessWidget {
               onPressed: () async {
                 var networkService = NetworkService.instance;
                 var cacheService = CacheService.instance;
-                          
+
                 var accessToken =
                     await cacheService.getAccessToken(checkEmail: (email) {
                   print("gelen email : " + email.toString());
@@ -100,11 +101,12 @@ class SignupView extends StatelessWidget {
                 print("refresh token : " + refreshToken.toString());
 
                 var homeModel = await networkService
-                    .fetch<HomeModel, HomeModel>(ApplicationConstants.DENE_HOME,
+                    .fetch<HomeModel, HomeModel>(NetworkConstants.FORGET_PASSWORD_URL,
                         type: HttpRequestTypesEnum.GET,
                         parseModel: HomeModel());
 
-                print("gelen home modeli : " + (homeModel.data as HomeModel).toString());
+                print("gelen home modeli : " +
+                    (homeModel.data as HomeModel).toString());
               },
               child: Text(LocaleKeys.giris, style: TextStyle(
               

@@ -18,7 +18,7 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
   }
 
   CacheManagerOfHive._init() {
-    //  initHive();
+    initHive();
   }
 
   @override
@@ -187,12 +187,12 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
    if(platformSelectorService.getCurrentPlatform()!= PlatformTypesEnum.WEB) {
        getCachingPath(platformSelectorService);
        String cacheFoldePath = await getCacheFolderPath();
-      Hive.init(cacheFoldePath); 
+      
    }    
    */
+    Hive.init(cacheFolderName);
     isInitialized = true;
   }
-
 
   @override
   Future<IBaseCacheResponseModel> cacheModel(
@@ -205,5 +205,5 @@ class CacheManagerOfHive with ICacheManager, CoreMixinPlatformSelectorService {
     throw UnimplementedError();
   }
 
- applyEmail(String? email) => email != null ? setCurrentEmail(email) : null;
+  applyEmail(String? email) => email != null ? setCurrentEmail(email) : null;
 }

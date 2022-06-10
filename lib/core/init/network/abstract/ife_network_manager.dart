@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../constant/static/network/network_statics.dart';
 import '../../../util/workbench/core_service_workbench.dart';
 import '../../../base/model/abstract/ife_base_network_model.dart';
-import '../../../constant/static/app/application_statics.dart';
 import 'ife_network_service.dart';
 
 mixin INetworkManager implements INetworService {
@@ -23,13 +22,13 @@ mixin INetworkManager implements INetworService {
   // util serviceses...
   var cacheService = CoreServiceWorkBench.cacheService;
   var logService = CoreServiceWorkBench.logService;
-
+  
   // rule - connection properties...
-  final double _connectionTimeOut = 30.0;
-  final double _receivingTimeOut = 5.0;
+  final int _connectionTimeOut = 300 ;
+  final int _receivingTimeOut = 5;
 
   // base url - paths
-  final String _baseUrl = ApplicationConstants.API_BASE_URL;
+  final String _baseUrl = NetworkConstants.API_BASE_MOCK_URL;
 
   // local directory paths
   final String _baseLocalDirectory = "";

@@ -23,10 +23,11 @@ class NetworkManagerOfDio with INetworkManager {
   }
 
   NetworkManagerOfDio._init() {
+    
     _dio = Dio();
-    _dio.options.baseUrl = baseUrl;
-    _dio.options.connectTimeout = connectionTimeOut;
-    _dio.options.receiveTimeout = receivingTimeOut;
+  //  _dio.options.baseUrl = baseUrl;
+  //_dio.options.connectTimeout = connectionTimeOut;
+  // _dio.options.receiveTimeout = receivingTimeOut;
 
     cacheService.getAccessToken().then((value) => accessToken = value);
 
@@ -44,7 +45,7 @@ class NetworkManagerOfDio with INetworkManager {
               return handler.next(error);
             }
           }
-        } else if (error.response!.headers.value("errorflag") == "true") {
+        } else if (error.response?.headers.value("errorflag") == "true") {
           var model = responseParser<ErrorResponseModel, ErrorResponseModel>(
               ErrorResponseModel(), error.response!.data);
           model!.statusCode = error.response!.statusCode.toString();
@@ -123,7 +124,7 @@ class NetworkManagerOfDio with INetworkManager {
                   errorMessage: response.statusMessage.toString()));
       }
     } on DioError catch (e) {
-      var foundFlag = e.response!.headers.value("errorflag");
+      var foundFlag = e.response?.headers.value("errorflag");
       var error = foundFlag != null ? e.error as ErrorResponseModel : e.error;
       throw error;
     }
