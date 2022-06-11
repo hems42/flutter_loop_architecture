@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_notebook/core/constant/static/network/network_statics.dart';
-import 'package:flutter_notebook/core/init/lang/concrete/easy_localization/locale_keys.g.dart';
+import '../../../../../core/constant/static/network/network_statics.dart';
+import '../../../../../core/init/lang/concrete/easy_localization/locale_keys.g.dart';
 import '../../../../../core/init/cache/concrete/cache_service.dart';
 import '../../../../../core/init/network/concrete/network_service.dart';
 import '../../model/home_model.dart';
 import '../../../../../core/constant/enum/navigation/navigation_animations_enum.dart';
 import '../../../../../core/constant/enum/navigation/navigation_pages_enum.dart';
 import '../../../../../core/constant/enum/network/http_request_types_enum.dart';
-import '../../../../../core/constant/static/app/application_statics.dart';
 import '../../../../../core/init/navigation/concrete/navigation_service.dart';
 import '../../../../../core/base/view/concrete/base_widget.dart';
 import '../../../../../core/extension/string_extension.dart';
