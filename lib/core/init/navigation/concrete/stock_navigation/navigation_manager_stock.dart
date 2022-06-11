@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../../constant/enum/navigation/navigation_action_types_enum.dart';
+import '../../../../base/model/abstract/ife_base_navigation_request_model.dart';
 import '../../../../../view/authentication/login/view/login_view.dart';
 import '../../../../constant/enum/system/platform_types_enum.dart';
 import '../../../../../view/util/view/not_found_page.dart';
@@ -12,9 +14,10 @@ import '../../abstract/ife_navigation_manager.dart';
 
 part 'navigation_manager_stock_animations.dart';
 
-class NavigationManagerOfStock with INavigationManager, CoreMixinPlatformSelectorService {
+class NavigationManagerOfStock
+    with INavigationManager, CoreMixinPlatformSelectorService {
   static final NavigationManagerOfStock _instance =
-  NavigationManagerOfStock._init();
+      NavigationManagerOfStock._init();
   static NavigationManagerOfStock get instance => _instance;
   NavigationManagerOfStock._init() {
     currentPlatform = platformSelectorService.getCurrentPlatform();
@@ -54,7 +57,6 @@ class NavigationManagerOfStock with INavigationManager, CoreMixinPlatformSelecto
         getSelectedPageStringFromNavigationPagesEnum(page), removeAllOldRoutes,
         arguments: data);
   }
-
 
   @override
   Future<void> navigateToPage(NavigationPagesEnum page,
@@ -101,6 +103,17 @@ class NavigationManagerOfStock with INavigationManager, CoreMixinPlatformSelecto
                 .call(context, animation, secondaryAnimation, child),
       );
     }
+  }
+
+  @override
+  Future<T> navigate<T>(
+      NavigationPagesEnum page,
+      IBaseNavigationRequestModel<T> navigationRequestModel,
+      NavigationActionTypesEnum actionTypesEnum,
+      {Object? data,
+      NavigationAnimationsEnum? selectedAnimation}) {
+    
+    throw UnimplementedError();
   }
 }
 
