@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../init/lang/concrete/easy_localization/locale_keys.g.dart';
 import 'package:mobx/mobx.dart';
 
 class BaseView<T extends Store> extends StatefulWidget {
